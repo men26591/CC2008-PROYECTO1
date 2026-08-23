@@ -6,15 +6,21 @@ import java.util.*;
 public class Usuario {
     private String nombre;
     private String contrasena;
-    private ArrayList<Conceptos> baseConceptos;
+    private ArrayList<Concepto> baseConceptos;
     private String aConceptos;
-    private ArrayListe<Kits> baseKits;
+    private ArrayListe<KitEstudio> baseKits;
     private String aKits;
     private String ultimaVista;
 
     
     public Usuario() {
-       
+        this.nombre = "";
+        this.contrasena = "";
+        this.baseConceptos = new ArrayList<Concepto>();
+        this.aConceptos = "";
+        this.baseKits = new ArrayList<KitEstudio>();
+        this.aKits = "";
+        this.ultimaVisita = "";
     }
 
    
@@ -46,23 +52,22 @@ public class Usuario {
         return "";
     }
 
-    public void setBaseConceptos(Set<Conceptos> baseConceptos) {
+    public void setBaseConceptos(Set<Concepto> baseConceptos) {
         
     }
 
   
-    public Set<Conceptos> getBaseConceptos() {
+    public Set<Concepto> getBaseConceptos() {
         return null;
     }
 
 
-    public void setBaseKits(Set<Kits> baseKits) {
+    public void setBaseKits(Set<KitEstudio> baseKits) {
 
     }
 
     
-    public Set<Kits> getBaseKits() {
-        // TODO implement here
+    public Set<KitEstudio> getBaseKits() {
         return null;
     }
 
