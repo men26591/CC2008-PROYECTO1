@@ -10,7 +10,7 @@ public class Usuario {
     private String aConceptos;
     private ArrayListe<KitEstudio> baseKits;
     private String aKits;
-    private String ultimaVista;
+    private String ultimaVisita;
 
     
     public Usuario() {
@@ -72,12 +72,12 @@ public class Usuario {
     }
 
    
-    public void setUltimaVista(String ultimaVisita) {
+    public void setUltimaVisita(String ultimaVisita) {
         
     }
 
 
-    public String getUltimaVista() {
+    public String getUltimaVisita() {
        
         return "";
     }
