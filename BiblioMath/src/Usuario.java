@@ -35,51 +35,50 @@ public class Usuario {
 
    
     public void setNombre(String nombre) {
-       
+        this.nombre = nombre;       
     }
 
     
     public String getNombre() {
-        return "";
+        return this.nombre;
     }
 
     
     public void setContrasena(String contrasena) {
-        
+        this.contrasena = contrasena;
     }
 
     public String getContrasena() {
-        return "";
+        return contrasena;
     }
 
     public void setBaseConceptos(Set<Concepto> baseConceptos) {
-        
+        this.baseConceptos = baseConceptos;
     }
 
   
     public Set<Concepto> getBaseConceptos() {
-        return null;
+        return this.baseConceptos;
     }
 
 
     public void setBaseKits(Set<KitEstudio> baseKits) {
-
+        this.baseKits = baseKits;
     }
 
     
     public Set<KitEstudio> getBaseKits() {
-        return null;
+        return this.baseKits;
     }
 
    
     public void setUltimaVisita(String ultimaVisita) {
-        
+        this.ultimaVisita = ultimaVisita;
     }
 
 
     public String getUltimaVisita() {
-       
-        return "";
+        return this.ultimaVisita;
     }
 
  
