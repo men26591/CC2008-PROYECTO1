@@ -1,21 +1,19 @@
-
-import java.io.*;
-import java.util.*;
-
+import java.util.ArrayList;
 
 public class Biblioteca {
-
 
     public Biblioteca() {
     }
 
 
-    private String baseUsuarios;
+    private ArrayList<Usuario> baseUsuarios;
     private Usuario usuarioActual;
 
 
 
     public Biblioteca() {
+        baseUsuarios = new ArrayList<Usuario>();
+        usuarioActual = null;
     }
 
     //Métodos
