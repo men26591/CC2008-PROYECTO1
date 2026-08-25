@@ -57,9 +57,8 @@ public class Usuario {
     }
 
   
-    public Set<Concepto> getBaseConceptos() {
-        return this.baseConceptos;
-    }
+    //public Set<Concepto> getBaseConceptos() {
+        //return this.baseConceptos;
 
 
     public void setBaseKits(Set<KitEstudio> baseKits) {
