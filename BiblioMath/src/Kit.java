@@ -27,5 +27,18 @@ public class Kit {
     public void agregarConcepto(Concepto concepto){
         conceptos.add(concepto);
     }
-    
+    public void mostrarKit(){
+        System.out.println("Kit: " + nombre);
+        for(int i = 0; i < conceptos.size(); i++){
+            System.out.println(conceptos.get(i));
+        }
+    }
+    public Concepto buscarenkit(int id){
+        for(int i = 0; i < conceptos.size(); i++){
+            if(id == conceptos.get(i).getId()){
+                return conceptos.get(i);
+            }
+        }
+        return null;
+    }
 }
