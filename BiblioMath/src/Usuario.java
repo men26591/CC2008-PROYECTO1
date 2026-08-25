@@ -8,7 +8,7 @@ public class Usuario {
     private String contrasena;
     private ArrayList<Concepto> baseConceptos;
     private String aConceptos;
-    private ArrayListe<KitEstudio> baseKits;
+    private ArrayList<KitEstudio> baseKits;
     private String aKits;
     private String ultimaVisita;
 
