@@ -14,5 +14,18 @@ public class Kit {
         nombre = teclado.nextLine();
         conceptos = new ArrayList<Concepto>(1);
     }
+    public String getNombre(){
+        return nombre;
+    }
+
+    public void setConceptos(){
+        conceptos = new ArrayList<Concepto>(1);
+    }
+    public ArrayList<Concepto> getConceptos(){
+        return conceptos;
+    }
+    public void agregarConcepto(Concepto concepto){
+        conceptos.add(concepto);
+    }
     
 }
