@@ -93,21 +93,41 @@ public class Usuario {
         return "";
     }
 
-    public void nuevoConcepto() {
-        
-        return null;
+    public void nuevoConcepto(int id,String nombre,String explicacion,String categoria,String curso,String kits) {
+        Concepto c = new Concepto();
+        c.setId(id);
+        c.setNombre(nombre);
+        c.setExplicacion(explicacion);
+        c.setCategoria(categoria);
+        c.setCurso(curso);
+        String[] listaKits = kits.split(",");
+        c.setKitEstudio(listaKits);
+
+        this.baseConceptos.add(c);
     }
 
     
     public String motrarConceptos() {
+        String cadena = "";
+        for (Concepto c:baseConceptos){
+            cadena += c.toString() + "\n";
+        }
         
-        return "";
+        return cadena;
     }
 
    
-    public String buscarConcepto() {
-        
-        return "";
+    public String buscarConcepto(String nombre) {
+        for (Concepto c:baseConceptos){
+            if (c.getNombre().toLowerCase().equals(nombre.toLowerCase())){
+                setUltimaVisita(Integer.toString(c.getId()));
+                return c.toString();
+            }
+        }
+
+        //Si no se hizo ningun retorno
+        return "No se encontró concepto.";
+                
     }
 
   
