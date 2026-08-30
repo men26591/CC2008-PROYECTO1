@@ -8,7 +8,7 @@ public class Usuario {
     private String contrasena;
     private ArrayList<Concepto> baseConceptos;
     private String aConceptos;
-    private ArrayList<KitEstudio> baseKits;
+    private ArrayList<Kit> baseKits;
     private String aKits;
     private String ultimaVisita;
 
@@ -18,7 +18,7 @@ public class Usuario {
         this.contrasena = "";
         this.baseConceptos = new ArrayList<Concepto>();
         this.aConceptos = "";
-        this.baseKits = new ArrayList<KitEstudio>();
+        this.baseKits = new ArrayList<Kit>();
         this.aKits = "";
         this.ultimaVisita = "";
     }
@@ -52,21 +52,22 @@ public class Usuario {
         return contrasena;
     }
 
-    public void setBaseConceptos(Set<Concepto> baseConceptos) {
+    public void setBaseConceptos(ArrayList<Concepto> baseConceptos) {
         this.baseConceptos = baseConceptos;
     }
 
   
-    //public Set<Concepto> getBaseConceptos() {
-        //return this.baseConceptos;
+    public ArrayList<Concepto> getBaseConceptos() {
+        return this.baseConceptos;
+    }
 
 
-    public void setBaseKits(Set<KitEstudio> baseKits) {
+    public void setBaseKits(ArrayList<Kit> baseKits) {
         this.baseKits = baseKits;
     }
 
     
-    public Set<KitEstudio> getBaseKits() {
+    public ArrayList<Kit> getBaseKits() {
         return this.baseKits;
     }
 
