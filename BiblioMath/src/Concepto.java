@@ -11,14 +11,15 @@ public class Concepto {
     private String explicacion;
     private String categoria;
     private String curso;
-    private ArrayList<KitEstudio> kitEstudio;
+   private List<String> kitEstudio;
 
     public Concepto() {
-        id = "";
+        id = 0;
         nombre = "";
+        explicacion = "";
         categoria = "";
         curso = "";
-        kitEstudio = new ArrayList<KitEstdio>();
+        kitEstudio = new ArrayList<>(); 
     }
 
     // Get & Set
@@ -67,12 +68,11 @@ public class Concepto {
         return curso;
     }
 
-
-    public ArrayList<KitEstudio> getKitEstudio() {
+    public List<String> getKitEstudio(){
         return kitEstudio;
     }
 
-    public void setKitEstudio(ArrayList<KitEstudio> kitEstudio) {
+    public void setKitEstudio (List<String> kitEstudio){
         this.kitEstudio = kitEstudio;
     }
 
