@@ -7,8 +7,14 @@ public class Kit {
     //Atributos
     private String nombre;
     private ArrayList<Concepto> conceptos;
+
+    public Kit (){
+        nombre = "";
+        this.concepto = new ArrayList<>();
+    }
+
     //Métodos
-    public Kit(){}
+
     public void setNombre(Scanner teclado){
         System.out.println("Ingrese el nombre del nuevo kit: ");
         nombre = teclado.nextLine();
@@ -24,9 +30,13 @@ public class Kit {
     public ArrayList<Concepto> getConceptos(){
         return conceptos;
     }
+
     public void agregarConcepto(Concepto concepto){
-        conceptos.add(concepto);
+        if (concepto != null){
+                conceptos.add(concepto);
+        }
     }
+
     public void mostrarKit(){
         System.out.println("Kit: " + nombre);
         for(int i = 0; i < conceptos.size(); i++){

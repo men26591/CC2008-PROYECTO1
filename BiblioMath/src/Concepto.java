@@ -1,10 +1,8 @@
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Concepto {
-
-    public Concepto() {
-    }
 
     private int id;
     private String nombre;
@@ -78,13 +76,15 @@ public class Concepto {
 
     //Otros métodos
     
-    public void agregarKit(String nombreKit) {
-        //DEPEDNE DE KIT.
-        return null;
+    public void agregarKit(Kit kit) {
+
+            kit.agregarConcepto(this);
+            this.kitEstudio.add(kit.getNombre());
+            
     }
 
     public String toString() {
-        return "";
+        return "Concepto [id = " + id + ", nombre = " + nombre + ", categoria = " + categoria + ", curso = " + curso + "]";
     }
 
 }
