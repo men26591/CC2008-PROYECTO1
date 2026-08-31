@@ -8,9 +8,9 @@ public class Kit {
     private String nombre;
     private ArrayList<Concepto> conceptos;
 
-    public Kit (){
+    public Kit(){
         nombre = "";
-        this.concepto = new ArrayList<>();
+        this.conceptos = new ArrayList<>();
     }
 
     //Métodos

@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -143,13 +144,20 @@ public class Usuario {
     }
 
     
-    public void creatKitStudio() {
-        
-        return null;
+    public void crearKitStudio(String nombre) {
+        Kit k = new Kit();
+        k.setNombre(nombre);
+        baseKits.add(k);
     }
 
-    public List <String> mostrarKits() {
-        return null;
+    public ArrayList <String> mostrarKits() {
+        ArrayList <String> listaKits= new ArrayList<>();
+
+        for (Kit k:baseKits){
+            listaKits.add(k.toString());
+        }
+
+        return listaKits;
     }
 
     
