@@ -153,8 +153,14 @@ public class Usuario {
     }
 
     
-    public void buscarKits(String nombre) {
-        
+    public String buscarKits(String nombre) {
+        for (Kit k:baseKits){
+            if(k.getNombre().toLowerCase().equals(nombre.toLowerCase())){
+                setUltimaVista(nombre);
+                return k.toString();
+            }
+        }
+        return "No se encontró el Kit.";
     }
 
   
