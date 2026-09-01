@@ -20,6 +20,13 @@ public class Biblioteca {
 
     public String crearUsuario(String nombre, String contrasena) {
 
+        for (Usuario usuario : baseUsuarios) {
+
+            if (usuario.getNombre().equals(nombre)) {
+                return "Ya existe el usuario";
+            }
+        }
+
         Usuario nuevoUsuario = new Usuario();
 
         nuevoUsuario.setNombre(nombre);
@@ -27,7 +34,6 @@ public class Biblioteca {
 
         baseUsuarios.add(nuevoUsuario);
 
-        return "Usuario creado correctamente";
+        return "Se creó el usuario correctamente";
     }
 }
-
