@@ -26,11 +26,12 @@ public class Usuario {
 
    
     public void BajarBaseDatos(String direccion, ArrayList local) {
-    
+        //Relacion con archivo .csv
     }
 
     
     public void GuardarBaseDatos(String direccion, ArrayList local) {
+        //Relacion con archivo .csv
        
     }
 
@@ -132,15 +133,29 @@ public class Usuario {
     }
 
   
-    public void filtrarCurso(String Curso) {
+    public ArrayList<Concepto> filtrarCurso(String Curso) {
+        ArrayList<Concepto> filtrado = new ArrayList<>();  
+
+        for(Concepto c:baseConceptos){
+            if(c.getCurso().equals(Curso)){
+                filtrado.add(c);
+            }
+        }
        
-        return null;
+        return filtrado;
     }
 
    
-    public void filtrarCategoria(String Categoria) {
+    public ArrayList<Concepto> filtrarCategoria(String Categoria) {
+        ArrayList<Concepto> filtrado = new ArrayList<>();
+
+        for(Concepto c:baseConceptos){
+            if(c.getCategoria().equals(Categoria)){
+                filtrado.add(c);
+            }
+        }
         
-        return null;
+        return filtrado;
     }
 
     
@@ -164,7 +179,7 @@ public class Usuario {
     public String buscarKits(String nombre) {
         for (Kit k:baseKits){
             if(k.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                setUltimaVista(nombre);
+                setUltimaVisita(nombre);
                 return k.toString();
             }
         }
