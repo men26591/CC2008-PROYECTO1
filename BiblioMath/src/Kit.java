@@ -59,7 +59,7 @@ public class Kit {
             }
         }
         return null;
-    
+        
     public String toString(){ 
 
         return nombre + ","+ conceptos;
