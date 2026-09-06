@@ -17,7 +17,7 @@ public class Concepto {
         explicacion = "";
         categoria = "";
         curso = "";
-        kitEstudio = new ArrayList<>(); 
+        kitEstudio = new ArrayList<>();
     }
 
     // Get & Set
