@@ -179,7 +179,21 @@ public class Principal {
             case 2:
                 System.out.println("********** Agregar Concepto **********");
 
-                
+                int id;
+                String nombre, explicacion, categoria, curso;
+
+                System.out.println("Nombre: ");
+                nombre = nextLine();
+
+                System.out.println("Explicación: ");
+                explicacion = nextLine();
+
+                System.out.println("Categoría: ");
+                categoria = nextLine();
+
+                System.out.println("Curso");
+                curso = nextLine();
+
 
                 break;
             case 3:
