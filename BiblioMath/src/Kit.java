@@ -4,32 +4,40 @@ import java.util.*;
 
 
 public class Kit {
-    //Atributos
+
+//Atributos
     private String nombre;
     private ArrayList<Concepto> conceptos;
 
     public Kit(){
         nombre = "";
-        this.conceptos = new ArrayList<>();
+        conceptos = new ArrayList<>();
+    }
+    
+    public Kit(String nombre){
+        this.nombre = nombre;
+        conceptos = new ArrayList<Concepto>();
+        }
+    
+//Métodos SET & GET
+
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
 
-    //Métodos
-
-    public void setNombre(Scanner teclado){
-        System.out.println("Ingrese el nombre del nuevo kit: ");
-        nombre = teclado.nextLine();
-        conceptos = new ArrayList<Concepto>(1);
-    }
     public String getNombre(){
         return nombre;
     }
 
-    public void setConceptos(){
-        conceptos = new ArrayList<Concepto>(1);
+    public void setConceptos(ArrayList<Concepto>conceptos){
+        this.conceptos = conceptos;
     }
+
     public ArrayList<Concepto> getConceptos(){
         return conceptos;
     }
+
+// Otros métodos
 
     public void agregarConcepto(Concepto concepto){
         if (concepto != null){
@@ -37,18 +45,10 @@ public class Kit {
         }
     }
 
-    public void mostrarKit(){
-        System.out.println("Kit: " + nombre);
-        for(int i = 0; i < conceptos.size(); i++){
-            System.out.println(conceptos.get(i));
-        }
+    public String toString(){ 
+
+        return nombre + ","+ conceptos;
+
     }
-    public Concepto buscarenkit(int id){
-        for(int i = 0; i < conceptos.size(); i++){
-            if(id == conceptos.get(i).getId()){
-                return conceptos.get(i);
-            }
-        }
-        return null;
-    }
+
 }
