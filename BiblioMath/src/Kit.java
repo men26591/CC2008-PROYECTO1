@@ -47,17 +47,15 @@ public class Kit {
     
     public Concepto buscarenkit(int id){
         for(int i = 0; i < conceptos.size(); i++){
-            if(id == conceptos.get(i).getId()){
-                return conceptos.get(i);
-            }
+            if(conceptos.get(i) != null){
+                if(id == conceptos.get(i).getId()){
+                    return conceptos.get(i);
+                }
+            }          
         }
         return null;
-        
+    }  
     public String toString(){ 
-
         return nombre + ","+ conceptos;
-
     }
-
-
 }
