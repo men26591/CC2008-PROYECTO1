@@ -16,10 +16,10 @@ public class Principal {
         System.out.println("\n********* ¿Qué desea hacer? (Ingrese el número) **********");
         
         boolean error = true;
-
+        int accion = 0;
         while (error == true){
                 try{
-                    int accion = teclado.nextInt();
+                    accion = teclado.nextInt();
                     teclado.nextLine();
                     error = false;
 
@@ -64,7 +64,7 @@ public class Principal {
                     }
 
 
-                System.out.println("\Password: ");
+                System.out.println("Password: ");
                 error = true;
 
                 while (error == true){
@@ -93,14 +93,14 @@ public class Principal {
 
                 System.out.println("\nUsername: ");
                 error = true;
-
+                String usernameN = null;
                 while (error == true){
                         
                         try{
-                            username = teclado.nextLine();
+                            usernameN = teclado.nextLine();
                             error = false;
                                 
-                            if (username.isBlank()) { 
+                            if (usernameN.isBlank()) { 
                                 System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
                                 error = true;
                             }
@@ -113,28 +113,28 @@ public class Principal {
                     }
 
 
-                System.out.println("\Password: ");
+                System.out.println("Password: ");
                 error = true;
-
-                while (error == true){
+                String passwordN = null;
+                while (error){
                         
                         try{
-                            password = teclado.nextLine();
-                            error = false;
-                                
-                            if (password.isBlank()) { 
+                            passwordN = teclado.nextLine();
+
+                            if (passwordN.isBlank()) { 
                                 System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
-                                error = true;
+                            }
+                            else{
+                                error = false;
                             }
 
                         }catch(Exception e){
                             System.out.println("\n¡Error inesperado, intenta de nuevo!");
                             teclado.nextLine();
-                            error = true;
                         }
                     }
 
-                System.out.println(biblio.crearUsuario(username,password));
+                System.out.println(biblio.crearUsuario(usernameN,passwordN));
         
             break;
 
@@ -151,27 +151,24 @@ public class Principal {
         System.out.println("\n1. Ver Racha \n2.Agregar Concepto \n3. Buscar \n4. Ver Busquedas Populares ");
         System.out.println("¿Qué desea hacer? (Ingrese el número)");
 
-        erro = true
-         while (error == true){
+        error = true;
+        int accionB = 0;
+         while (error){
+                String entrada = teclado.nextLine();
                 try{
-                    int accion = teclado.nextInt();
-                    teclado.nextLine();
-                    error = false;
-
-                    if (accion > 2 || accion < 1) {
-                        System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
-                        error = true;
+                    accionB = Integer.parseInt(entrada);
+                    if ((0 > accionB) & (accionB > 4)){
+                        error = false;
                     }
-
+                    else{
+                        System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
+                    }
                 }catch(Exception e){
                     System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
-                    teclado.nextLine();
-                    error = true;
-                     
                 }
         }
 
-        switch (accion){
+        switch (accionB){
             case 1:
                 System.out.println("********** Racha **********");
 
@@ -183,16 +180,16 @@ public class Principal {
                 String nombre, explicacion, categoria, curso;
 
                 System.out.println("Nombre: ");
-                nombre = nextLine();
+                nombre = teclado.nextLine();
 
                 System.out.println("Explicación: ");
-                explicacion = nextLine();
+                explicacion = teclado.nextLine();
 
                 System.out.println("Categoría: ");
-                categoria = nextLine();
+                categoria = teclado.nextLine();
 
                 System.out.println("Curso");
-                curso = nextLine();
+                curso = teclado.nextLine();
 
 
                 break;
