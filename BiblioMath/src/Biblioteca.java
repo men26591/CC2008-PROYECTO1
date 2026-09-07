@@ -36,4 +36,16 @@ public class Biblioteca {
 
         return "Se creó el usuario correctamente";
     }
+
+    public String login(String nombre, String contrasena) {
+
+        for (Usuario usuario : baseUsuarios) {
+
+            if (usuario.getNombre().equals(nombre)) {
+                return "Usuario encontrado";
+            }
+        }
+
+        return "Usuario no encontrado";
+    }
 }
