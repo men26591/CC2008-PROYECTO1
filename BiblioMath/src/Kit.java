@@ -63,6 +63,15 @@ public class Kit {
                 }
             } 
         }
+    }
+    public void cambiarConcepto(int id, Concepto concepto){
+        for(int i = 0; i < conceptos.size(); i++){
+           if(conceptos.get(i) != null){
+                if(id == conceptos.get(i).getId()){
+                    conceptos.set(i, concepto);
+                }
+            } 
+        }
     }  
     public String toString(){ 
         return nombre + ","+ conceptos;
