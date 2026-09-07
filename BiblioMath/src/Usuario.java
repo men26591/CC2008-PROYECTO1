@@ -85,14 +85,12 @@ public class Usuario {
 
  
     public String getAConceptos() {
-      
-        return "";
+        return this.aConceptos;
     }
 
     
     public String getAKit() {
-        
-        return "";
+        return this.aKits;
     }
 
     public void nuevoConcepto(int id,String nombre,String explicacion,String categoria,String curso,String kits) {
@@ -187,9 +185,13 @@ public class Usuario {
     }
 
   
-    public void irUltimo() {
-        
-        return null;
+    public String irUltimo() {
+        String r = buscarKits(ultimaVisita);
+        if(r.equals("No se encontró el Kit.")){
+            return(buscarConcepto(ultimaVisita));
+        }else{
+            return r;
+        }
     }
-
+    
 }
