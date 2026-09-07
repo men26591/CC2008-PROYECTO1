@@ -1,6 +1,4 @@
 
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -25,12 +23,12 @@ public class Usuario {
     }
 
    
-    public void BajarBaseDatos(String direccion, ArrayList local) {
+    public <tipo> void BajarBaseDatos(String direccion, ArrayList<tipo> local) {
         //Relacion con archivo .csv
     }
 
     
-    public void GuardarBaseDatos(String direccion, ArrayList local) {
+    public <tipo> void GuardarBaseDatos(String direccion, ArrayList<tipo> local) {
         //Relacion con archivo .csv
        
     }
@@ -100,7 +98,14 @@ public class Usuario {
         c.setExplicacion(explicacion);
         c.setCategoria(categoria);
         c.setCurso(curso);
-        String[] listaKits = kits.split(",");
+
+        String[] lkits = kits.split(","); //Separar kist ingresados 
+        ArrayList<String> listaKits = new ArrayList<>();
+        //Transformar la lista en un Arreglo dinámico
+        for(String k:lkits){
+            listaKits.add(k);
+        }
+
         c.setKitEstudio(listaKits);
 
         this.baseConceptos.add(c);
@@ -193,5 +198,5 @@ public class Usuario {
             return r;
         }
     }
-    
+
 }

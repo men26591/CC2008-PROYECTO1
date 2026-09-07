@@ -70,7 +70,7 @@ public class Concepto {
         return kitEstudio;
     }
 
-    public void setKitEstudio (List<String> kitEstudio){
+    public void setKitEstudio (ArrayList<String> kitEstudio){
         this.kitEstudio = kitEstudio;
     }
 
