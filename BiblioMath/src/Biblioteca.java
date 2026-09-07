@@ -41,11 +41,13 @@ public class Biblioteca {
 
         for (Usuario usuario : baseUsuarios) {
 
-            if (usuario.getNombre().equals(nombre)) {
-                return "Usuario encontrado";
+            if (usuario.getNombre().equals(nombre) &&
+                usuario.getContrasena().equals(contrasena)) {
+
+                return "Inicio de sesión correcto";
             }
         }
 
-        return "Usuario no encontrado";
+        return "Usuario o contraseña incorrectos";
     }
 }
