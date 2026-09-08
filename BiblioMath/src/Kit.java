@@ -53,17 +53,6 @@ public class Kit {
             } 
         }
     }
-    
-    /* public Concepto buscarenkit(int id){
-        for(int i = 0; i < conceptos.size(); i++){
-            if(conceptos.get(i) != null){
-                if(id == conceptos.get(i).getId()){
-                    return conceptos.get(i);
-                }
-            }          
-        }
-        return null;
-    }
     public void cambiarConcepto(int id, Concepto concepto){
         for(int i = 0; i < conceptos.size(); i++){
            if(conceptos.get(i) != null){
@@ -72,7 +61,7 @@ public class Kit {
                 }
             } 
         }
-    }   */
+    }
     public String toString(){ 
         return nombre + ","+ conceptos;
     }
