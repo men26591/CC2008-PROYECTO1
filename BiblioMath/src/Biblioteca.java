@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Biblioteca {
 
     private ArrayList<Usuario> baseUsuarios;
+    private String aUsuarios;
     private Usuario usuarioActual;
 
     public Biblioteca() {
@@ -16,6 +17,10 @@ public class Biblioteca {
 
     public Usuario getUsuarioActual() {
         return usuarioActual;
+    }
+
+    public String getAUsuarios(){
+        return  aUsuarios;
     }
 
     public String crearUsuario(String nombre, String contrasena) {

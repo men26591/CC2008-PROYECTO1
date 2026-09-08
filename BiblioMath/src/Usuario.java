@@ -199,4 +199,33 @@ public class Usuario {
         }
     }
 
+    //Métodos dentro de Kit
+    public void agregarCaKit(String kitN,String conceptoN){
+        Kit kit = null;
+        Concepto concepto = null;
+        for (Kit k:baseKits){
+            if(k.getNombre().toLowerCase().equals(kitN.toLowerCase())){
+                kit = k;
+            }
+        }
+        for (Concepto c:baseConceptos){
+            if (c.getNombre().toLowerCase().equals(conceptoN.toLowerCase())){
+                concepto = c;    
+            }
+        }
+
+        kit.agregarConcepto(concepto);
+    }
+    
+    public void quitaEnKit(String kitN,int id){
+        Kit kit = null;
+        for (Kit k:baseKits){
+            if(k.getNombre().toLowerCase().equals(kitN.toLowerCase())){
+                kit = k;
+            }
+        }
+        kit.quitarConcepto(id);
+    }
+
+
 }

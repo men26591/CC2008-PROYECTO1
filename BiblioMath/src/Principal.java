@@ -12,7 +12,7 @@ public class Principal {
 
         System.out.println("********** BiblioMath **********");
 //LONG IN/SING UP
-        System.out.println("\n1. Lon in\n2. Sign up");
+        System.out.println("\n1. Log in\n2. Sign up");
         System.out.println("\n********* ¿Qué desea hacer? (Ingrese el número) **********");
         
         boolean error = true;
@@ -36,7 +36,8 @@ public class Principal {
                 }
             }
 
-        String username, password;
+        String username = "";
+        String password="";
 
         switch (accion){
             case 1:
@@ -84,6 +85,8 @@ public class Principal {
                             error = true;
                         }
                     }
+                
+                System.out.println(biblio.login(username, password));
 
             break;
                 
@@ -148,7 +151,7 @@ public class Principal {
         
         System.out.println("********** Menú **********");
 
-        System.out.println("\n1. Ver Racha \n2.Agregar Concepto \n3. Buscar \n4. Ver Busquedas Populares ");
+        System.out.println("1.Agregar Concepto \n2. Mostrar Conceptos\n3. Buscar Concepto\n4. Agregar Kit\n5. Mostrar Kits\n6. Buscar Kit\n7. Agregar Concepto a Kit\n8. Quitar Concepto en Kit\n9. Filtrar Curso\n10. Filtrar Categoria\n11. Último visitado");
         System.out.println("¿Qué desea hacer? (Ingrese el número)");
 
         error = true;
@@ -157,7 +160,7 @@ public class Principal {
                 String entrada = teclado.nextLine();
                 try{
                     accionB = Integer.parseInt(entrada);
-                    if ((0 > accionB) & (accionB > 4)){
+                    if ((0 > accionB) & (accionB > 10)){
                         error = false;
                     }
                     else{
@@ -170,14 +173,13 @@ public class Principal {
 
         switch (accionB){
             case 1:
-                System.out.println("********** Racha **********");
-
-                break;
-            case 2:
                 System.out.println("********** Agregar Concepto **********");
 
                 int id;
-                String nombre, explicacion, categoria, curso;
+                String nombre, explicacion, categoria, curso, kits;
+
+                System.out.println("ID: ");
+                id = teclado.nextInt(); teclado.nextLine();
 
                 System.out.println("Nombre: ");
                 nombre = teclado.nextLine();
@@ -191,15 +193,68 @@ public class Principal {
                 System.out.println("Curso");
                 curso = teclado.nextLine();
 
+                System.out.println("Kits (Codigo de kits separados por Coma)");
+                kits = teclado.nextLine();
 
+                biblio.getUsuarioActual().nuevoConcepto(id, nombre, explicacion, categoria, curso, kits);
+
+                break;
+            case 2:
+                System.out.println("********** Mostrar Conceptos **********");
+                System.out.println(biblio.getUsuarioActual().motrarConceptos());
                 break;
             case 3:
-                System.out.println("********** Buscar **********");
-
+                System.out.println("********** Buscar Concepto **********");
+                System.out.println("Nombre: ");
+                String nom = teclado.nextLine();
+                System.out.println(biblio.getUsuarioActual().buscarConcepto(nom));
                 break;
             case 4:
-                System.out.println("********** Busquedas Populares **********");
+                System.out.println("********** Crear Kit **********");
+                String n = teclado.nextLine();
 
+                biblio.getUsuarioActual().crearKitStudio(n);
+                break;
+            case 5:
+                System.out.println("********** Mostrar Kits **********");
+                System.out.println(biblio.getUsuarioActual().mostrarKits());
+            case 6:
+                System.out.println("********** Buscar Kit**********");
+                System.out.println("Nombre: ");
+                nombre = teclado.nextLine();
+                System.out.println(biblio.getUsuarioActual().buscarKits(nombre));
+                break;
+            case 7:
+                System.out.println("********** Agregar Concepto a Kit**********");
+                System.out.println("Nombre Kit: ");
+                String kit = teclado.nextLine();
+                System.out.println("Nombre Concepto: ");
+                String concepto = teclado.nextLine();
+                biblio.getUsuarioActual().agregarCaKit(kit, concepto);
+                break;
+            case 8:
+                System.out.println("********** Quitar Concepto en Kit**********");
+                System.out.println("Nombre Kit: ");
+                kit = teclado.nextLine();
+                System.out.println("ID Concepto: ");
+                id = teclado.nextInt(); teclado.nextLine();
+                biblio.getUsuarioActual().quitaEnKit(kit, id);
+                break;
+            case 9:
+                System.out.println("**********Filtrar Curso**********");
+                System.out.println("Curso");
+                curso = teclado.nextLine();
+                System.out.println(biblio.getUsuarioActual().filtrarCurso(curso));
+                break;
+            case 10:
+                System.out.println("**********Filtrar Categoría**********");
+                System.out.println("Categoria");
+                categoria = teclado.nextLine();
+                System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
+                break;
+            case 11:
+                System.out.println("**********Ir al último visitado**********");
+                System.out.println(biblio.getUsuarioActual().irUltimo());
                 break;
             default:
                 System.out.println("Opción no válida.");
