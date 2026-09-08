@@ -84,7 +84,25 @@ public class Concepto {
     }
 
     public String toString() {
-        return "Concepto [id = " + id + ", nombre = " + nombre + ", categoria = " + categoria + ", curso = " + curso + "]";
+
+        String nombresKit = "";
+        String nombreKit = "";
+
+        if (this.kitEstudio == null || this.kitEstudio.isEmpty()){
+            nombresKit = "Ninguno"; 
+        }else{
+            for (int i= 0; i< this.kitEstudio.size(); i++){
+                nombreKit = this.kitEstudio.get(i);
+
+                if (i == 0){
+                    nombresKit = nombreKit;
+                }else {
+                    nombresKit = nombresKit  + ", " + nombreKit;
+                }
+            }
+        }
+         
+        return "\nConcepto \nID: " + id + "\nNombre: " + nombre + "\nCategoría: " + categoria + "\nCurso: 1" + curso +"\nKit de Estudio: "+ nombresKit + "\n";
     }
 
 }
