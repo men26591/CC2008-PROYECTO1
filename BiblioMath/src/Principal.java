@@ -13,30 +13,27 @@ public class Principal {
         System.out.println("\n********* ¿Qué desea hacer? (Ingrese el número) **********");
         
         boolean error = true;
-        int accion = 0;
-        while (error == true){
+        int accion1 = 0;
+        while (error){
+                String entrada1 = teclado.nextLine();
                 try{
-                    accion = teclado.nextInt();
-                    teclado.nextLine();
-                    error = false;
-
-                    if (accion > 2 || accion < 1) {
+                    accion1 = Integer.parseInt(entrada1);
+                    if (accion1 > 2 || accion1 < 1) {
                         System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
-                        error = true;
+                    }
+                    else{
+                        error = false;
                     }
 
                 }catch(Exception e){
                     System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
-                    teclado.nextLine();
-                    error = true;
-                     
                 }
             }
 
         String username = "";
         String password="";
 
-        switch (accion){
+        switch (accion1){
             case 1:
                 System.out.println("\n********* Log in **********");
 
