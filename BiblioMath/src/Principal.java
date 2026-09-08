@@ -31,7 +31,7 @@ public class Principal {
             }
 
         String username = "";
-        String password="";
+        String password ="";
 
         switch (accion1){
             case 1:
@@ -132,7 +132,6 @@ public class Principal {
                     }
 
                 System.out.println(biblio.crearUsuario(usernameN,passwordN));
-
         
             break;
 
@@ -170,26 +169,139 @@ public class Principal {
                 case 1:
                     System.out.println("********** Agregar Concepto **********");
 
-                    int id;
-                    String nombre, explicacion, categoria, curso, kits;
+                    int id = 0;
+                    String nombre = "";
+                    String explicacion = "";
+                    String categoria = "";
+                    String curso = "";
+                    String kits = "";
 
                     System.out.println("ID: ");
-                    id = teclado.nextInt(); teclado.nextLine();
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+
+                            id = teclado.nextInt(); teclado.nextLine();
+                            error = false;
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
 
                     System.out.println("Nombre: ");
-                    nombre = teclado.nextLine();
+
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+    
+                            nombre = teclado.nextLine();
+                            error = false;
+                                
+                            if (nombre.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
 
                     System.out.println("Explicación: ");
-                    explicacion = teclado.nextLine();
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+                            
+                            explicacion = teclado.nextLine();
+                            error = false;
+                                
+                            if (explicacion.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
 
                     System.out.println("Categoría: ");
-                    categoria = teclado.nextLine();
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+                            
+                            categoria = teclado.nextLine();
+                            error = false;
+                                
+                            if (categoria.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
 
                     System.out.println("Curso");
-                    curso = teclado.nextLine();
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+                            
+                            curso = teclado.nextLine();
+                            error = false;
+                                
+                            if (curso.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
 
                     System.out.println("Kits (Codigo de kits separados por Coma)");
-                    kits = teclado.nextLine();
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+                            kits = teclado.nextLine();
+                            error = false;
+                                
+                            if (kits.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
 
                     biblio.getUsuarioActual().nuevoConcepto(id, nombre, explicacion, categoria, curso, kits);
                     break;
@@ -198,12 +310,37 @@ public class Principal {
                     System.out.println("********** Mostrar Conceptos **********");
                     System.out.println(biblio.getUsuarioActual().motrarConceptos());
                     break;
+
                 case 3:
+                    
                     System.out.println("********** Buscar Concepto **********");
+
                     System.out.println("Nombre: ");
-                    String nom = teclado.nextLine();
+                    String nom = "";
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+                            nom = teclado.nextLine();
+                            error = false;
+                                
+                            if (nom.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
+                    
                     System.out.println(biblio.getUsuarioActual().buscarConcepto(nom));
+                    
                     break;
+
                 case 4:
                     System.out.println("********** Crear Kit **********");
                     String n = teclado.nextLine();
@@ -217,8 +354,28 @@ public class Principal {
                 case 6:
                     System.out.println("********** Buscar Kit**********");
                     System.out.println("Nombre: ");
-                    nombre = teclado.nextLine();
+                    nombre = "";
+                    error = true;
+
+                    while (error == true){
+                        
+                        try{
+                            nombre = teclado.nextLine();
+                            error = false;
+                                
+                            if (nombre.isBlank()) { 
+                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                error = true;
+                            }
+
+                        }catch(Exception e){
+                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                            teclado.nextLine();
+                            error = true;
+                        }
+                    }
                     System.out.println(biblio.getUsuarioActual().buscarKits(nombre));
+
                     break;
                 case 7:
                     System.out.println("********** Agregar Concepto a Kit**********");
@@ -265,3 +422,9 @@ public class Principal {
     }
 
 }
+
+
+                    
+
+
+                    
