@@ -15,6 +15,10 @@ public class Biblioteca {
         return baseUsuarios;
     }
 
+    public void setUsuarioActual(Usuario u){
+        this.usuarioActual = u;
+    }
+
     public Usuario getUsuarioActual() {
         return usuarioActual;
     }
@@ -39,6 +43,7 @@ public class Biblioteca {
 
         baseUsuarios.add(nuevoUsuario);
 
+        setUsuarioActual(nuevoUsuario);
         return "Se creó el usuario correctamente";
     }
 
@@ -48,7 +53,8 @@ public class Biblioteca {
 
             if (usuario.getNombre().equals(nombre) &&
                 usuario.getContrasena().equals(contrasena)) {
-
+                
+                setUsuarioActual(usuario);
                 return "Inicio de sesión correcto";
             }
         }
