@@ -389,16 +389,32 @@ public class Principal {
 
                     if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
                         System.out.println("Nombre Kit: ");
-                        kit = teclado.nextLine();
+                        error = true;
+                        while(error == true){
+                            kit = teclado.nextLine();
+                            if (kit.isBlank()){    
+                            System.out.println("Intenta de nuevo, el nombre del kit no puede estar vacío");
+                        } else {
+                            error = false;
+                            }
+                        }
+                        
                         System.out.println("Nombre Concepto: ");
-                        concepto = teclado.nextLine();
-                        biblio.getUsuarioActual().agregarCaKit(kit, concepto);
-                    }else{
-                        System.out.println("No se han registrado datos");
+                        error = true;
+                        while (error == true) {
+                            concepto = teclado.nextLine();
+                            if (concepto.isBlank()) {
+                                System.out.println("El nombre del Concepto no puede estar vacío.");
+                            } else {
+                                error = false;
+                            }
+                        }
+                        System.out.println(biblio.getUsuarioActual().agregarCaKit(kit, concepto));
+                    } else {
+                        System.out.prinln("No se han registrado datos.");
                     }
-                    
-                    
                     break;
+                    
                 case 8:
                     System.out.println("********** Quitar Concepto en Kit**********");
                     if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
