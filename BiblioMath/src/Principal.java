@@ -419,27 +419,74 @@ public class Principal {
                     System.out.println("********** Quitar Concepto en Kit**********");
                     if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
                         System.out.println("Nombre Kit: ");
-                        kit = teclado.nextLine();
+                        error = true;
+                        while (error == true) {
+                            kit = teclado.nextLine();
+                            if (kit.isBlank()){
+                                System.out.println("Intenta de nuevo, el nombre kit no puede estar vacío");
+                            } else {
+                                error = false;
+                            }
+                        }
                         System.out.println("ID Concepto: ");
-                        id = teclado.nextInt(); teclado.nextLine();
-                        biblio.getUsuarioActual().quitaEnKit(kit, id);
-                    }else{
-                        System.out.println("No se han registrado datos");
+                        error = true;
+                        while (error == true){
+                            try {
+                                id = teclado.nextInt(); teclado.nextLine();
+                                if (id <= 0) {
+                                    System.out.println("Intenta de nuevo, el ID debe ser mahor que 0.");   
+                                } else {
+                                    error = false;
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Intenta de nuevo, ingresa un número entero.");
+                                }
+                            }
+
+                            System.out.println(biblio.getUsuarioActual().quitaEnKit(kit, id));
+                        } else {
+                            System.out.println("No se han registrado datos");
                     }
-                    
                     break;
+                    
                 case 9:
                     System.out.println("**********Filtrar Curso**********");
                     System.out.println("Curso");
-                    curso = teclado.nextLine();
-                    System.out.println(biblio.getUsuarioActual().filtrarCurso(curso));
+                    error = true;
+                    while (error == true) {
+                        curso = teclado.nextLine();
+                        if (curso.isBlank()) {
+                            System.out.println("Intenta de nuevo, el curso no puede estar vacío."); 
+                        } else {
+                            error = false;
+                        }
+                    }
+                    if (biblio.getUsuarioActual().filtrarCurso(curso).isEmpty()) {
+                            System.out.println("No se encontraron conceptos de ese curso."):
+                            } else {
+                            System.out.println(biblio.getUsuarioActual().filtrarCurso(curso));
+                        }
                     break;
+                    
                 case 10:
                     System.out.println("**********Filtrar Categoría**********");
                     System.out.println("Categoria");
-                    categoria = teclado.nextLine();
-                    System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
+                    error = true;
+                    while (error == true) {
+                        categoria = teclado.nextLine();
+                        if (categoria.isBlank())
+                            System.out.println("Intenta de nuevo, la categoría no puede estar vacía."); 
+                        } else {
+                            error = false;
+                        }
+                    }
+                    if (biblio.getUsuarioActual().filtrarCategoria(categoria).isEmpty()) {
+                         System.out.println("No se encontraron conceptos de esa categoría.");
+                             } else {      
+                        System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
+                    }
                     break;
+            
                 case 11:
                     System.out.println("**********Ir al último visitado**********");
                     System.out.println(biblio.getUsuarioActual().irUltimo());
