@@ -29,9 +29,10 @@ public class Principal {
                     System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
                 }
             }
-
+        
         String username = "";
         String password ="";
+        
 
         switch (accion1){
             case 1:
@@ -165,16 +166,18 @@ public class Principal {
                     }
             }
 
+            int id = 0;
+            String nombre = "";
+            String explicacion = "";
+            String categoria = "";
+            String curso = "";
+            String kits = "";
+            String kit = "";
+            String concepto = "";
+
             switch (accionB){
                 case 1:
                     System.out.println("********** Agregar Concepto **********");
-
-                    int id = 0;
-                    String nombre = "";
-                    String explicacion = "";
-                    String categoria = "";
-                    String curso = "";
-                    String kits = "";
 
                     System.out.println("ID: ");
                     error = true;
@@ -383,9 +386,6 @@ public class Principal {
                     break;
                 case 7:
                     System.out.println("********** Agregar Concepto a Kit**********");
-                    
-                    String kit = " "; 
-                    String concepto = " ";
 
                     if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
                         System.out.println("Nombre Kit: ");
