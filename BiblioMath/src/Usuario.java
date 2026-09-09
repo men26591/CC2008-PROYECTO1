@@ -140,7 +140,7 @@ public class Usuario {
         ArrayList<Concepto> filtrado = new ArrayList<>();  
 
         for(Concepto c:baseConceptos){
-            if(c.getCurso().equals(Curso)){
+            if(c.getCurso().equalsIgnoreCase(Curso)){
                 filtrado.add(c);
             }
         }
@@ -153,7 +153,7 @@ public class Usuario {
         ArrayList<Concepto> filtrado = new ArrayList<>();
 
         for(Concepto c:baseConceptos){
-            if(c.getCategoria().equals(Categoria)){
+            if(c.getCategoria().equalsIgnoreCase(Categoria)){
                 filtrado.add(c);
             }
         }
@@ -200,7 +200,7 @@ public class Usuario {
     }
 
     //Métodos dentro de Kit
-    public void agregarCaKit(String kitN,String conceptoN){
+    public String agregarCaKit(String kitN,String conceptoN){
         Kit kit = null;
         Concepto concepto = null;
         for (Kit k:baseKits){
@@ -214,17 +214,49 @@ public class Usuario {
             }
         }
 
+        if (kit == null) {
+            return "No se encontró el kit.";
+        }
+
+        if (concepto == null) {
+            return "No se encontró el concepto.";
+        }
+
+        for (Concepto c : kit.getConceptos()) {
+            if (c.getId() == concepto.getId()) {
+                return "El concepto ya pertenece a ese kit.";
+            }
+        }
+
         kit.agregarConcepto(concepto);
+        return "Concepto agregado al kit correctamente.";
     }
     
-    public void quitaEnKit(String kitN,int id){
+    public String quitaEnKit(String kitN,int id){
         Kit kit = null;
         for (Kit k:baseKits){
             if(k.getNombre().toLowerCase().equals(kitN.toLowerCase())){
                 kit = k;
             }
         }
+
+        if (kit == null) {
+            return "No se encontró el kit.";
+        }
+
+        boolean conceptoEncontrado = false;
+        for (Concepto c : kit.getConceptos()) {
+            if (c.getId() == id) {
+                conceptoEncontrado = true;
+            }
+        }
+
+        if (conceptoEncontrado == false) {
+            return "No se encontró un concepto con ese ID dentro del kit.";
+        }
+
         kit.quitarConcepto(id);
+        return "Concepto eliminado del kit correctamente.";
     }
 
 

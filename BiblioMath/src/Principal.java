@@ -390,31 +390,33 @@ public class Principal {
                     if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
                         System.out.println("Nombre Kit: ");
                         error = true;
-                        while(error == true){
+                        while (error == true) {
                             kit = teclado.nextLine();
-                            if (kit.isBlank()){    
-                            System.out.println("Intenta de nuevo, el nombre del kit no puede estar vacío");
-                        } else {
-                            error = false;
+                            if (kit.isBlank()) {
+                                System.out.println("¡Intenta de nuevo! El nombre del kit no puede estar vacío.");
+                            } else {
+                                error = false;
                             }
                         }
-                        
+
                         System.out.println("Nombre Concepto: ");
                         error = true;
                         while (error == true) {
                             concepto = teclado.nextLine();
                             if (concepto.isBlank()) {
-                                System.out.println("El nombre del Concepto no puede estar vacío.");
+                                System.out.println("¡Intenta de nuevo! El nombre del concepto no puede estar vacío.");
                             } else {
                                 error = false;
                             }
                         }
+
                         System.out.println(biblio.getUsuarioActual().agregarCaKit(kit, concepto));
-                    } else {
-                        System.out.prinln("No se han registrado datos.");
+                    }else{
+                        System.out.println("No se han registrado datos");
                     }
-                    break;
                     
+                    
+                    break;
                 case 8:
                     System.out.println("********** Quitar Concepto en Kit**********");
                     if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
@@ -422,33 +424,34 @@ public class Principal {
                         error = true;
                         while (error == true) {
                             kit = teclado.nextLine();
-                            if (kit.isBlank()){
-                                System.out.println("Intenta de nuevo, el nombre kit no puede estar vacío");
+                            if (kit.isBlank()) {
+                                System.out.println("¡Intenta de nuevo! El nombre del kit no puede estar vacío.");
                             } else {
                                 error = false;
                             }
                         }
+
                         System.out.println("ID Concepto: ");
                         error = true;
-                        while (error == true){
+                        while (error == true) {
                             try {
-                                id = teclado.nextInt(); teclado.nextLine();
+                                id = Integer.parseInt(teclado.nextLine());
                                 if (id <= 0) {
-                                    System.out.println("Intenta de nuevo, el ID debe ser mahor que 0.");   
+                                    System.out.println("¡Intenta de nuevo! El ID debe ser mayor que cero.");
                                 } else {
                                     error = false;
                                 }
                             } catch (Exception e) {
-                                System.out.println("Intenta de nuevo, ingresa un número entero.");
-                                }
+                                System.out.println("¡Intenta de nuevo! Debes ingresar un número entero.");
                             }
+                        }
 
-                            System.out.println(biblio.getUsuarioActual().quitaEnKit(kit, id));
-                        } else {
-                            System.out.println("No se han registrado datos");
+                        System.out.println(biblio.getUsuarioActual().quitaEnKit(kit, id));
+                    }else{
+                        System.out.println("No se han registrado datos");
                     }
-                    break;
                     
+                    break;
                 case 9:
                     System.out.println("**********Filtrar Curso**********");
                     System.out.println("Curso");
@@ -456,36 +459,30 @@ public class Principal {
                     while (error == true) {
                         curso = teclado.nextLine();
                         if (curso.isBlank()) {
-                            System.out.println("Intenta de nuevo, el curso no puede estar vacío."); 
+                            System.out.println("¡Intenta de nuevo! El curso no puede estar vacío.");
                         } else {
                             error = false;
                         }
                     }
+
                     if (biblio.getUsuarioActual().filtrarCurso(curso).isEmpty()) {
-                            System.out.println("No se encontraron conceptos de ese curso."):
-                            } else {
-                            System.out.println(biblio.getUsuarioActual().filtrarCurso(curso));
-                        }
+                        System.out.println("No se encontraron conceptos de ese curso.");
+                    } else {
+                        System.out.println(biblio.getUsuarioActual().filtrarCurso(curso));
+                    }
                     break;
-                    
                 case 10:
                     System.out.println("**********Filtrar Categoría**********");
                     System.out.println("Categoria");
                     error = true;
                     while (error == true) {
                         categoria = teclado.nextLine();
-                        if (categoria.isBlank())
-                            System.out.println("Intenta de nuevo, la categoría no puede estar vacía."); 
+                        if (categoria.isBlank()) {
+                            System.out.println("¡Intenta de nuevo! La categoría no puede estar vacía.");
                         } else {
                             error = false;
                         }
                     }
-                    if (biblio.getUsuarioActual().filtrarCategoria(categoria).isEmpty()) {
-                         System.out.println("No se encontraron conceptos de esa categoría.");
-                             } else {      
-                        System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
-                    }
-                    break;
             
                 case 11:
                     System.out.println("**********Ir al último visitado**********");
@@ -494,6 +491,7 @@ public class Principal {
                 
                 case 12:
                     System.out.println("¡Adios! Gracias por usar BiblioMath");
+                    break;
                 default:
                     System.out.println("Opción no válida.");
                     break;
