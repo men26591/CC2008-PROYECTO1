@@ -308,7 +308,11 @@ public class Principal {
 
                 case 2:
                     System.out.println("********** Mostrar Conceptos **********");
+                    if(biblio.getUsuarioActual().estaLlenoConcepto() == true){
                     System.out.println(biblio.getUsuarioActual().motrarConceptos());
+                    }else{
+                    System.out.println("No se han ingresado conceptos al sistema.");
+                    }
                     break;
 
                 case 3:
@@ -379,19 +383,34 @@ public class Principal {
                     break;
                 case 7:
                     System.out.println("********** Agregar Concepto a Kit**********");
-                    System.out.println("Nombre Kit: ");
-                    String kit = teclado.nextLine();
-                    System.out.println("Nombre Concepto: ");
-                    String concepto = teclado.nextLine();
-                    biblio.getUsuarioActual().agregarCaKit(kit, concepto);
+                    
+                    String kit = " "; 
+                    String concepto = " ";
+
+                    if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
+                        System.out.println("Nombre Kit: ");
+                        kit = teclado.nextLine();
+                        System.out.println("Nombre Concepto: ");
+                        concepto = teclado.nextLine();
+                        biblio.getUsuarioActual().agregarCaKit(kit, concepto);
+                    }else{
+                        System.out.println("No se han registrado datos");
+                    }
+                    
+                    
                     break;
                 case 8:
                     System.out.println("********** Quitar Concepto en Kit**********");
-                    System.out.println("Nombre Kit: ");
-                    kit = teclado.nextLine();
-                    System.out.println("ID Concepto: ");
-                    id = teclado.nextInt(); teclado.nextLine();
-                    biblio.getUsuarioActual().quitaEnKit(kit, id);
+                    if(biblio.getUsuarioActual().estaLlenoKit() == true && biblio.getUsuarioActual().estaLlenoConcepto() == true) {
+                        System.out.println("Nombre Kit: ");
+                        kit = teclado.nextLine();
+                        System.out.println("ID Concepto: ");
+                        id = teclado.nextInt(); teclado.nextLine();
+                        biblio.getUsuarioActual().quitaEnKit(kit, id);
+                    }else{
+                        System.out.println("No se han registrado datos");
+                    }
+                    
                     break;
                 case 9:
                     System.out.println("**********Filtrar Curso**********");

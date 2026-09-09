@@ -228,4 +228,19 @@ public class Usuario {
     }
 
 
+    public boolean estaLlenoKit(){
+
+        if (baseKits.isEmpty()) {
+                return false;
+            }
+        return true;
+    }
+
+    public boolean estaLlenoConcepto(){
+
+        if (baseConceptos.isEmpty()) {
+                return false;
+            }
+        return true;
+    }
 }
