@@ -379,7 +379,11 @@ public class Principal {
 
                 case 5:
                     System.out.println("********** Mostrar Kits **********");
-                    System.out.println(biblio.getUsuarioActual().mostrarKits());
+                    if(biblio.getUsuarioActual().estaLlenoKit() == true){
+                        System.out.println(biblio.getUsuarioActual().mostrarKits());
+                    }else {
+                        System.out.println("No se han registrado kits en el sistema.");
+                    }
                     break;
                 case 6:
                     System.out.println("********** Buscar Kit**********");
@@ -497,17 +501,21 @@ public class Principal {
 
                 case 10:
                     System.out.println("**********Filtrar Categoría**********");
-                    System.out.println("Categoria");
-                    error = true;
-                    while (error == true) {
-                        categoria = teclado.nextLine();
-                        if (categoria.isBlank()) {
-                            System.out.println("¡Intenta de nuevo! La categoría no puede estar vacía.");
-                        } else {
-                            error = false;
+                    if(biblio.getUsuarioActual().estaLlenoConcepto() == true){
+                        System.out.println("Categoria");
+                        error = true;
+                        while (error == true) {
+                            categoria = teclado.nextLine();
+                            if (categoria.isBlank()) {
+                                System.out.println("¡Intenta de nuevo! La categoría no puede estar vacía.");
+                            } else {
+                                error = false;
+                            }
                         }
+                        System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
+                    }else{
+                    System.out.println("No se han ingresado conceptos al sistema.");
                     }
-                    System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
                     break;
 
                 case 11:

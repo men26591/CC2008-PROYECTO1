@@ -120,7 +120,6 @@ public class Usuario {
             setUltimaVisita(c.getNombre());
         }
     }
-
     
     public String motrarConceptos() {
         String cadena = "";
