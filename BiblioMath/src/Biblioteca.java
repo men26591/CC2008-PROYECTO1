@@ -59,6 +59,6 @@ public class Biblioteca {
             }
         }
 
-        return "Usuario o contraseña incorrectos";
+        throw new RuntimeException();
     }
 }

@@ -91,23 +91,34 @@ public class Usuario {
     }
 
     public void nuevoConcepto(int id,String nombre,String explicacion,String categoria,String curso,String kits) {
-        Concepto c = new Concepto();
-        c.setId(id);
-        c.setNombre(nombre);
-        c.setExplicacion(explicacion);
-        c.setCategoria(categoria);
-        c.setCurso(curso);
+        boolean repetido = false;
 
-        String[] lkits = kits.split(","); //Separar kist ingresados 
-        ArrayList<String> listaKits = new ArrayList<>();
-        //Transformar la lista en un Arreglo dinámico
-        for(String k:lkits){
-            listaKits.add(k);
+        for(Concepto c:baseConceptos){
+            if((c.getId()==id)||(c.getNombre().equalsIgnoreCase(nombre))){repetido=true;}
         }
 
-        c.setKitEstudio(listaKits);
+        if(repetido){
+            throw new RuntimeException();
+        }else{
+            Concepto c = new Concepto();
+            c.setId(id);
+            c.setNombre(nombre);
+            c.setExplicacion(explicacion);
+            c.setCategoria(categoria);
+            c.setCurso(curso);
 
-        this.baseConceptos.add(c);
+            String[] lkits = kits.split(","); //Separar kist ingresados 
+            ArrayList<String> listaKits = new ArrayList<>();
+            //Transformar la lista en un Arreglo dinámico
+            for(String k:lkits){
+                listaKits.add(k);
+            }
+
+            c.setKitEstudio(listaKits);
+
+            this.baseConceptos.add(c);
+            setUltimaVisita(c.getNombre());
+        }
     }
 
     
@@ -124,7 +135,7 @@ public class Usuario {
     public String buscarConcepto(String nombre) {
         for (Concepto c:baseConceptos){
             if (c.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                setUltimaVisita(Integer.toString(c.getId()));
+                setUltimaVisita(c.getNombre());
                 return c.toString();
             }
         }
@@ -162,9 +173,22 @@ public class Usuario {
 
     
     public void crearKitStudio(String nombre) {
-        Kit k = new Kit();
-        k.setNombre(nombre);
-        baseKits.add(k);
+        boolean repetido = false;
+        
+        for(Kit k:baseKits){
+            if(k.getNombre().equalsIgnoreCase(nombre)){
+                repetido = true;
+            }
+        }
+
+        if(repetido){
+            throw new RuntimeException();
+        }else{
+            Kit k = new Kit();
+            k.setNombre(nombre);
+            baseKits.add(k);
+            setUltimaVisita(k.getNombre());
+        }
     }
 
     public ArrayList <String> mostrarKits() {
@@ -190,11 +214,15 @@ public class Usuario {
 
   
     public String irUltimo() {
-        String r = buscarKits(ultimaVisita);
-        if(r.equals("No se encontró el Kit.")){
-            return(buscarConcepto(ultimaVisita));
+        if(ultimaVisita.equals("")){
+            return "No se ha registrado última visita. Es posible que no se hayan registrado conceptos o kits.";
         }else{
-            return r;
+            String r = buscarKits(ultimaVisita);
+            if(r.equals("No se encontró el Kit.")){
+                return(buscarConcepto(ultimaVisita));
+            }else{
+                return "Kit:\n"+r;
+            }
         }
     }
 
@@ -257,7 +285,6 @@ public class Usuario {
         kit.quitarConcepto(id);
         return "Concepto eliminado del kit correctamente.";
     }
-
 
     public boolean estaLlenoKit(){
 

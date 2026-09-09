@@ -6,139 +6,150 @@ public class Principal {
         Scanner teclado = new Scanner(System.in);
 
         Biblioteca biblio = new Biblioteca();
-
-        System.out.println("********** BiblioMath **********");
-//LONG IN/SING UP
-        System.out.println("\n1. Log in\n2. Sign up");
-        System.out.println("\n********* ¿Qué desea hacer? (Ingrese el número) **********");
         
-        boolean error = true;
-        int accion1 = 0;
-        while (error){
-                String entrada1 = teclado.nextLine();
-                try{
-                    accion1 = Integer.parseInt(entrada1);
-                    if (accion1 > 2 || accion1 < 1) {
+        boolean error = true; //Validacion ingreso de opcion valida
+        boolean cuenta = false; //Validacion de ingreso a cuenta
+
+        while(cuenta == false){
+            error = true;
+            System.out.println("********** BiblioMath **********");
+    //LONG IN/SING UP
+            System.out.println("\n1. Log in\n2. Sign up");
+            System.out.println("\n********* ¿Qué desea hacer? (Ingrese el número) **********");
+            
+            int accion1 = 0;
+            while (error){
+                    String entrada1 = teclado.nextLine();
+                    try{
+                        accion1 = Integer.parseInt(entrada1);
+                        if (accion1 > 2 || accion1 < 1) {
+                            System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
+                        }
+                        else{
+                            error = false;
+                        }
+
+                    }catch(Exception e){
                         System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
                     }
-                    else{
-                        error = false;
-                    }
-
-                }catch(Exception e){
-                    System.out.println("\n¡Intente de nuevo! Ingresa una opción válida: ");
                 }
-            }
-        
-        String username = "";
-        String password ="";
-        
+            
+            String username = "";
+            String password ="";
+            
 
-        switch (accion1){
-            case 1:
-                System.out.println("\n********* Log in **********");
+            switch (accion1){
+                case 1:
+                    System.out.println("\n********* Log in **********");
 
-                System.out.println("\nUsername: ");
-                error = true;
+                    System.out.println("\nUsername: ");
+                    error = true;
 
-                while (error == true){
-                        
-                        try{
-                            username = teclado.nextLine();
-                            error = false;
-                                
-                            if (username.isBlank()) { 
-                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
-                                error = true;
-                            }
-
-                        }catch(Exception e){
-                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
-                            teclado.nextLine();
-                            error = true;
-                        }
-                    }
-
-
-                System.out.println("Password: ");
-                error = true;
-
-                while (error == true){
-                        
-                        try{
-                            password = teclado.nextLine();
-                            error = false;
-                                
-                            if (password.isBlank()) { 
-                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
-                                error = true;
-                            }
-
-                        }catch(Exception e){
-                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
-                            teclado.nextLine();
-                            error = true;
-                        }
-                    }
-                
-                System.out.println(biblio.login(username, password));
-
-            break;
-                
-            case 2:
-                
-                System.out.println("\n********* Sign up **********");
-
-                System.out.println("\nUsername: ");
-                error = true;
-                String usernameN = null;
-                while (error == true){
-                        
-                        try{
-                            usernameN = teclado.nextLine();
-                            error = false;
-                                
-                            if (usernameN.isBlank()) { 
-                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
-                                error = true;
-                            }
-
-                        }catch(Exception e){
-                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
-                            teclado.nextLine();
-                            error = true;
-                        }
-                    }
-
-
-                System.out.println("Password: ");
-                error = true;
-                String passwordN = null;
-                while (error){
-                        
-                        try{
-                            passwordN = teclado.nextLine();
-
-                            if (passwordN.isBlank()) { 
-                                System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
-                            }
-                            else{
+                    while (error == true){
+                            
+                            try{
+                                username = teclado.nextLine();
                                 error = false;
-                            }
+                                    
+                                if (username.isBlank()) { 
+                                    System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                    error = true;
+                                }
 
-                        }catch(Exception e){
-                            System.out.println("\n¡Error inesperado, intenta de nuevo!");
-                            teclado.nextLine();
+                            }catch(Exception e){
+                                System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                                teclado.nextLine();
+                                error = true;
+                            }
                         }
+
+
+                    System.out.println("Password: ");
+                    error = true;
+
+                    while (error == true){
+                            
+                            try{
+                                password = teclado.nextLine();
+                                error = false;
+                                    
+                                if (password.isBlank()) { 
+                                    System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                    error = true;
+                                }
+
+                            }catch(Exception e){
+                                System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                                teclado.nextLine();
+                                error = true;
+                            }
+                        }
+                    
+                    try{
+                        System.out.println(biblio.login(username, password));
+                        cuenta = true;
+                    }catch (Exception e) {
+                        System.out.println("Usuario o contraseña incorrectos. Vuelva a intentarlo o cree un nuevo usuario.");
                     }
 
-                System.out.println(biblio.crearUsuario(usernameN,passwordN));
-        
-            break;
-
-            default:
-                System.out.println("Opción no válida.");
                 break;
+                    
+                case 2:
+                    
+                    System.out.println("\n********* Sign up **********");
+
+                    System.out.println("\nUsername: ");
+                    error = true;
+                    String usernameN = null;
+                    while (error == true){
+                            
+                            try{
+                                usernameN = teclado.nextLine();
+                                error = false;
+                                    
+                                if (usernameN.isBlank()) { 
+                                    System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                    error = true;
+                                }
+
+                            }catch(Exception e){
+                                System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                                teclado.nextLine();
+                                error = true;
+                            }
+                        }
+
+
+                    System.out.println("Password: ");
+                    error = true;
+                    String passwordN = null;
+                    while (error){
+                            
+                            try{
+                                passwordN = teclado.nextLine();
+
+                                if (passwordN.isBlank()) { 
+                                    System.out.println("\n¡Intenta de nuevo! No puedes dejar espacios vacíos.");
+                                }
+                                else{
+                                    error = false;
+                                }
+
+                            }catch(Exception e){
+                                System.out.println("\n¡Error inesperado, intenta de nuevo!");
+                                teclado.nextLine();
+                            }
+                        }
+
+                    System.out.println(biblio.crearUsuario(usernameN,passwordN));
+                    cuenta = true;
+            
+                break;
+
+                default:
+                    System.out.println("Opción no válida.");
+                    break;
+            }
         }
 
 //BIBLIO
@@ -159,10 +170,10 @@ public class Principal {
                             error = false;
                         }
                         else{
-                            System.out.println("\n 1111 ¡Intente de nuevo! Ingresa una opción válida: ");
+                            System.out.println("\n ¡Intente de nuevo! Ingresa una opción válida: ");
                         }
                     }catch(Exception e){
-                        System.out.println("\n 2222 ¡Intente de nuevo! Ingresa una opción válida: ");
+                        System.out.println("\n ¡Intente de nuevo! Ingresa una opción válida: ");
                     }
             }
 
@@ -306,7 +317,12 @@ public class Principal {
                         }
                     }
 
-                    biblio.getUsuarioActual().nuevoConcepto(id, nombre, explicacion, categoria, curso, kits);
+                    try{
+                        biblio.getUsuarioActual().nuevoConcepto(id, nombre, explicacion, categoria, curso, kits);
+                    }catch(Exception e){
+                        System.out.println("Ya existe un concepto con el id o nombre ingresado. No es posible registrar un concepto con datos repetidos.");
+                    }
+
                     break;
 
                 case 2:
@@ -350,10 +366,17 @@ public class Principal {
 
                 case 4:
                     System.out.println("********** Crear Kit **********");
+                    System.out.println("Ingrese el nombre del Kit:");
                     String n = teclado.nextLine();
 
-                    biblio.getUsuarioActual().crearKitStudio(n);
+                    try{
+                        biblio.getUsuarioActual().crearKitStudio(n);
+                        System.out.println("El kit fue creado con exito.");
+                    }catch (Exception e){
+                        System.out.println("¡Error! Ya existe un Kit con este nombre.");
+                    }
                     break;
+
                 case 5:
                     System.out.println("********** Mostrar Kits **********");
                     System.out.println(biblio.getUsuarioActual().mostrarKits());
@@ -471,6 +494,7 @@ public class Principal {
                         System.out.println(biblio.getUsuarioActual().filtrarCurso(curso));
                     }
                     break;
+
                 case 10:
                     System.out.println("**********Filtrar Categoría**********");
                     System.out.println("Categoria");
@@ -483,7 +507,9 @@ public class Principal {
                             error = false;
                         }
                     }
-            
+                    System.out.println(biblio.getUsuarioActual().filtrarCategoria(categoria));
+                    break;
+
                 case 11:
                     System.out.println("**********Ir al último visitado**********");
                     System.out.println(biblio.getUsuarioActual().irUltimo());

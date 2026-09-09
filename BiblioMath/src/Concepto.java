@@ -102,7 +102,7 @@ public class Concepto {
             }
         }
          
-        return "\nConcepto \nID: " + id + "\nNombre: " + nombre + "\nCategoría: " + categoria + "\nCurso: 1" + curso +"\nKit de Estudio: "+ nombresKit + "\n";
+        return "\nConcepto \nID: " + id + "\nNombre: " + nombre + "\nCategoría: " + categoria + "\nCurso: " + curso +"\nKit de Estudio: "+ nombresKit + "\n";
     }
 
 }
