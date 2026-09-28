@@ -17,9 +17,9 @@ public class Usuario {
         this.nombre = "";
         this.contrasena = "";
         this.baseConceptos = new ArrayList<Concepto>();
-        this.aConceptos = "";
+        this.aConceptos = "baseConceptos1.csv";
         this.baseKits = new ArrayList<Kit>();
-        this.aKits = "";
+        this.aKits = "baseKits1.csv";
         this.ultimaVisita = "";
     }
 

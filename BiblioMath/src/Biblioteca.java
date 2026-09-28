@@ -9,6 +9,7 @@ public class Biblioteca {
 
     public Biblioteca() {
         baseUsuarios = new ArrayList<Usuario>();
+        aUsuarios = "baseUsuarios.csv";
         usuarioActual = null;
     }
 
