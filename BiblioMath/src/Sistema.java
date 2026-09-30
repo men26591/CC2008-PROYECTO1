@@ -8,42 +8,47 @@ public class Sistema {
     }
 
     public void iniciar() {
-        // Aquí se cargarían los usuarios del archivo CSV.
         ventana = new VentanaPrincipal(this);
-        ventana.mostrarPanel("login");
+        mostrarLogin();
     }
 
     public boolean iniciarSesion(String nombre, String contrasena) {
+
         try {
             biblioteca.login(nombre, contrasena);
-            ventana.mostrarPanel("inicio");
+            mostrarInicio();
             return true;
+
         } catch (Exception e) {
             return false;
         }
     }
 
     public String registrarUsuario(String nombre, String contrasena) {
+
         String mensaje = biblioteca.crearUsuario(nombre, contrasena);
 
         if (mensaje.equals("Se creó el usuario correctamente")) {
-            ventana.mostrarPanel("inicio");
+            mostrarInicio();
         }
 
         return mensaje;
-    }
-
-    public Usuario getUsuarioActual() {
-        return biblioteca.getUsuarioActual();
     }
 
     public Biblioteca getBiblioteca() {
         return biblioteca;
     }
 
-    public void cerrarSesion() {
-        biblioteca.setUsuarioActual(null);
+    public Usuario getUsuarioActual() {
+        return biblioteca.getUsuarioActual();
+    }
+
+    public void mostrarLogin() {
         ventana.mostrarPanel("login");
+    }
+
+    public void mostrarRegistro() {
+        ventana.mostrarPanel("registro");
     }
 
     public void mostrarInicio() {
@@ -60,5 +65,10 @@ public class Sistema {
 
     public void mostrarKits() {
         ventana.mostrarPanel("kits");
+    }
+
+    public void cerrarSesion() {
+        biblioteca.setUsuarioActual(null);
+        mostrarLogin();
     }
 }
