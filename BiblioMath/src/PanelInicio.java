@@ -7,3 +7,4 @@ public class PanelInicio extends JPanel {
         add(new JLabel("Inicio"));
     }
 }
+

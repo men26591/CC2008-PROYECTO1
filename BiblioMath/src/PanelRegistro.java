@@ -1,15 +1,9 @@
-import javax.swing.JPanel; //Espacio para agregar las cosas en la ventana
-import javax.swing.JLabel; 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class PanelLogin extends JPanel {
-    
-    private JTextField txtUsuario; // asi el usuario ingresa el texto y la contraseña
-    private JPasswordField txtContrasena;
+public class PanelRegistro extends JPanel {
 
-     public PanelLogin(Sistema sistema) {
-
- 
+    public PanelRegistro(Sistema sistema) {
+        add(new JLabel("Registro"));
     }
 }
-
-
