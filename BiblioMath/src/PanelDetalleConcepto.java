@@ -6,8 +6,11 @@ public class PanelDetalleConcepto extends JPanel {
 
     public PanelDetalleConcepto(Sistema sistema) {
         add(new JLabel("Biblioteca"));
-        setVisible(true);
-        setSize(1000, 750);
-        
+        JFrame a = new JFrame();
+        a.setVisible(true);
+        a.setSize(1000, 750);
+        a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        a.setLocationRelativeTo(null);
+
     }
 }
