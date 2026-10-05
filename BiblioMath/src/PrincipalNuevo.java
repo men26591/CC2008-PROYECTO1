@@ -1,4 +1,4 @@
-public class PrincipalNuevo {
+public class PrincipalNuevo { // Función: Arrancar el programa
 
     public static void main(String[] args) {
 

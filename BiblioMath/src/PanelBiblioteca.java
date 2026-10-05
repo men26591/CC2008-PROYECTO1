@@ -1,7 +1,7 @@
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelBiblioteca extends JPanel {
+public class PanelBiblioteca extends JPanel { //Función: Interfaz de biblioteca
 
     public PanelBiblioteca(Sistema sistema) {
         add(new JLabel("Biblioteca"));
