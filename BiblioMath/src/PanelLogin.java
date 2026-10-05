@@ -24,12 +24,25 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         encabezado.setBorder(BorderFactory.createEmptyBorder(15, 30, 15, 30)); //Los bordes (arriba, iz, abajo, de) sería un tipo de padding/margen
 
         //Cargar imagen
-        ImageIcon logoBiblio = new ImageIcon("BiblioMath/recursos/logoBiblio.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
-        
+        ImageIcon logoBiblioOriginal = new ImageIcon("BiblioMath/recursos/logoBiblio.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
+        //Cambiar el TAMAÑO de la imagen
+        Image logoBiEscalada =  logoBiblioOriginal.getImage().getScaledInstance(280, 70, Image.SCALE_SMOOTH);
+        //Convertir nuevamente a ImageIcon
+        ImageIcon logoBiblioEscalado = new ImageIcon(logoBiEscalada);
 
-        JLabel logoBiblioIzquierda =new JLabel(logoBiblio);
+        JLabel logoBiblio =new JLabel(logoBiblioEscalado); //Jlabel que mostrrá la imagen
+        encabezado.add(logoBiblio,BorderLayout.WEST);
 
-        encabezado.add(logoBiblioIzquierda,BorderLayout.WEST);
+
+        //Cargar imagen LOGO MATE
+        ImageIcon logoMateUVG = new ImageIcon("BiblioMath/recursos/logoMate.png");
+        //Modifcar tamaño
+        Image logoMaEscalada = logoMateUVG.getImage().getScaledInstance(70,70,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
+        //Agregar a Jlabel para mostrar
+        JLabel logoMate = new JLabel(logoMateUVGEscalonado);
+        encabezado.add(logoMate,BorderLayout.EAST);
 
 
         //Contenido Principal
@@ -41,10 +54,21 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         JPanel ilustracion = new JPanel();
 
         formulario.add(new JLabel("FORMULARIO"));
-        ilustracion.add(new JLabel("IMAGEN"));
-
         contenido.add(formulario);
         contenido.add(ilustracion);
+
+        //Cargar imagen LOGO MATE
+        ImageIcon imagenDecorativa = new ImageIcon("BiblioMath/recursos/imagenLogin.png");
+        //Modifcar tamaño
+        Image imagenDeEscalada = imagenDecorativa.getImage().getScaledInstance(400,400,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon imagenDeEscaladaEscalado = new ImageIcon(imagenDeEscalada);
+        //Agregar a Jlabel para mostrar
+        JLabel imagenDecorativaEscalonado = new JLabel(imagenDeEscaladaEscalado);
+        encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
+        ilustracion.add(imagenDecorativaEscalonado);
+
+        
 
         //Agregar todo al panel
 
