@@ -1,7 +1,5 @@
 import java.util.*;
 import java.io.*;  //Paquete para manejo de archivos csv.
- 
-
 
 public class Usuario {
     private String nombre;
@@ -24,8 +22,44 @@ public class Usuario {
     }
 
    
-    public <tipo> void BajarBaseDatos(String direccion, ArrayList<tipo> local) {
+    public <tipo> void BajarBaseDatos(String direccion, ArrayList<tipo> local)throws Exception {
         //Relacion con archivo .csv
+        try(BufferedReader br = new BufferedReader(new FileReader(direccion))){ //Abre el archivo a manera de lector
+        br.readLine(); // Saltar el encabezado
+
+        String linea; //Para ir almacenando datos
+        local.clear(); // Evitar duplicados al volver a cargar
+
+        linea = br.readLine();
+        while (linea != null) {
+            if (linea.trim().isEmpty()) {
+                continue; // Saltar filas vacías
+            }
+
+            String[] atributos = linea.split(",");
+            
+            //Creacion de objetos
+            if (direccion.equals(aConceptos)){
+                Concepto c = new Concepto();
+                c.setId(Integer.parseInt(atributos[0]));
+                c.setNombre(atributos[1]);
+                c.setExplicacion(atributos[2]);
+                c.setCategoria(atributos[3]);
+                c.setCurso(atributos[4]);
+                //c.setKitEstudio(atributos[5]);
+
+                baseConceptos.add(c);//Agregar objeto a local
+            }
+            if (direccion.equals(aKits)) {
+                Kit k = new Kit();
+                k.setNombre(atributos[0]);
+                //k.setConceptos(atributos[1]);
+                baseKits.add(k); //Agregar objeto a local
+                
+            }
+        }
+        }
+
     }
 
     
