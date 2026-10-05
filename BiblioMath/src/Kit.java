@@ -56,4 +56,10 @@ public class Kit {
     public String toString(){ 
         return nombre + ","+ conceptos;
     }
+
+    public String toDatos(){ //Para el almacenamiento en csv
+        String cadena="";
+        cadena = nombre+","+conceptos; //Datos separados por comas
+        return cadena;
+    }
 }

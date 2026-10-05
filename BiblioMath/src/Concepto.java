@@ -105,4 +105,9 @@ public class Concepto {
         return "\nConcepto \nID: " + id + "\nNombre: " + nombre + "\nCategoría: " + categoria + "\nCurso: " + curso +"\nKit de Estudio: "+ nombresKit + "\n";
     }
 
+    public String toDatos(){ //Para el almacenamiento en csv
+        String cadena="";
+        cadena = id+","+nombre+","+categoria+","+curso+","+kitEstudio; //Datos separados por comas
+        return cadena;
+    }
 }

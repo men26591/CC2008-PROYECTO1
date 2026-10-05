@@ -61,33 +61,39 @@ public class Usuario {
         }
 
     }
-
     
-    public <tipo> void GuardarBaseDatos(String direccion, ArrayList<tipo> local) {
+    public <tipo> void GuardarBaseDatos(String direccion, ArrayList<tipo> local)throws Exception{
         //Relacion con archivo .csv
         if (!local.isEmpty()) { //Si no esta vacia
             ArrayList<String> datos = new ArrayList<>(); //Lista que almacena listas de datos.
+            
             for (tipo e:local){
-                datos.add(e.toDatos()); //Genera lista de Strings con los datos separados por comas
-            }
+                if (e instanceof Concepto) {
+                    Concepto c = (Concepto) e;
+                    datos.add(c.toDatos());
 
-            BufferedWriter bw = new BufferedWriter(new FileWriter(direccion));
+                } else if (e instanceof Kit) {
+                    Kit k = (Kit) e;
+                    datos.add(k.toDatos());
+                }
 
-            if(local.get(0) instanceof Concepto){ //Si se trata de la base de Conceptos
-                bw.write("id,nombre,explicacion,categoria,curso,kitEstudio");// encabezado
-            }
-            if(local.get(0) instanceof Kit){ //Si se trata de la base de Kits
-                bw.write("nombre,conceptos");// encabezado
-            }
+            try(BufferedWriter bw = new BufferedWriter(new FileWriter(direccion))){
+                if(local.get(0) instanceof Concepto){ //Si se trata de la base de Conceptos
+                    bw.write("id,nombre,explicacion,categoria,curso,kitEstudio");// encabezado
+                }
+                if(local.get(0) instanceof Kit){ //Si se trata de la base de Kits
+                    bw.write("nombre,conceptos");// encabezado
+                }
 
-            bw.newLine(); //Cambio de fila
-
-            for (String fila : datos) {
-                bw.write(fila); // Escribe la linea con los datos de un elemento
                 bw.newLine(); //Cambio de fila
+
+                for (String fila : datos) {
+                    bw.write(fila); // Escribe la linea con los datos de un elemento
+                    bw.newLine(); //Cambio de fila
+                }
             }
-        }
-       
+            }
+        }  
     }
 
    
