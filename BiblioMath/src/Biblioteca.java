@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.io.*;  //Paquete para manejo de archivos csv.
 
-public class Biblioteca {
+public class Biblioteca { //Función: Lógica de usuarios/sesión
 
     private ArrayList<Usuario> baseUsuarios;
     private String aUsuarios;
