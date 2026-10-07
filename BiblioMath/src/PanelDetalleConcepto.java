@@ -1,18 +1,24 @@
-import java.awt.Color;
-import javax.swing.JFrame;
+import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Font; //Permite agregar fuentes
+import java.awt.Dimension;
+import javax.swing.JPanel; // Agrupar elementos visuales dentro de la ventana
+import javax.swing.ImageIcon; //Agregar imagenes 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JTextField; //Recibe el texto normal
+import javax.swing.JPasswordField; //Recibe contraseña y agrega los puntitos 
+import javax.swing.JButton; //Permite ejetuar la acción
+import javax.swing.BoxLayout; // Permite ordenar elementos, es algo gráfico
+import javax.swing.BorderFactory;
+import javax.swing.Box; // Acompañana al BoxLayout es como un contendor ligero y una herramienta para crear espacio en blanco 
+
 
 public class PanelDetalleConcepto extends JPanel {
 
-    public PanelDetalleConcepto(Sistema sistema) {
-        add(new JLabel("Biblioteca"));
-        JFrame a = new JFrame();
-        a.setVisible(true);
-        a.setSize(1000, 750);
-        a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        a.setLocationRelativeTo(null);
-        Color celesteFondo = new Color(210, 224, 255);
-        a.setBackground(celesteFondo);
-    }
+    public PanelDetalleConcepto(Sistema sistema) {}
+
+        
+       
 }
