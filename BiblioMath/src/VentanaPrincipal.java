@@ -11,6 +11,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
 
         setTitle("BiblioMath");
         setSize(1000, 750);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
