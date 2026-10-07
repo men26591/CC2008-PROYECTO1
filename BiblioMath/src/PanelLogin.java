@@ -13,10 +13,8 @@ import javax.swing.JPasswordField; //Recibe contraseña y agrega los puntitos
 import javax.swing.JButton; //Permite ejetuar la acción
 import javax.swing.BoxLayout; // Permite ordenar elementos, es algo gráfico
 import javax.swing.Box; // Acompañana al BoxLayout es como un contendor ligero y una herramienta para crear espacio en blanco 
-
-
 import javax.swing.BorderFactory; //Aplicar bordes
-
+import javax.swing.JOptionPane; //Para mostrar mensaje por medio de una ventanita emergente
 
 public class PanelLogin extends JPanel { // Función: Interfaz de login
 
@@ -54,8 +52,6 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
 
 
         //Contenido Principal
-
-
         JPanel contenido = new JPanel(new GridLayout(1,2));
 
         JPanel formulario = new JPanel();
@@ -84,7 +80,6 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
        
 
         //Añadir BOTÓN
-
         JButton botonLogin = new JButton("Login in"); // Crea un boton que va a tener escerito log in
         botonLogin.setMaximumSize(new Dimension(300,40)); //Limitamos tamaño
         botonLogin.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
@@ -93,6 +88,28 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         
         JPanel ilustracion = new JPanel();
 
+
+        botonLogin.addActionListener( e -> { // cuando ocurra la acción de este botón ejecuta lo que está dentro
+            
+            String userName = campoUsuario.getText(); // Pasar lo que recibe lo pasa a string ese metodo .getText lo traae JTextField        
+            String contrasena = new String (campoContrena.getPassword()); // Para obtener la contraseña 
+            
+            if(userName.isBlank() || contrasena.isBlank()){ // verifica si el campo de usuario o contraseña están en blanco
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña está vacía.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+
+                return ; // para que hasta ahi llegue y evitar que se ejecture el resto de programa
+            }
+            
+            boolean ingresadoCorrecto = sistema.iniciarSesion(userName, contrasena);
+
+            if(!ingresadoCorrecto){
+                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.","Datos Incompletos", JOptionPane.WARNING_MESSAGE); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
+            }
+        });
+
+        botonRegistro.addActionListener(e -> {
+            sistema.mostrarRegistro();
+        });
 
 
         // Se añanden para que se muestre si no no se muestra!!!!
@@ -114,6 +131,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         formulario.add(botonRegistro);
 
 
+
         //Cargar imagen LOGO MATE
         ImageIcon imagenDecorativa = new ImageIcon("BiblioMath/recursos/imagenLogin.png");
         //Modifcar tamaño
@@ -125,14 +143,15 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
         ilustracion.add(imagenDecorativaEscalonado);
 
-        
-
         //Agregar todo al panel
 
         //Agregar los Jpanel y dalres una ubicacacion de referencia
         
         this.add(encabezado, BorderLayout.NORTH); //Los agregamos y colcoamos donde queremos que aparezcan 
         this.add(contenido, BorderLayout.CENTER); //Los agregamos y colcoamos donde queremos que aparezcan 
+
         
     }
 }
+
+       
