@@ -3,7 +3,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Font; //Permite agregar fuentes
-import java.awt.Dimension;
 
 import javax.swing.JPanel; // Agrupar elementos visuales dentro de la ventana
 import javax.swing.ImageIcon; //Agregar imagenes 
