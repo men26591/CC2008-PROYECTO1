@@ -3,7 +3,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Font; //Permite agregar fuentes
-import java.awt.Dimension;
+
 
 import javax.swing.JPanel; // Agrupar elementos visuales dentro de la ventana
 import javax.swing.ImageIcon; //Agregar imagenes 
@@ -40,19 +40,26 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         encabezado.add(logoBiblio,BorderLayout.WEST);
 
 
-        //Cargar imagen LOGO MATE
+     
+       //Cargar imagen LOGO MATE
         ImageIcon logoMateUVG = new ImageIcon("BiblioMath/recursos/logoMate.png");
         //Modifcar tamaño
-        Image logoMaEscalada = logoMateUVG.getImage().getScaledInstance(70,70,Image.SCALE_SMOOTH);
+        Image logoMaEscalada = logoMateUVG.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
         //Convetir nuevamente a ImageIcon
         ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
         //Agregar a Jlabel para mostrar
-        JLabel logoMate = new JLabel(logoMateUVGEscalonado);
-        encabezado.add(logoMate,BorderLayout.EAST);
+        
+        JButton botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
+        //Preferencias para el diseño del botón
+        botonlogoMate.setContentAreaFilled(false); //Quitar el color del botón
+        botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
+        botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        encabezado.add(botonlogoMate,BorderLayout.EAST);
 
 
         //Contenido Principal
-        JPanel contenido = new JPanel(new GridLayout(1,2));
+        JPanel contenido = new JPanel(new GridLayout(1,2)); // Para dividir el area en dos columnas
 
         JPanel formulario = new JPanel();
         formulario.setLayout(new BoxLayout(formulario, BoxLayout.Y_AXIS)); // Las componente se apilan verticalmente 
@@ -88,7 +95,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         
         JPanel ilustracion = new JPanel();
 
-
+//Action Listener 
         botonLogin.addActionListener( e -> { // cuando ocurra la acción de este botón ejecuta lo que está dentro
             
             String userName = campoUsuario.getText(); // Pasar lo que recibe lo pasa a string ese metodo .getText lo traae JTextField        
@@ -143,7 +150,13 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
         ilustracion.add(imagenDecorativaEscalonado);
 
-        //Agregar todo al panel
+// ACTIONES "actionListeer"
+        botonlogoMate.addActionListener(e -> {
+        //Agregamos lo que secede cuando se presiona
+        JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
+
+        });
+
 
         //Agregar los Jpanel y dalres una ubicacacion de referencia
         

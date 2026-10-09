@@ -43,12 +43,18 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         //Cargar imagen LOGO MATE
         ImageIcon logoMateUVG = new ImageIcon("BiblioMath/recursos/logoMate.png");
         //Modifcar tamaño
-        Image logoMaEscalada = logoMateUVG.getImage().getScaledInstance(70,70,Image.SCALE_SMOOTH);
+        Image logoMaEscalada = logoMateUVG.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
         //Convetir nuevamente a ImageIcon
         ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
         //Agregar a Jlabel para mostrar
-        JLabel logoMate = new JLabel(logoMateUVGEscalonado);
-        encabezado.add(logoMate,BorderLayout.EAST);
+        
+        JButton botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
+        //Preferencias para el diseño del botón
+        botonlogoMate.setContentAreaFilled(false); //Quitar el color del botón
+        botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
+        botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        encabezado.add(botonlogoMate,BorderLayout.EAST);
 
 
         //Contenido Principal
@@ -100,7 +106,7 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
                 return ; // para que hasta ahi llegue y evitar que se ejecture el resto de programa
             }
         
-                JOptionPane.showMessageDialog(this, sistema.registrarUsuario(userName,contrasena),"Datos Incompletos", JOptionPane.WARNING_MESSAGE); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
+                JOptionPane.showMessageDialog(this, sistema.registrarUsuario(userName,contrasena)); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
         
         });
 
@@ -140,14 +146,19 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
         ilustracion.add(imagenDecorativaEscalonado);
 
-        //Agregar todo al panel
+// ACTIONES "actionListeer"
+    botonlogoMate.addActionListener(e -> {
+        //Agregamos lo que secede cuando se presiona
+        JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
+
+    });
 
         //Agregar los Jpanel y dalres una ubicacacion de referencia
         
         this.add(encabezado, BorderLayout.NORTH); //Los agregamos y colcoamos donde queremos que aparezcan 
         this.add(contenido, BorderLayout.CENTER); //Los agregamos y colcoamos donde queremos que aparezcan 
 
-        
+    
     }
 
 }
