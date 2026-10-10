@@ -187,7 +187,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacion.setOpaque(false); //Para que no muestre color 
 
         //Mostrar instrucciones 
-        JLabel textoInstrucciones = new JLabel("Explicación");
+        JLabel textoInstrucciones = new JLabel("Explicación del Concepto");
         textoInstrucciones.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
         textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
