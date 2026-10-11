@@ -10,6 +10,7 @@ import java.awt.Image; // Agregar imageness
 import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
 import java.awt.Color; // Permite agregar colores
 import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
+import java.awt.Font;
 import java.awt.Graphics; //Permite agregar graficos (figuras)
 
 
@@ -120,6 +121,42 @@ public class PanelKits extends JPanel { //Función: Interfaz de kits
         
         g.setColor(Color.WHITE);
         g.fillRect(50, 20, 900, 60); //figuara llena de color
-    
+        // Medidas y separación de los cuadros
+        int margen = 50;
+        int separacion = 20;
+        int altoCuadro = 300;
+
+        // Calcular el ancho para que ambos quepan en el panel
+        int anchoCuadro = (getWidth() - (margen * 2) - separacion) / 2;
+
+        // Posición vertical: dejar 30 píxeles debajo de los cuadros
+        int posicionY = getHeight() - altoCuadro - 30;
+
+        // Pintar ambos cuadros de blanco
+        g.setColor(Color.WHITE);
+
+        // Cuadro izquierdo
+        g.fillRect(margen, posicionY, anchoCuadro, altoCuadro);
+
+        // Cuadro derecho
+        g.fillRect(
+            margen + anchoCuadro + separacion,
+            posicionY,
+            anchoCuadro,
+            altoCuadro
+        );
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+
+        g.drawString( "Nombre Kit", margen + 20, posicionY + 30);
+
+        g.setFont(new Font("Arial", Font.PLAIN, 15));
+
+        g.drawString( "Buscar concepto a agregar", margen + 20, posicionY + 60);
+
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+
+        g.drawString("Detalles del kit", margen + anchoCuadro + separacion + 20, posicionY + 30);
+
     }
 }
