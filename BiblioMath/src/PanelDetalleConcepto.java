@@ -126,6 +126,23 @@ public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuid
         
         g.setColor(Color.WHITE);
         g.fillRect(50, 20, 900, 60); //figuara llena de color
+
+        // Posición del cuadro
+        int margen = 50;
+        int posicionY = 110;
+
+        // Tamaño según el espacio disponible
+        int anchoCuadro = getWidth() - (margen * 2);
+        int altoCuadro = getHeight() - posicionY - 30;
+
+        // Dibujar el cuadro blanco
+        g.setColor(Color.WHITE);
+        g.fillRect(margen, posicionY, anchoCuadro, altoCuadro);
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+
+        g.drawString( "Nombre Concepto", anchoCuadro/2 - margen, posicionY + 30);
     
     }
         
