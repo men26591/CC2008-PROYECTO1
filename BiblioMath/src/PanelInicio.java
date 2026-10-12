@@ -159,7 +159,24 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
     botonlogoMate.addActionListener(e -> {
         //Agregamos lo que secede cuando se presiona
         JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
+    });
 
+    botonBuscar.addActionListener(e -> {
+        //Obtencion de datos del formulario.
+        String nombre = campoBuscar.getText().trim();
+
+        if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
+            JOptionPane.showMessageDialog(this, "Ingresa el nombre del concepto que deseas buscar.");
+        }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
+            String m = sistema.buscar(nombre); //Se llama a método en sistema
+            JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
+        }
+
+    });
+
+    botonVer.addActionListener(e -> {
+        String m = sistema.verUltimo();
+        JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
     });
 
 //AGREGAR PARA MOSTRAR

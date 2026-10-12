@@ -243,8 +243,8 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
             if (nombre.isEmpty() || categoria.isEmpty() || curso.isEmpty() || explicacion.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
                 JOptionPane.showMessageDialog(this, "Completa todos los campos para poder registrar el nuevo concepto.");
             }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-                String m = sistema.registrarConcepto(nombre, explicacion, categoria, curso);
-                JOptionPane.showMessageDialog(this, m);
+                String m = sistema.registrarConcepto(nombre, explicacion, categoria, curso); //Recibe mensaje
+                JOptionPane.showMessageDialog(this, m); //Lo muestra como notificacion
             }
 
         });
