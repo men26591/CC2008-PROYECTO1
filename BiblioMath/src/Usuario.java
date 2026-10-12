@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.management.RuntimeErrorException;
+
 import java.io.*;  //Paquete para manejo de archivos csv.
 
 public class Usuario {
@@ -19,6 +22,13 @@ public class Usuario {
         this.baseKits = new ArrayList<Kit>();
         this.aKits = "BiblioMath/baseKits1.csv";
         this.ultimaVisita = "";
+
+        try{
+            BajarBaseDatos(aConceptos,baseConceptos);
+            BajarBaseDatos(aKits, baseKits);
+        }catch(Exception e){
+            throw new RuntimeException("Error en cargar datos del usuario");
+        }
     }
 
    
@@ -30,8 +40,7 @@ public class Usuario {
         String linea; //Para ir almacenando datos
         local.clear(); // Evitar duplicados al volver a cargar
 
-        linea = br.readLine();
-        while (linea != null) {
+        while ((linea = br.readLine()) != null) {
             if (linea.trim().isEmpty()) {
                 continue; // Saltar filas vacías
             }
@@ -182,6 +191,12 @@ public class Usuario {
 
             this.baseConceptos.add(c);
             setUltimaVisita(c.getNombre());
+
+            try{
+                GuardarBaseDatos(aConceptos, baseConceptos); //Actualiza base datos
+            }catch(Exception e){
+                throw new RuntimeException("No se pudo guardar el concepto"+e);
+            }
         }
     }
     

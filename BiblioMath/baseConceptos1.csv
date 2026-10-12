@@ -1,1 +1,3 @@
-﻿id,nombre,explicacion,categoria,curso,kitEstudio
+id,nombre,explicacion,categoria,curso,kitEstudio
+0,sumar,+,e,D,[]
+1,Pitagoras,Hipotenusa,P,p,[]

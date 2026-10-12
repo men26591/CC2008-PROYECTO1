@@ -107,7 +107,7 @@ public class Concepto {
 
     public String toDatos(){ //Para el almacenamiento en csv
         String cadena="";
-        cadena = id+","+nombre+","+categoria+","+curso+","+kitEstudio; //Datos separados por comas
+        cadena = id+","+nombre+","+explicacion+","+categoria+","+curso+","+kitEstudio; //Datos separados por comas
         return cadena;
     }
 }

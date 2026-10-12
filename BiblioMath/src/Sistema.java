@@ -36,6 +36,29 @@ public class Sistema {
         return mensaje;
     }
 
+    public String registrarConcepto(String nombre, String explicacion,String categoria, String curso) {
+        Usuario u = getUsuarioActual();
+
+        int siguienteId = 0; //Variable para signar ID
+        for (Concepto concepto : u.getBaseConceptos()) { //Para cada concepto
+            if (concepto.getId() >= siguienteId) { //Si tiene un ID mayor o igual al de la variable
+                siguienteId = concepto.getId() + 1; //La variableaumenta en 1 su ID
+            }
+        }
+
+        String mensaje;
+        try {
+            u.nuevoConcepto(siguienteId, nombre,explicacion, categoria,curso, "");
+            mensaje = "Concepto registrado correctamente.";
+        } catch (Exception e) {
+            e.printStackTrace();
+            mensaje = "No se pudo agregar concepto.";
+        }
+
+        return mensaje;    
+    }
+
+
     public Biblioteca getBiblioteca() { //Le da acceso a otros paneles para obtener la informacion
         return biblioteca;
     }
