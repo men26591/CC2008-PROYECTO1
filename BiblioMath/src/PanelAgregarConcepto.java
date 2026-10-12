@@ -196,13 +196,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
         informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
 
-<<<<<<< HEAD
         JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y se agrega a al cuadro de texto
-=======
-
-        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y le meto la ent5rada de texto
-        informacion.add(barra); // meto la barra a al panel informacion (dentro de barra esta la entrada fde texto)
->>>>>>> 16dfd09f1b9bf0cf16c33d93f42af1ca32e4920a
         
         Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
         barra.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
@@ -211,14 +205,8 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacion.add(Box.createVerticalStrut(55)); //Funciona para dejar un espacio
         informacion.add(textoInstrucciones);
         informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
-<<<<<<< HEAD
         informacion.add(informacionConcepto);
         informacion.add(barra); 
-=======
-        informacion.add(barra);
-        contenido.add(informacion);
-
->>>>>>> 16dfd09f1b9bf0cf16c33d93f42af1ca32e4920a
         
 
 // ACTIONES "actionListeer"
