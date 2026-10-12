@@ -143,8 +143,16 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonVer.setBorderPainted(false); // Quitar el borde del botón
         botonVer.setAlignmentX(CENTER_ALIGNMENT);
 
-// ACTIONES "actionListeer"
 
+        JButton botonCerrarSesion = new JButton("Cerrar Sesión");
+        botonCerrarSesion.setPreferredSize(new Dimension(100,35)); //Limitamos tamaño
+
+        
+// ACTIONES "actionListeer"
+    
+    botonCerrarSesion.addActionListener(e ->{
+        sistema.mostrarLogin();
+    });
     botonLogoBiblio.addActionListener(e ->{ // Cuando lo preciones sucedará:
 
         sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
@@ -196,6 +204,8 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         //Los agregamos y colcoamos donde queremos que aparezcan 
         this.add(encabezado, BorderLayout.NORTH); 
         this.add(contenido, BorderLayout.CENTER);
+        this.add(botonCerrarSesion, BorderLayout.SOUTH);
+
 
 
     }   
@@ -212,8 +222,6 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
     
         g.setColor(Color.WHITE);
         g.fillRect(150, 430, 700, 200);
-
-    
     }
 }
 

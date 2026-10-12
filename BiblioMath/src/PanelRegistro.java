@@ -108,10 +108,14 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         
                 JOptionPane.showMessageDialog(this, sistema.registrarUsuario(userName,contrasena)); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
         
+            campoUsuario.setText("");
+            campoContrena.setText("");
         });
 
         botonRegresar.addActionListener(e -> {
             sistema.mostrarLogin();
+            campoUsuario.setText("");
+            campoContrena.setText("");
         });
 
 
@@ -151,6 +155,8 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         //Agregamos lo que secede cuando se presiona
         JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
 
+        campoUsuario.setText("");
+        campoContrena.setText("");
     });
 
         //Agregar los Jpanel y dalres una ubicacacion de referencia

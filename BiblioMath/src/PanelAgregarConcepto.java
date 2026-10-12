@@ -208,8 +208,9 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
 
         contenido.add(informacion);
         informacion.add(barra); 
-        
 
+
+        
 // ACTIONES "actionListeer"
 
         botonLogoBiblio.addActionListener(e ->{ // Cuando lo preciones sucedará:
@@ -253,7 +254,6 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
             campoCurso.setText("");
             campoNombre.setText("");
             informacionConcepto.setText("");
-
 
             
         });

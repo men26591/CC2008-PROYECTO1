@@ -108,6 +108,8 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
             }
             
             boolean ingresadoCorrecto = sistema.iniciarSesion(userName, contrasena);
+            campoUsuario.setText("");
+            campoContrena.setText("");
 
             if(!ingresadoCorrecto){
                 JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.","Datos Incompletos", JOptionPane.WARNING_MESSAGE); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
@@ -116,6 +118,9 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
 
         botonRegistro.addActionListener(e -> {
             sistema.mostrarRegistro();
+
+            campoUsuario.setText("");
+            campoContrena.setText("");
         });
 
 
