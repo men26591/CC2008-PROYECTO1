@@ -7,6 +7,9 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     private CardLayout cardLayout;
     private JPanel contenedor;
 
+    private PanelKits panelKits;
+    private PanelDetalleConcepto panelDetalleConcepto;
+
     public VentanaPrincipal(Sistema sistema) {
 
         setTitle("BiblioMath");
@@ -18,12 +21,42 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         cardLayout = new CardLayout(); // Crea el CardLayout 
         contenedor = new JPanel(cardLayout);  //Se crea un panel (donde vamos a mostrar ) que se organizará con cardLayout
 
+<<<<<<< Updated upstream
         contenedor.add(new PanelLogin(sistema), "login"); // Se meten todas las pantallas dentro de ese panel  y crea las pantallas
         contenedor.add(new PanelRegistro(sistema), "registro"); //Crea la pantalla, agrega el cardLayout y agrega el nombre
         contenedor.add(new PanelInicio(sistema), "inicio");
         contenedor.add(new PanelBiblioteca(sistema), "biblioteca");
         contenedor.add(new PanelAgregarConcepto(sistema), "agregar" );
         contenedor.add(new PanelKits(sistema), "kits");
+=======
+        // Crear los paneles que necesitamos actualizar
+        panelKits = new PanelKits(sistema);
+
+        panelDetalleConcepto =
+            new PanelDetalleConcepto(sistema);
+
+        // Agregar todas las pantallas
+        contenedor.add(new PanelLogin(sistema), "login");
+        contenedor.add(new PanelRegistro(sistema), "registro");
+        contenedor.add(new PanelInicio(sistema), "inicio");
+
+        contenedor.add(
+            new PanelBiblioteca(sistema),
+            "biblioteca"
+        );
+
+        contenedor.add(
+            new PanelAgregarConcepto(sistema),
+            "agregar"
+        );
+
+        contenedor.add(panelKits, "kits");
+
+        contenedor.add(
+            panelDetalleConcepto,
+            "detalleConcepto"
+        );
+>>>>>>> Stashed changes
 
         add(contenedor); // Se agrega el contendro a la ventana
 
@@ -32,5 +65,16 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
 
     public void mostrarPanel(String nombrePanel) { //Método para cambiar de pantalla (panel) más no cambia de VENTANA, está siempre es la misma (Esta esctructura aparece en SISTEMA)
         cardLayout.show(contenedor, nombrePanel);
+    }
+
+    public void mostrarPanelKits() {
+        panelKits.actualizarLista();
+        mostrarPanel("kits");
+    }
+
+    public void mostrarDetalleConcepto(Concepto concepto) {
+
+        panelDetalleConcepto.mostrarConcepto(concepto);
+        mostrarPanel("detalleConcepto");
     }
 }

@@ -143,6 +143,7 @@ public class PanelDetalleConcepto extends JPanel {
         g.setFont(new Font("Arial", Font.BOLD, 18));
 
         g.drawString( "Nombre Concepto", anchoCuadro/2 - margen, posicionY + 30);
+        
     
     }
         

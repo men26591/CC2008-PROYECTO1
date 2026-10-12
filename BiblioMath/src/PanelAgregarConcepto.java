@@ -1,25 +1,23 @@
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.TreeUI;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTextArea; // agregar un texto de varias lineas
-
-import java.awt.Dimension; //Permite modificar los paneles
-import java.awt.GridLayout; // para dividir el panel 
-
-import java.awt.Image; // Agregar imageness
-import java.awt.Font; //Permite agregar fuentes
-import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
-import java.awt.Color; // Permite agregar colores
-import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
-import java.awt.Graphics; //Permite agregar graficos (figuras)
+import javax.swing.JLabel; // agregar un texto de varias lineas
+import javax.swing.JOptionPane; //Permite modificar los paneles
+import javax.swing.JPanel; // para dividir el panel
+import javax.swing.JScrollPane; // Agregar imageness
+import javax.swing.JTextArea; //Permite agregar fuentes
+import javax.swing.JTextField; // Importa un administrador de diseño que divide un contenedor en 5 regiones
+import javax.swing.border.LineBorder; // Permite agregar colores
 
 
 
@@ -192,20 +190,35 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
         textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
+        //JtextArea
         JTextArea informacionConcepto = new JTextArea();
-        Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
-        informacionConcepto.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
-
-        informacionConcepto.setBorder(new LineBorder(new Color(63, 123, 242)));
+        informacionConcepto.setLineWrap(true); // para un salto de linea
+        informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
         informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
+
+<<<<<<< HEAD
+        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y se agrega a al cuadro de texto
+=======
+
+        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y le meto la ent5rada de texto
+        informacion.add(barra); // meto la barra a al panel informacion (dentro de barra esta la entrada fde texto)
+>>>>>>> 16dfd09f1b9bf0cf16c33d93f42af1ca32e4920a
+        
+        Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
+        barra.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
+        barra.setBorder(new LineBorder(new Color(63, 123, 242)));
 
         informacion.add(Box.createVerticalStrut(55)); //Funciona para dejar un espacio
         informacion.add(textoInstrucciones);
         informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
+<<<<<<< HEAD
         informacion.add(informacionConcepto);
-
+        informacion.add(barra); 
+=======
+        informacion.add(barra);
         contenido.add(informacion);
 
+>>>>>>> 16dfd09f1b9bf0cf16c33d93f42af1ca32e4920a
         
 
 // ACTIONES "actionListeer"
@@ -247,6 +260,13 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
                 JOptionPane.showMessageDialog(this, m); //Lo muestra como notificacion
             }
 
+            campoCategoria.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
+            campoCurso.setText("");
+            campoNombre.setText("");
+            informacionConcepto.setText("");
+
+
+            
         });
         }
 
