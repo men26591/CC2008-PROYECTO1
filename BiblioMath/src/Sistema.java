@@ -58,6 +58,26 @@ public class Sistema {
         return mensaje;    
     }
 
+    public String buscar(String nombre) {
+        Usuario u = getUsuarioActual(); //Se obtiene el usuario
+
+        String m = u.buscarKits(nombre); //Se busca Kit
+        if(m.equals("No se encontró el Kit.")){ //Si no se encuentra Kit
+            m = u.buscarConcepto(nombre); //Se busca concepto
+            if(m.equals("No se encontró concepto.")){ //Si no e encuentra Concepto
+                m = "No se encontro ningun concepto o kit con este nombre."; //Se modifica mensaje para que indicar que no se encontro concepto ni kit.
+            }
+        }
+
+        return m;  //Se retorna el   
+    }
+
+    public String verUltimo() {
+        Usuario u = getUsuarioActual(); //Se obtiene el usuario
+        String m =  u.irUltimo(); //Se llama al método ir último de usuario
+        return m;  //Se retorna lo retornado por el método
+    }
+
 
     public Biblioteca getBiblioteca() { //Le da acceso a otros paneles para obtener la informacion
         return biblioteca;
