@@ -1,8 +1,7 @@
-public class PrincipalNuevo { // Función: Arrancar el programa
-
+public class PrincipalNuevo {
     public static void main(String[] args) {
-
         Sistema sistema = new Sistema();
-        sistema.iniciar();
+        VentanaPrincipal ventana = new VentanaPrincipal(sistema);
+        ventana.setVisible(true);
     }
 }
