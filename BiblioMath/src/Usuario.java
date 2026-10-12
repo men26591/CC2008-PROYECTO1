@@ -1,5 +1,4 @@
 import java.util.*;
-import javax.management.RuntimeErrorException;
 import java.io.*;  //Paquete para manejo de archivos csv.
 
 public class Usuario {
@@ -97,7 +96,7 @@ public class Usuario {
     }
 
     public void archivosBases(){
-        String carpeta = "basesDatos/" + nombre + "/";
+        String carpeta = "BiblioMath/basesDatos/" + nombre + "/";
         this.aConceptos = carpeta + "conceptos.csv"; //Archivo de conceptos dentro de la carpeta
         this.aKits = carpeta + "kits.csv"; //Archivo de kits dentro de la carpeta
 
@@ -179,7 +178,7 @@ public class Usuario {
         }
 
         if(repetido){
-            throw new RuntimeException();
+            throw new RuntimeException("Ya existe un concepto con este nombre.");
         }else{
             Concepto c = new Concepto();
             c.setId(id);

@@ -206,10 +206,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacion.add(textoInstrucciones);
         informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
 
-        informacion.add(barra);
         contenido.add(informacion);
-
-        informacion.add(informacionConcepto);
         informacion.add(barra); 
         
 

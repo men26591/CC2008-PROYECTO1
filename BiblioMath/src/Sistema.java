@@ -51,7 +51,6 @@ public class Sistema {
             u.nuevoConcepto(siguienteId, nombre,explicacion, categoria,curso, "");
             mensaje = "Concepto registrado correctamente.";
         } catch (Exception e) {
-            e.printStackTrace();
             mensaje = "No se pudo agregar concepto.";
         }
 

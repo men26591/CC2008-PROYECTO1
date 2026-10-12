@@ -9,7 +9,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
 
     public Biblioteca() {
         baseUsuarios = new ArrayList<Usuario>();
-        aUsuarios = "basesDatos/baseUsuarios.csv";
+        aUsuarios = "BiblioMath/basesDatos/baseUsuarios.csv";
         usuarioActual = null;
 
         //Bajar los usuarios existententes en la base de datos a la lista local.
@@ -37,6 +37,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
             }
 
         }catch (IOException e) {//Si ocurre un error
+            e.printStackTrace();
             System.out.println("No se pudieron cargar los usuarios ya existentes ");
         }
     }
