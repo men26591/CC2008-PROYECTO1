@@ -1,27 +1,23 @@
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.TreeUI;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JTextArea; // agregar un texto de varias lineas
-
-import java.awt.Dimension; //Permite modificar los paneles
-import java.awt.GridLayout; // para dividir el panel 
-
-import java.awt.Image; // Agregar imageness
-import java.awt.Font; //Permite agregar fuentes
-import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
-import java.awt.Color; // Permite agregar colores
-import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
-import java.awt.Graphics; //Permite agregar graficos (figuras)
+import javax.swing.JLabel; // agregar un texto de varias lineas
+import javax.swing.JOptionPane; //Permite modificar los paneles
+import javax.swing.JPanel; // para dividir el panel
+import javax.swing.JScrollPane; // Agregar imageness
+import javax.swing.JTextArea; //Permite agregar fuentes
+import javax.swing.JTextField; // Importa un administrador de diseño que divide un contenedor en 5 regiones
+import javax.swing.border.LineBorder; // Permite agregar colores
 
 
 
@@ -199,7 +195,6 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
 
         JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y se agrega a al cuadro de texto
-        informacionConcepto.add(barra);
         
         Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
         informacionConcepto.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
@@ -210,8 +205,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacion.add(textoInstrucciones);
         informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
         informacion.add(informacionConcepto);
-        contenido.add(informacion);
-
+        informacion.add(barra); 
         
 
 // ACTIONES "actionListeer"
