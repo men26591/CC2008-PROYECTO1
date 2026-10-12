@@ -9,7 +9,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
 
     public Biblioteca() {
         baseUsuarios = new ArrayList<Usuario>();
-        aUsuarios = "BiblioMath/baseUsuarios.csv";
+        aUsuarios = "BiblioMath/basesDatos/baseUsuarios.csv";
         usuarioActual = null;
 
         //Bajar los usuarios existententes en la base de datos a la lista local.
@@ -29,6 +29,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
                     Usuario u = new Usuario(); //Crea usuario
                     u.setNombre(atributos[0]); //Primer atributo se asigna a usuario
                     u.setContrasena(atributos[1]); //Segundo atributo se asigna a contrasena
+                    u.archivosBases();
                     baseUsuarios.add(u); //Se agrega usuario a la lista local
                 }
                 linea = br.readLine();//Lee la siguiente linea
@@ -68,6 +69,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
 
         nuevoUsuario.setNombre(nombre);
         nuevoUsuario.setContrasena(contrasena);
+        nuevoUsuario.archivosBases();
 
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(aUsuarios, true))) { //Abre el archivo en modo escritura y lo cierra el archivo automáticamente después de usarlo.
             escritor.write(nombre + "," + contrasena); //Escribe usuario y contraseña

@@ -18,17 +18,10 @@ public class Usuario {
         this.nombre = "";
         this.contrasena = "";
         this.baseConceptos = new ArrayList<Concepto>();
-        this.aConceptos = "BiblioMath/baseConceptos1.csv";
+        this.aConceptos = "";
         this.baseKits = new ArrayList<Kit>();
-        this.aKits = "BiblioMath/baseKits1.csv";
+        this.aKits = "";
         this.ultimaVisita = "";
-
-        try{
-            BajarBaseDatos(aConceptos,baseConceptos);
-            BajarBaseDatos(aKits, baseKits);
-        }catch(Exception e){
-            throw new RuntimeException("Error en cargar datos del usuario");
-        }
     }
 
    
@@ -86,6 +79,8 @@ public class Usuario {
                     datos.add(k.toDatos());
                 }
 
+            new File(direccion).getParentFile().mkdirs(); //Se crea la carpeta del archivo si no existe
+
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(direccion))){
                 if(local.get(0) instanceof Concepto){ //Si se trata de la base de Conceptos
                     bw.write("id,nombre,explicacion,categoria,curso,kitEstudio");// encabezado
@@ -105,7 +100,24 @@ public class Usuario {
         }  
     }
 
-   
+    public void archivosBases(){
+        String carpeta = "BiblioMath/basesDatos/" + nombre + "/"; //Carpeta nueva por usuario
+        this.aConceptos = carpeta + "conceptos.csv"; //Archivo de conceptos dentro de la carpeta
+        this.aKits = carpeta + "kits.csv"; //Archivo de kits dentro de la carpeta
+
+        try {
+            if (new File(aConceptos).isFile()) {
+                BajarBaseDatos(aConceptos, baseConceptos); //Carga la base de datos
+            }
+            if (new File(aKits).isFile()) {
+                BajarBaseDatos(aKits, baseKits); //Carga la base de datos
+            }
+        } catch (Exception e) { //Si ocurre un error
+            throw new IllegalStateException("No se pudieron cargar los datos de " + nombre, e);
+        }
+    }
+
+
     public void setNombre(String nombre) {
         this.nombre = nombre;       
     }
