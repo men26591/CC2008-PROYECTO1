@@ -194,22 +194,24 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
         textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
+        //JtextArea
         JTextArea informacionConcepto = new JTextArea();
         informacionConcepto.setLineWrap(true); // para un salto de linea
         informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
+        informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
 
-        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y se agrega a al cuadro de texto
-        informacionConcepto.add(barra);
+
+        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y le meto la ent5rada de texto
+        informacion.add(barra); // meto la barra a al panel informacion (dentro de barra esta la entrada fde texto)
         
         Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
-        informacionConcepto.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
-        informacionConcepto.setBorder(new LineBorder(new Color(63, 123, 242)));
-        informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
+        barra.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
+        barra.setBorder(new LineBorder(new Color(63, 123, 242)));
 
         informacion.add(Box.createVerticalStrut(55)); //Funciona para dejar un espacio
         informacion.add(textoInstrucciones);
         informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
-        informacion.add(informacionConcepto);
+        informacion.add(barra);
         contenido.add(informacion);
 
         
