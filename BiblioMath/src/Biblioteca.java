@@ -9,8 +9,34 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
 
     public Biblioteca() {
         baseUsuarios = new ArrayList<Usuario>();
-        aUsuarios = "baseUsuarios.csv";
+        aUsuarios = "BiblioMath/baseUsuarios.csv";
         usuarioActual = null;
+
+        //Bajar los usuarios existententes en la base de datos a la lista local.
+        try(BufferedReader br = new BufferedReader(new FileReader(aUsuarios))){ //Abre el archivo a manera de lector
+            br.readLine(); // Saltar el encabezado
+
+            String linea; //Para ir almacenando datos
+
+            linea = br.readLine();//Lee la siguiente linea como un String
+            while (linea != null) {
+                if (linea.trim().isEmpty()) {
+                    continue; // Saltar filas vacías
+                }
+
+                String[] atributos = linea.split(","); //Realiza una lista con los atributos.
+                if(atributos.length == 2){
+                    Usuario u = new Usuario(); //Crea usuario
+                    u.setNombre(atributos[0]); //Primer atributo se asigna a usuario
+                    u.setContrasena(atributos[1]); //Segundo atributo se asigna a contrasena
+                    baseUsuarios.add(u); //Se agrega usuario a la lista local
+                }
+                linea = br.readLine();//Lee la siguiente linea
+            }
+
+        }catch (IOException e) {//Si ocurre un error
+            System.out.println("No se pudieron cargar los usuarios ya existentes ");
+        }
     }
 
     public ArrayList<Usuario> getBaseUsuarios() {
@@ -43,9 +69,18 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
         nuevoUsuario.setNombre(nombre);
         nuevoUsuario.setContrasena(contrasena);
 
-        baseUsuarios.add(nuevoUsuario);
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(aUsuarios, true))) { //Abre el archivo en modo escritura y lo cierra el archivo automáticamente después de usarlo.
+            escritor.write(nombre + "," + contrasena); //Escribe usuario y contraseña
+            escritor.newLine(); //Cambia de linea para no sobreescribir en la siguiente ocasion
+            
+        } catch (IOException e) { //En caso no se pueda abrir el archivo
+            return "No se pudo guardar el usuario."; //Termina el método si hay error.
+        }
 
-        setUsuarioActual(nuevoUsuario);
+        //Una vez ya guardado
+        baseUsuarios.add(nuevoUsuario); //Agrega a la lista local
+        setUsuarioActual(nuevoUsuario); //Declara que es el usuario con el que se esta trabajando.
+
         return "Se creó el usuario correctamente";
     }
 
