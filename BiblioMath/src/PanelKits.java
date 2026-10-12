@@ -1,5 +1,6 @@
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,12 +14,19 @@ import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los aco
 import java.awt.Font;
 import java.awt.Graphics; //Permite agregar graficos (figuras)
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 
 public class PanelKits extends JPanel { //Función: Interfaz de kits
 
+    private JTextField campoNombrar;
+    private JTextField campoBuscarConcepto;
+    private String nombreKit = "Nuevo Kit";
+
     public PanelKits(Sistema sistema) {
          //ENCABEZADO
-
+         
         this.setBackground(new Color(210, 224, 255));
         this.setLayout(new BorderLayout()); // Es para agregar eso de ubicaciones, si quere norte, este 
 //ENCABEZADO *******************************************
@@ -47,8 +55,8 @@ public class PanelKits extends JPanel { //Función: Interfaz de kits
     //** 
 
         //Panel para meterlo en el panel y que se colocen los dos logos del lado derecho 
-         JPanel panelLogosDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
-         panelLogosDerecho.setOpaque(false); //Mantiene l fondo delpanel trasparente o sin color
+        JPanel panelLogosDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
+        panelLogosDerecho.setOpaque(false); //Mantiene l fondo delpanel trasparente o sin color
 
     //BOTON HERRAMIENTAS
 
@@ -89,27 +97,114 @@ public class PanelKits extends JPanel { //Función: Interfaz de kits
 
 // ACTIONES "actionListeer"
 
-    botonLogoBiblio.addActionListener(e ->{ // Cuando lo preciones sucedará:
+        botonLogoBiblio.addActionListener(e ->{ // Cuando lo preciones sucedará:
 
-        sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
+            sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
 
-    });
+        });
 
-    botonHerramientas.addActionListener(e -> {
-        //Agregar que sucede cuando se presiona
-        sistema.mostrarAgregarConcepto();
-    });
+        botonHerramientas.addActionListener(e -> {
+            //Agregar que sucede cuando se presiona
+            sistema.mostrarAgregarConcepto();
+        });
 
-    botonlogoMate.addActionListener(e -> {
-        //Agregamos lo que secede cuando se presiona
-        JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
+        botonlogoMate.addActionListener(e -> {
+            //Agregamos lo que secede cuando se presiona
+            JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
 
-    });
+        });
 
-//AGREGAR PARA MOSTRAR
-        encabezado.add(panelLogosDerecho);
-        this.add(encabezado, BorderLayout.NORTH); 
+    //AGREGAR PARA MOSTRAR
+            encabezado.add(panelLogosDerecho);
+            this.add(encabezado, BorderLayout.NORTH); 
 
+            // Crear el campo para escribir
+            campoNombrar = new JTextField();
+            campoNombrar.setFont(new Font("Arial", Font.PLAIN, 15));
+
+            campoNombrar.getDocument().addDocumentListener(
+                new DocumentListener() {
+
+                    private void actualizarNombre() {
+                        String texto = campoNombrar.getText().trim();
+
+                        if (texto.isEmpty()) {
+                            nombreKit = "Nuevo Kit";
+                        } else {
+                            nombreKit = texto;
+                        }
+
+                        // Volver a dibujar el panel con el nuevo título
+                        repaint();
+                    }
+
+                    @Override
+                    public void insertUpdate(DocumentEvent e) {
+                        actualizarNombre();
+                    }
+
+                    @Override
+                    public void removeUpdate(DocumentEvent e) {
+                        actualizarNombre();
+                    }
+
+                    @Override
+                    public void changedUpdate(DocumentEvent e) {
+                        actualizarNombre();
+                    }
+                }
+            );
+
+            // Agregarlo al panel
+            this.add(campoNombrar, BorderLayout.CENTER);
+
+            // Crear el campo para escribir
+            campoBuscarConcepto = new JTextField();
+            campoBuscarConcepto.setFont(new Font("Arial", Font.PLAIN, 15));
+
+            // Agregarlo al panel
+            this.add(campoBuscarConcepto, BorderLayout.CENTER);
+
+    }
+
+    @Override
+    public void doLayout() {
+        super.doLayout();
+        int margen = 50;
+        int separacion = 20;
+        int altoCuadro = 300;
+        if (campoNombrar != null) {
+            // Las mismas medidas que utilizas al dibujar los cuadros
+
+            int anchoCuadro =
+                (getWidth() - margen * 2 - separacion) / 2;
+
+            int posicionY = getHeight() - altoCuadro - 30;
+
+            // Ubicar el campo debajo del texto
+            campoNombrar.setBounds(
+                margen + 20,                  // Posición horizontal
+                posicionY + 75,               // Posición vertical
+                Math.max(0, anchoCuadro - 40), // Ancho
+                30                            // Alto
+            );
+        }
+        if (campoBuscarConcepto != null) {
+            // Las mismas medidas que utilizas al dibujar los cuadros
+
+            int anchoCuadro =
+                (getWidth() - margen * 2 - separacion) / 2;
+
+            int posicionY = getHeight() - altoCuadro - 30;
+
+            // Ubicar el campo debajo del texto
+            campoBuscarConcepto.setBounds(
+                margen + 20,                  // Posición horizontal
+                posicionY + 150,               // Posición vertical
+                Math.max(0, anchoCuadro - 40), // Ancho
+                30                            // Alto
+            );
+        }
     }
 
     public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuidad al escribir. Graphics -> g (el nombre de la cariables o algo así)
@@ -147,16 +242,14 @@ public class PanelKits extends JPanel { //Función: Interfaz de kits
         );
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 18));
-
-        g.drawString( "Nombre Kit", margen + 20, posicionY + 30);
+        g.drawString( nombreKit, margen + 20, posicionY + 30);
 
         g.setFont(new Font("Arial", Font.PLAIN, 15));
-
-        g.drawString( "Buscar concepto a agregar", margen + 20, posicionY + 60);
+        g.drawString( "Cambiar nombre del kit", margen + 20, posicionY + 60);
+        g.drawString( "Buscar concepto a agregar", margen + 20, posicionY + 135);
 
         g.setFont(new Font("Arial", Font.BOLD, 18));
-
         g.drawString("Detalles del kit", margen + anchoCuadro + separacion + 20, posicionY + 30);
 
-    }
+    } 
 }
