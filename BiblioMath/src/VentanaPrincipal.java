@@ -20,43 +20,16 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
 
         cardLayout = new CardLayout(); // Crea el CardLayout 
         contenedor = new JPanel(cardLayout);  //Se crea un panel (donde vamos a mostrar ) que se organizará con cardLayout
+        panelDetalleConcepto = new PanelDetalleConcepto(sistema);
 
-<<<<<<< Updated upstream
         contenedor.add(new PanelLogin(sistema), "login"); // Se meten todas las pantallas dentro de ese panel  y crea las pantallas
         contenedor.add(new PanelRegistro(sistema), "registro"); //Crea la pantalla, agrega el cardLayout y agrega el nombre
         contenedor.add(new PanelInicio(sistema), "inicio");
         contenedor.add(new PanelBiblioteca(sistema), "biblioteca");
         contenedor.add(new PanelAgregarConcepto(sistema), "agregar" );
         contenedor.add(new PanelKits(sistema), "kits");
-=======
-        // Crear los paneles que necesitamos actualizar
-        panelKits = new PanelKits(sistema);
+        contenedor.add(panelDetalleConcepto, "detalleConcepto");
 
-        panelDetalleConcepto =
-            new PanelDetalleConcepto(sistema);
-
-        // Agregar todas las pantallas
-        contenedor.add(new PanelLogin(sistema), "login");
-        contenedor.add(new PanelRegistro(sistema), "registro");
-        contenedor.add(new PanelInicio(sistema), "inicio");
-
-        contenedor.add(
-            new PanelBiblioteca(sistema),
-            "biblioteca"
-        );
-
-        contenedor.add(
-            new PanelAgregarConcepto(sistema),
-            "agregar"
-        );
-
-        contenedor.add(panelKits, "kits");
-
-        contenedor.add(
-            panelDetalleConcepto,
-            "detalleConcepto"
-        );
->>>>>>> Stashed changes
 
         add(contenedor); // Se agrega el contendro a la ventana
 
@@ -68,12 +41,10 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     }
 
     public void mostrarPanelKits() {
-        panelKits.actualizarLista();
         mostrarPanel("kits");
     }
 
     public void mostrarDetalleConcepto(Concepto concepto) {
-
         panelDetalleConcepto.mostrarConcepto(concepto);
         mostrarPanel("detalleConcepto");
     }

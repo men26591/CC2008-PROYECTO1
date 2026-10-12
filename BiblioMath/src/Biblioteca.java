@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.io.*;  //Paquete para manejo de archivos csv.
+import java.io.*;
+import java.util.ArrayList;  //Paquete para manejo de archivos csv.
 
 public class Biblioteca { //Función: Lógica de usuarios/sesión
 
@@ -9,7 +9,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
 
     public Biblioteca() {
         baseUsuarios = new ArrayList<Usuario>();
-        aUsuarios = "BiblioMath/basesDatos/baseUsuarios.csv";
+        aUsuarios = "basesDatos/baseUsuarios.csv";
         usuarioActual = null;
 
         //Bajar los usuarios existententes en la base de datos a la lista local.
@@ -21,9 +21,9 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
             linea = br.readLine();//Lee la siguiente linea como un String
             while (linea != null) {
                 if (linea.trim().isEmpty()) {
-                    continue; // Saltar filas vacías
+                    linea = br.readLine();
+                    continue;
                 }
-
                 String[] atributos = linea.split(","); //Realiza una lista con los atributos.
                 if(atributos.length == 2){
                     Usuario u = new Usuario(); //Crea usuario
@@ -31,6 +31,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
                     u.setContrasena(atributos[1]); //Segundo atributo se asigna a contrasena
                     u.archivosBases();
                     baseUsuarios.add(u); //Se agrega usuario a la lista local
+                    System.out.println("Usuario cargado: " + u.getNombre());
                 }
                 linea = br.readLine();//Lee la siguiente linea
             }
