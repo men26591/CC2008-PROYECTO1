@@ -24,13 +24,24 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         contenedor.add(new PanelBiblioteca(sistema), "biblioteca");
         contenedor.add(new PanelAgregarConcepto(sistema), "agregar" );
         contenedor.add(new PanelKits(sistema), "kits");
+         contenedor.add(new PanelDetalleConcepto(sistema), "detalleConcepto");
 
         add(contenedor);//añade pantallas
+
 
         setVisible(true); // Para que se visible 
     }
 
     public void mostrarPanel(String nombrePanel) { //Método para cambiar de pantalla (panel) más no cambia de VENTANA, está siempre es la misma (Esta esctructura aparece en SISTEMA)
         cardLayout.show(contenedor, nombrePanel);
+    }
+
+    public void mostrarPanelKits() {
+        mostrarPanel("kits");
+    }
+
+    public void mostrarDetalleConcepto(Concepto concepto) {
+        //panelDetalleConcepto.mostrarConcepto(concepto);
+        mostrarPanel("detalleConcepto");
     }
 }

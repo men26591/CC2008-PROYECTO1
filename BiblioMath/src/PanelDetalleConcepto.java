@@ -1,26 +1,20 @@
 import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.FlowLayout;
 import java.awt.Font; //Permite agregar fuentes
-import java.awt.Dimension;
-import javax.swing.JPanel; // Agrupar elementos visuales dentro de la ventana
-import javax.swing.ImageIcon; //Agregar imagenes 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField; //Recibe el texto normal
-import javax.swing.JPasswordField; //Recibe contraseña y agrega los puntitos 
-import javax.swing.JButton; //Permite ejetuar la acción
-import javax.swing.BoxLayout; // Permite ordenar elementos, es algo gráfico
-import javax.swing.BorderFactory;
-
-import java.awt.Color; // Permite agregar colores
-import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
-import java.awt.Graphics; //Permite agregar graficos (figuras)
+import java.awt.Graphics;
+import java.awt.Image; // Agrupar elementos visuales dentro de la ventana
+import javax.swing.BorderFactory; //Agregar imagenes
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane; //Recibe el texto normal
+import javax.swing.JPanel; //Recibe contraseña y agrega los puntitos 
 
 
 public class PanelDetalleConcepto extends JPanel {
-
+    
+    private Concepto conceptoActual;
     public PanelDetalleConcepto(Sistema sistema) {
 
 
@@ -142,10 +136,20 @@ public class PanelDetalleConcepto extends JPanel {
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 18));
 
-        g.drawString( "Nombre Concepto", anchoCuadro/2 - margen, posicionY + 30);
+        if (conceptoActual != null) {
+            g.drawString(conceptoActual.getNombre(),
+                        anchoCuadro / 2 - margen, posicionY + 30);
+        } else {
+            g.drawString("Nombre Concepto",
+                        anchoCuadro / 2 - margen, posicionY + 30);
+        }
         
     
     }
         
-       
+    public void mostrarConcepto(Concepto concepto) {
+    this.conceptoActual = concepto;
+    repaint();
+}
+
 }

@@ -1,7 +1,5 @@
 import java.util.*;
-
 import javax.management.RuntimeErrorException;
-
 import java.io.*;  //Paquete para manejo de archivos csv.
 
 public class Usuario {
@@ -13,7 +11,6 @@ public class Usuario {
     private String aKits;
     private String ultimaVisita;
 
-    
     public Usuario() {
         this.nombre = "";
         this.contrasena = "";
@@ -24,7 +21,6 @@ public class Usuario {
         this.ultimaVisita = "";
     }
 
-   
     public <tipo> void BajarBaseDatos(String direccion, ArrayList<tipo> local)throws Exception {
         //Relacion con archivo .csv
         try(BufferedReader br = new BufferedReader(new FileReader(direccion))){ //Abre el archivo a manera de lector
@@ -101,7 +97,7 @@ public class Usuario {
     }
 
     public void archivosBases(){
-        String carpeta = "BiblioMath/basesDatos/" + nombre + "/"; //Carpeta nueva por usuario
+        String carpeta = "basesDatos/" + nombre + "/";
         this.aConceptos = carpeta + "conceptos.csv"; //Archivo de conceptos dentro de la carpeta
         this.aKits = carpeta + "kits.csv"; //Archivo de kits dentro de la carpeta
 
