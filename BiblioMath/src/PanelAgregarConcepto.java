@@ -1,6 +1,8 @@
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.TreeUI;
@@ -193,9 +195,14 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
         JTextArea informacionConcepto = new JTextArea();
+        informacionConcepto.setLineWrap(true); // para un salto de linea
+        informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
+
+        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y se agrega a al cuadro de texto
+        informacionConcepto.add(barra);
+        
         Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
         informacionConcepto.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
-
         informacionConcepto.setBorder(new LineBorder(new Color(63, 123, 242)));
         informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
 
@@ -203,7 +210,6 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacion.add(textoInstrucciones);
         informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
         informacion.add(informacionConcepto);
-
         contenido.add(informacion);
 
         
@@ -247,6 +253,13 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
                 JOptionPane.showMessageDialog(this, m); //Lo muestra como notificacion
             }
 
+            campoCategoria.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
+            campoCurso.setText("");
+            campoNombre.setText("");
+            informacionConcepto.setText("");
+
+
+            
         });
         }
 

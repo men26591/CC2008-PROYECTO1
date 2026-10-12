@@ -143,6 +143,7 @@ public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuid
         g.setFont(new Font("Arial", Font.BOLD, 18));
 
         g.drawString( "Nombre Concepto", anchoCuadro/2 - margen, posicionY + 30);
+        
     
     }
         
