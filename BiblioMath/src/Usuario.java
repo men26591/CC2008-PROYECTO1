@@ -8,7 +8,7 @@ public class Usuario {
     private String aConceptos;
     private ArrayList<Kit> baseKits;
     private String aKits;
-    private String ultimaVisita;
+    private Object ultimaVisita;
 
     public Usuario() {
         this.nombre = "";
@@ -17,7 +17,7 @@ public class Usuario {
         this.aConceptos = "";
         this.baseKits = new ArrayList<Kit>();
         this.aKits = "";
-        this.ultimaVisita = "";
+        this.ultimaVisita = null;
     }
 
     public <tipo> void BajarBaseDatos(String direccion, ArrayList<tipo> local)throws Exception {
@@ -151,12 +151,12 @@ public class Usuario {
     }
 
    
-    public void setUltimaVisita(String ultimaVisita) {
+    public void setUltimaVisita(Object ultimaVisita) {
         this.ultimaVisita = ultimaVisita;
     }
 
 
-    public String getUltimaVisita() {
+    public Object getUltimaVisita() {
         return this.ultimaVisita;
     }
 
@@ -217,16 +217,16 @@ public class Usuario {
     }
 
    
-    public String buscarConcepto(String nombre) {
+    public Concepto buscarConcepto(String nombre) {
         for (Concepto c:baseConceptos){
             if (c.getNombre().toLowerCase().equals(nombre.toLowerCase())){
                 setUltimaVisita(c.getNombre());
-                return c.toString();
+                return c;
             }
         }
 
         //Si no se hizo ningun retorno
-        return "No se encontró concepto.";
+        return null;
                 
     }
 
@@ -287,27 +287,26 @@ public class Usuario {
     }
 
     
-    public String buscarKits(String nombre) {
+    public Kit buscarKits(String nombre) {
         for (Kit k:baseKits){
             if(k.getNombre().toLowerCase().equals(nombre.toLowerCase())){
                 setUltimaVisita(nombre);
-                return k.toString();
+                return k;
             }
         }
-        return "No se encontró el Kit.";
+        return null;
     }
 
   
-    public String irUltimo() {
-        if(ultimaVisita.equals("")){
-            return "No se ha registrado última visita. Es posible que no se hayan registrado conceptos o kits.";
+    public Object irUltimo() {
+        if(ultimaVisita == null){ //Si no hay ultima visita registrada
+            return "No se ha registrado última visita.";
         }else{
-            String r = buscarKits(ultimaVisita);
-            if(r.equals("No se encontró el Kit.")){
-                return(buscarConcepto(ultimaVisita));
-            }else{
-                return "Kit:\n"+r;
+            if((ultimaVisita instanceof Concepto)||(ultimaVisita instanceof Kit)){ //Si es un Concepto o Kit
+                return ultimaVisita;
             }
+            return "No se encontro objeto."; //Si no es kit o concepto
+            
         }
     }
 

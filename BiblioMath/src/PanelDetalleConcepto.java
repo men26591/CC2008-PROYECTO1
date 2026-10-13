@@ -113,7 +113,7 @@ public class PanelDetalleConcepto extends JPanel {
     panelInferior.setBorder(BorderFactory.createEmptyBorder(10, 55, 25, 55));
 
     JButton botonEjercicios = crearBotonAzul("Ejercicios");
-    JButton botonKit        = crearBotonAzul("Agregar en Kit");
+    JButton botonKit = crearBotonAzul("Agregar en Kit");
     JButton botonRegresar   = crearBotonAzul("Regresar");
 
     panelInferior.add(botonEjercicios, BorderLayout.WEST);
@@ -121,14 +121,14 @@ public class PanelDetalleConcepto extends JPanel {
     panelInferior.add(botonRegresar,   BorderLayout.EAST);
 
     botonEjercicios.addActionListener(e -> {
-    sistema.mostrarEjercicios(conceptoActual);
+        //sistema.mostrarEjercicios(conceptoActual);
     });
 
     botonKit.addActionListener(e -> {
         if (conceptoActual != null) {
-            sistema.agregarAlKit(conceptoActual);
-            JOptionPane.showMessageDialog(this,
-                "\"" + conceptoActual.getNombre() + "\" se agregó a tu kit.");
+            String kit = JOptionPane.showInputDialog(this, "Escribe el nombre del kit:"); //Recibe el nombre del kit
+            String m = sistema.agregarAKit(conceptoActual,kit); //Se llama el metodo en sistema
+            JOptionPane.showMessageDialog(this,m); //Se muestra el mensaje recibido.
         }
     });
 
@@ -172,9 +172,6 @@ public void mostrarEjercicios(Concepto concepto) {
     // cambia al panel de ejercicios (CardLayout o como lo manejes)
 }
 
-public void agregarAlKit(Concepto concepto) {
-    kit.add(concepto); // una ArrayList<Concepto> en Sistema
-}
 
 public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuidad al escribir. Graphics -> g (el nombre de la cariables o algo así)
     
@@ -194,22 +191,49 @@ public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuid
     int anchoCuadro = getWidth() - (margen * 2);
     int altoCuadro = getHeight() - posicionY - 100;
 
-    // Dibujar el cuadro blanco
-    g.setColor(new Color(63, 123, 242));
+    // Dibujar el cuadro azul claro
+    g.setColor(new Color(175, 199, 250));
     g.fillRect(margen, posicionY, anchoCuadro, altoCuadro);
 
     g.setColor(Color.WHITE);
     g.setFont(new Font("Arial", Font.BOLD, 18));
 
     if (conceptoActual != null) {
-        g.drawString(conceptoActual.getNombre(),
-                    anchoCuadro / 2 - margen, posicionY + 30);
+       int textoX = margen + 50;
+
+        // Nombre destacado
+        g.setColor(new Color(25, 25, 25));
+        g.setFont(new Font("Arial", Font.BOLD, 28));
+        String titulo = conceptoActual.getNombre(); //Obtiene el texto
+        int anchoTitulo = g.getFontMetrics().stringWidth(titulo); //Mide el ancho del titulo
+        int tituloX = margen + (anchoCuadro - anchoTitulo) / 2; //Coordena en x de manera que el titulo quede en medio
+        g.drawString(titulo, tituloX, posicionY + 75);
+
+        // Datos secundarios
+        g.setColor(new Color(123, 158, 235));
+        g.setFont(new Font("Arial", Font.PLAIN, 16));
+        g.drawString("Categoría: " + conceptoActual.getCategoria(),
+                      textoX, posicionY + 115);
+        g.drawString("Curso: " + conceptoActual.getCurso(),
+                      textoX, posicionY + 145);
+
+        // Línea divisoria
+        g.setColor(new Color(220, 227, 240));
+        g.drawLine(textoX, posicionY + 170, margen + anchoCuadro - 50, posicionY + 170);
+
+        // Explicación
+        g.setColor(new Color(63, 123, 242));
+        g.setFont(new Font("Arial", Font.BOLD, 19));
+        g.drawString("Explicación", textoX, posicionY + 205);
+
+        g.setColor(new Color(55, 65, 80));
+        g.setFont(new Font("Arial", Font.PLAIN, 16));
+        g.drawString(conceptoActual.getExplicacion(),textoX, posicionY + 240);
+
     } else {
         g.drawString("Nombre Concepto",
                     anchoCuadro / 2 - margen, posicionY + 30);
     }
-    
-
 }
         
 public void mostrarConcepto(Concepto concepto) {

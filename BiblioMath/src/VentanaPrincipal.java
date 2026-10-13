@@ -6,6 +6,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
 
     private CardLayout cardLayout;
     private JPanel contenedor;
+    private PanelDetalleConcepto panelConcepto; //Permite llamar el panel para facilitar mostrar los datos de cada concepto
 
     public VentanaPrincipal(Sistema sistema) {
 
@@ -24,7 +25,9 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         contenedor.add(new PanelBiblioteca(sistema), "biblioteca");
         contenedor.add(new PanelAgregarConcepto(sistema), "agregar" );
         contenedor.add(new PanelKits(sistema), "kits");
-         contenedor.add(new PanelDetalleConcepto(sistema), "detalleConcepto");
+        
+        panelConcepto = new PanelDetalleConcepto(sistema); //Crea el panel y lo asigna al atributo
+        contenedor.add(panelConcepto, "detalleConcepto"); //Añade el atributo con el panel al contenedor.
 
         add(contenedor);//añade pantallas
 
@@ -41,7 +44,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     }
 
     public void mostrarDetalleConcepto(Concepto concepto) {
-        //panelDetalleConcepto.mostrarConcepto(concepto);
-        mostrarPanel("detalleConcepto");
+        panelConcepto.mostrarConcepto(concepto);  //Refiere l Concepto con el que se esta trabajando
+        mostrarPanel("detalleConcepto"); //Muestra el panel
     }
 }

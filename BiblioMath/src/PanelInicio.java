@@ -176,15 +176,26 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
             JOptionPane.showMessageDialog(this, "Ingresa el nombre del concepto que deseas buscar.");
         }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-            String m = sistema.buscar(nombre); //Se llama a método en sistema
-            JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
+            Object m = sistema.buscar(nombre); //Se llama a método en sistema
+            if (m instanceof Concepto){ //Si es un concepto
+                sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
+            }
+
+            else{
+                JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
+            }
         }
 
     });
 
     botonVer.addActionListener(e -> {
-        String m = sistema.verUltimo();
-        JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
+        Object m = sistema.verUltimo();
+        if (m instanceof Concepto){ //Si es un concepto
+                sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
+            }
+        else{
+            JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
+        }
     });
 
 //AGREGAR PARA MOSTRAR

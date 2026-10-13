@@ -57,24 +57,32 @@ public class Sistema {
         return mensaje;    
     }
 
-    public String buscar(String nombre) {
+    public Object buscar(String nombre) {
         Usuario u = getUsuarioActual(); //Se obtiene el usuario
 
-        String m = u.buscarKits(nombre); //Se busca Kit
-        if(m.equals("No se encontró el Kit.")){ //Si no se encuentra Kit
-            m = u.buscarConcepto(nombre); //Se busca concepto
-            if(m.equals("No se encontró concepto.")){ //Si no e encuentra Concepto
-                m = "No se encontro ningun concepto o kit con este nombre."; //Se modifica mensaje para que indicar que no se encontro concepto ni kit.
+        Kit k = u.buscarKits(nombre); //Se busca Kit
+        if(k == null){ //Si no se encuentra Kit
+            Concepto c = u.buscarConcepto(nombre); //Se busca concepto
+            if(c==null){ //Si no e encuentra Concepto
+                return  "No se encontro ningun concepto o kit con este nombre."; //Se modifica mensaje para que indicar que no se encontro concepto ni kit.
             }
-        }
-
-        return m;  //Se retorna el   
+            return c; //retorna el Concepto si se encontro
+        }  
+        return k; //Retorna el kit su se encuentra
     }
 
-    public String verUltimo() {
+    public Object verUltimo() {
         Usuario u = getUsuarioActual(); //Se obtiene el usuario
-        String m =  u.irUltimo(); //Se llama al método ir último de usuario
+        Object m =  u.irUltimo(); //Se llama al método ir último de usuario
         return m;  //Se retorna lo retornado por el método
+    }
+
+    public String agregarAKit(Concepto c,String k) {
+        Usuario u = getUsuarioActual(); //Se obtiene el usuario
+
+        String m = u.agregarCaKit(c.getNombre(), k); //Se manda a llamar metodo en clase usuario
+        return m; //Se retorna el mensaje obtenido
+        
     }
 
 
@@ -109,6 +117,10 @@ public class Sistema {
 
     public void mostrarKits() {
         ventana.mostrarPanel("kits");
+    }
+
+    public void mostrarDetalleConcpeto(Concepto concepto) {
+        ventana.mostrarDetalleConcepto(concepto);
     }
 
     public void cerrarSesion() { 
