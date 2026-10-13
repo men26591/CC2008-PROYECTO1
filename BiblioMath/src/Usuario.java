@@ -197,7 +197,7 @@ public class Usuario {
             c.setKitEstudio(listaKits);
 
             this.baseConceptos.add(c);
-            setUltimaVisita(c.getNombre());
+            setUltimaVisita(c);
 
             try{
                 GuardarBaseDatos(aConceptos, baseConceptos); //Actualiza base datos
@@ -220,7 +220,7 @@ public class Usuario {
     public Concepto buscarConcepto(String nombre) {
         for (Concepto c:baseConceptos){
             if (c.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                setUltimaVisita(c.getNombre());
+                setUltimaVisita(c);
                 return c;
             }
         }

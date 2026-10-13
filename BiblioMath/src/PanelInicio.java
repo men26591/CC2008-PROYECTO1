@@ -73,6 +73,14 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonHerramientas.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
 
+        JButton botonKits = new JButton(logoErramientasEscalada); // Agregamos la imagen que queremos que aparezca en el botón
+        //Preferncias para el botón
+        botonKits.setContentAreaFilled(false); //Quitar el color del botón
+        botonKits.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonKits.setBorderPainted(false); //Quitar el borde del botó
+        botonKits.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        panelLogosDerecho.add(botonKits); // Agregarlo al panel que lo va a mostrar
+
     //BOTON LOGO UVG
         //Cargar imagen LOGO MATE
         ImageIcon logoMateUVG = new ImageIcon("BiblioMath/recursos/logoMate.png");
@@ -164,6 +172,11 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         sistema.mostrarAgregarConcepto();
     });
 
+    botonKits.addActionListener(e -> {
+        //Agregar que sucede cuando se presiona
+        sistema.mostrarKits();
+    });
+
     botonlogoMate.addActionListener(e -> {
         //Agregamos lo que secede cuando se presiona
         JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
@@ -180,7 +193,6 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
             if (m instanceof Concepto){ //Si es un concepto
                 sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
             }
-
             else{
                 JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
             }
