@@ -264,7 +264,7 @@ public class PanelKits extends JPanel { //Función: Interfaz de kits
         g.setColor(Color.BLACK); // aplica este color hasta que aparesca otro color. 
         g.drawRect(50, 20, 900,  60); // x,y, ancho y alto
         
-        g.setColor(Color.WHITE);
+        g.setColor(new Color(63, 123, 242));
         g.fillRect(50, 20, 900, 60); //figuara llena de color
         // Medidas y separación de los cuadros
         int margen = 50;
@@ -290,7 +290,7 @@ public class PanelKits extends JPanel { //Función: Interfaz de kits
             anchoCuadro,
             altoCuadro
         );
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, 18));
         g.drawString( nombreKit, margen + 20, posicionY + 30);
 

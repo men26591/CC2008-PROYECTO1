@@ -10,6 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane; //Recibe el texto normal
 import javax.swing.JPanel; //Recibe contraseña y agrega los puntitos 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 
 public class PanelDetalleConcepto extends JPanel {
@@ -105,49 +107,112 @@ public class PanelDetalleConcepto extends JPanel {
 
     });
 
-    //AGREGAR PARA MOSTRAR
-        encabezado.add(panelLogosDerecho);
-        this.add(encabezado, BorderLayout.NORTH); 
+    // BOTONES INFERIORES
+    JPanel panelInferior = new JPanel(new BorderLayout());
+    panelInferior.setOpaque(false);
+    panelInferior.setBorder(BorderFactory.createEmptyBorder(10, 55, 25, 55));
 
-    }
+    JButton botonEjercicios = crearBotonAzul("Ejercicios");
+    JButton botonKit        = crearBotonAzul("Agregar en Kit");
+    JButton botonRegresar   = crearBotonAzul("Regresar");
 
-    public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuidad al escribir. Graphics -> g (el nombre de la cariables o algo así)
-       
-        super.paintComponent(g); // para que nos deje usar lo como un lienzo y que se vaya al FRAME completo, y todo hacer referencia a Graphics
+    panelInferior.add(botonEjercicios, BorderLayout.WEST);
+    panelInferior.add(botonKit,        BorderLayout.CENTER);
+    panelInferior.add(botonRegresar,   BorderLayout.EAST);
 
-        g.setColor(Color.BLACK); // aplica este color hasta que aparesca otro color. 
-        g.drawRect(50, 20, 900,  60); // x,y, ancho y alto
-        
-        g.setColor(Color.WHITE);
-        g.fillRect(50, 20, 900, 60); //figuara llena de color
+    botonEjercicios.addActionListener(e -> {
+    sistema.mostrarEjercicios(conceptoActual);
+    });
 
-        // Posición del cuadro
-        int margen = 50;
-        int posicionY = 110;
-
-        // Tamaño según el espacio disponible
-        int anchoCuadro = getWidth() - (margen * 2);
-        int altoCuadro = getHeight() - posicionY - 30;
-
-        // Dibujar el cuadro blanco
-        g.setColor(Color.WHITE);
-        g.fillRect(margen, posicionY, anchoCuadro, altoCuadro);
-
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.BOLD, 18));
-
+    botonKit.addActionListener(e -> {
         if (conceptoActual != null) {
-            g.drawString(conceptoActual.getNombre(),
-                        anchoCuadro / 2 - margen, posicionY + 30);
-        } else {
-            g.drawString("Nombre Concepto",
-                        anchoCuadro / 2 - margen, posicionY + 30);
+            sistema.agregarAlKit(conceptoActual);
+            JOptionPane.showMessageDialog(this,
+                "\"" + conceptoActual.getNombre() + "\" se agregó a tu kit.");
         }
-        
+    });
+
+    botonRegresar.addActionListener(e -> {
+        sistema.mostrarInicio(); // o el panel anterior, como la lista de conceptos
+    });
+
     
+    //AGREGAR PARA MOSTRAR
+    encabezado.add(panelLogosDerecho);
+    this.add(encabezado, BorderLayout.NORTH); 
+
+    this.add(panelInferior, BorderLayout.SOUTH);
+
+
     }
+
+private JButton crearBotonAzul(String texto) {
+    JButton boton = new JButton(texto) {
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                                RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(new Color(63, 123, 242));
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 40, 40); // esquinas redondeadas
+            g2.dispose();
+            super.paintComponent(g); // dibuja el texto encima
+        }
+    };
+    boton.setContentAreaFilled(false);
+    boton.setFocusPainted(false);
+    boton.setBorderPainted(false);
+    boton.setForeground(Color.WHITE);
+    boton.setFont(new Font("Arial", Font.BOLD, 16));
+    boton.setPreferredSize(new Dimension(180, 40));
+    return boton;
+}
+
+public void mostrarEjercicios(Concepto concepto) {
+    // cambia al panel de ejercicios (CardLayout o como lo manejes)
+}
+
+public void agregarAlKit(Concepto concepto) {
+    kit.add(concepto); // una ArrayList<Concepto> en Sistema
+}
+
+public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuidad al escribir. Graphics -> g (el nombre de la cariables o algo así)
+    
+    super.paintComponent(g); // para que nos deje usar lo como un lienzo y que se vaya al FRAME completo, y todo hacer referencia a Graphics
+
+    g.setColor(Color.BLACK); // aplica este color hasta que aparesca otro color. 
+    g.drawRect(50, 20, 900,  60); // x,y, ancho y alto
+    
+    g.setColor(new Color(63, 123, 242));
+    g.fillRect(50, 20, 900, 60); //figuara llena de color
+
+    // Posición del cuadro
+    int margen = 50;
+    int posicionY = 110;
+
+    // Tamaño según el espacio disponible
+    int anchoCuadro = getWidth() - (margen * 2);
+    int altoCuadro = getHeight() - posicionY - 100;
+
+    // Dibujar el cuadro blanco
+    g.setColor(new Color(63, 123, 242));
+    g.fillRect(margen, posicionY, anchoCuadro, altoCuadro);
+
+    g.setColor(Color.WHITE);
+    g.setFont(new Font("Arial", Font.BOLD, 18));
+
+    if (conceptoActual != null) {
+        g.drawString(conceptoActual.getNombre(),
+                    anchoCuadro / 2 - margen, posicionY + 30);
+    } else {
+        g.drawString("Nombre Concepto",
+                    anchoCuadro / 2 - margen, posicionY + 30);
+    }
+    
+
+}
         
-    public void mostrarConcepto(Concepto concepto) {
+public void mostrarConcepto(Concepto concepto) {
     this.conceptoActual = concepto;
     repaint();
 }
