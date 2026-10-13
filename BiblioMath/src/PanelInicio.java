@@ -30,7 +30,9 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         JPanel encabezado = new JPanel(new BorderLayout());
         encabezado.setBorder(BorderFactory.createEmptyBorder(25, 55, 30, 55));
         encabezado.setOpaque(false);  // para que el panle que agregagamos no tenga color, osea que se transparente                 //Cargar imagen
-    
+
+
+
     //BOTON LOGO
         //Carga imagen del logo de biblioMath
         ImageIcon logoBiblioOriginal = new ImageIcon("BiblioMath/recursos/logoBiblio.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
@@ -52,12 +54,11 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
     //** 
 
         //Panel para meterlo en el panel y que se colocen los dos logos del lado derecho 
-         JPanel panelLogosDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
-         panelLogosDerecho.setOpaque(false); //Mantiene l fondo delpanel trasparente o sin color
-
+        JPanel panelLogosDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
+        panelLogosDerecho.setOpaque(false); //Mantiene l fondo delpanel trasparente o sin color
+    
     //BOTON HERRAMIENTAS
-
-         //Cargar imagen LOGO HERRAMINETAS
+        //Cargar imagen LOGO HERRAMINETAS
         ImageIcon logoHerramientas = new ImageIcon("BiblioMath/recursos/herramientas.png");
         //Modifcar tamaño
         Image logoHeEscalada= logoHerramientas.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
@@ -72,15 +73,44 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonHerramientas.setBorderPainted(false); //Quitar el borde del botó
         botonHerramientas.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
+    
+    //BOTON BIBLIOTECA CONCEPTOS
 
-        // JButton botonKits = new JButton(logoErramientasEscalada); // Agregamos la imagen que queremos que aparezca en el botón
+        //Cargar imagen LOGO BIBLIO CONCEPTOS
+        ImageIcon logoBiblioConcepto = new ImageIcon("BiblioMath/recursos/logoBibliConcepto.png");
+        //Modifcar tamaño
+        Image logoBiCoEscalado = logoBiblioConcepto.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoBilbioConceptoEscalada = new ImageIcon(logoBiCoEscalado);
+        //Agregar a Jlabel para mostrar
+
+        JButton botonBiblioConcepto = new JButton(logoBilbioConceptoEscalada); // Agregamos la imagen que queremos que aparezca en el botón
         // //Preferncias para el botón
-        // botonKits.setContentAreaFilled(false); //Quitar el color del botón
-        // botonKits.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
-        // botonKits.setBorderPainted(false); //Quitar el borde del botó
-        // botonKits.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
-        // panelLogosDerecho.add(botonKits); // Agregarlo al panel que lo va a mostrar
+        botonBiblioConcepto.setContentAreaFilled(false); //Quitar el color del botón
+        botonBiblioConcepto.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonBiblioConcepto.setBorderPainted(false); //Quitar el borde del botó
+        botonBiblioConcepto.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        panelLogosDerecho.add(botonBiblioConcepto); // Agregarlo al panel que lo va a mostrar
+    
+    //BOTON KITS
+        //Cargar imagen 
+        ImageIcon logoKits = new ImageIcon("BiblioMath/recursos/logoKits.png");
+        //Modifcar tamaño
+        Image logoKiEscalada= logoKits.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoKitsEscalado = new ImageIcon(logoKiEscalada);
+        //Agregar a Jlabel para mostrar
 
+        JButton botonKits = new JButton(logoKitsEscalado); // Agregamos la imagen que queremos que aparezca en el botón
+        // //Preferncias para el botón
+        botonKits.setContentAreaFilled(false); //Quitar el color del botón
+        botonKits.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonKits.setBorderPainted(false); //Quitar el borde del botó
+        botonKits.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        panelLogosDerecho.add(botonKits); // Agregarlo al panel que lo va a mostrar
+
+
+    
     //BOTON LOGO UVG
         //Cargar imagen LOGO MATE
         ImageIcon logoMateUVG = new ImageIcon("BiblioMath/recursos/logoMate.png");
