@@ -66,12 +66,12 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
 
 
         // Mostrar login 
-        JLabel textoLogin = new JLabel("Log in");
+        JLabel textoLogin = new JLabel("Iniciar Sesión");
         textoLogin.setFont(new Font ("SansSerif", Font.PLAIN, 32)); //Poner una fuente al texto. 
         textoLogin.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
        
         //Ingresar usuario
-        JLabel textUsuario = new JLabel ("Username");
+        JLabel textUsuario = new JLabel ("Usuario ");
         textUsuario.setAlignmentX(CENTER_ALIGNMENT);
         JTextField campoUsuario = new JTextField(); // Entrada de datos
         campoUsuario.setMaximumSize(new Dimension(300,35));  //Deteriminar tamaño dell campo
@@ -79,7 +79,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         campoUsuario.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar texto y campo especial para contraseñas
-        JLabel textContrasena = new JLabel ("Password");
+        JLabel textContrasena = new JLabel ("Contraseña");
         textContrasena.setAlignmentX(CENTER_ALIGNMENT);
         JPasswordField campoContrena = new JPasswordField();
         campoContrena.setMaximumSize(new Dimension(300,35)); //Determinar una tamaño para el campo porque si no aparece super grande
@@ -87,10 +87,10 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
        
 
         //Añadir BOTÓN
-        JButton botonLogin = new JButton("Login in"); // Crea un boton que va a tener escerito log in
+        JButton botonLogin = new JButton("Iniciar Sesión"); // Crea un boton que va a tener escerito log in
         botonLogin.setMaximumSize(new Dimension(300,40)); //Limitamos tamaño
         botonLogin.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
-        JButton botonRegistro = new JButton("Sing up");
+        JButton botonRegistro = new JButton("Registrarse");
         botonRegistro.setAlignmentX(CENTER_ALIGNMENT);
         
         JPanel ilustracion = new JPanel();

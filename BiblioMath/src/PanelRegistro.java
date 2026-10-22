@@ -65,12 +65,12 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
 
 
         // Mostrar login 
-        JLabel textoLogin = new JLabel("Sign up");
+        JLabel textoLogin = new JLabel("Registrarse");
         textoLogin.setFont(new Font ("SansSerif", Font.PLAIN, 32)); //Poner una fuente al texto. 
         textoLogin.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
        
         //Ingresar usuario
-        JLabel textUsuario = new JLabel ("Username");
+        JLabel textUsuario = new JLabel ("Usuario");
         textUsuario.setAlignmentX(CENTER_ALIGNMENT);
         JTextField campoUsuario = new JTextField(); // Entrada de datos
         campoUsuario.setMaximumSize(new Dimension(300,35));  //Deteriminar tamaño dell campo
@@ -78,7 +78,7 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         campoUsuario.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar texto y campo especial para contraseñas
-        JLabel textContrasena = new JLabel ("Password");
+        JLabel textContrasena = new JLabel ("Contraseña");
         textContrasena.setAlignmentX(CENTER_ALIGNMENT);
         JPasswordField campoContrena = new JPasswordField();
         campoContrena.setMaximumSize(new Dimension(300,35)); //Determinar una tamaño para el campo porque si no aparece super grande
@@ -86,7 +86,7 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
        
 
         //Añadir BOTÓN
-        JButton botonSignUp = new JButton("Sign up"); // Crea un boton que va a tener escerito log in
+        JButton botonSignUp = new JButton("Registrarse"); // Crea un boton que va a tener escerito log in
         botonSignUp.setMaximumSize(new Dimension(300,40)); //Limitamos tamaño
         botonSignUp.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
         JButton botonRegresar = new JButton("Regresar");
