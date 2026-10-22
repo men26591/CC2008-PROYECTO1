@@ -2,7 +2,12 @@ import java.awt.BorderLayout; // Importa un administrador de diseño que divide 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URI;
 import java.awt.Font; //Permite agregar fuentes
+import java.awt.Desktop; // Permite que el programa solicite al sistema operativo que abra archivos o navegador web predetermiando
+import java.net.URI; // URI (Identificador de Recursos Uniforme) lo que permite manerar o represntar direcciones o enlaces
 
 import javax.swing.JPanel; // Agrupar elementos visuales dentro de la ventana
 import javax.swing.ImageIcon; //Agregar imagenes 
@@ -15,10 +20,20 @@ import javax.swing.Box; // Acompañana al BoxLayout es como un contendor ligero 
 import javax.swing.BorderFactory; //Aplicar bordes
 import javax.swing.JOptionPane; //Para mostrar mensaje por medio de una ventanita emergente
 
+
 public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
+
+    private JButton botonlogoMate, botonSignUp, botonRegresar;
+    private JTextField campoUsuario;
+    private JPasswordField campoContrena;
+    private JLabel logoBiblio, textoLogin, textUsuario, textContrasena, imagenDecorativaEscalonado;
+    private Sistema sistema; //Para que todos los que estén aquí tengan acceso 
 
     public PanelRegistro(Sistema sistema) {
         add(new JLabel("Registro"));
+
+        this.sistema = sistema;  //Guarda la referencia global
+        Chismoso shute = new Chismoso();
 
         this.setLayout(new BorderLayout()); // Layout principal   se divide en regiones 
 
@@ -36,8 +51,9 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         //Convertir nuevamente a ImageIcon
         ImageIcon logoBiblioEscalado = new ImageIcon(logoBiEscalada);
 
-        JLabel logoBiblio =new JLabel(logoBiblioEscalado); //Jlabel que mostrrá la imagen
+        logoBiblio =new JLabel(logoBiblioEscalado); //Jlabel que mostrrá la imagen
         encabezado.add(logoBiblio,BorderLayout.WEST);
+    
 
 
         //Cargar imagen LOGO MATE
@@ -48,12 +64,13 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
         //Agregar a Jlabel para mostrar
         
-        JButton botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
+        botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
         //Preferencias para el diseño del botón
         botonlogoMate.setContentAreaFilled(false); //Quitar el color del botón
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonlogoMate.addActionListener(shute);
         encabezado.add(botonlogoMate,BorderLayout.EAST);
 
 
@@ -65,59 +82,37 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
 
 
         // Mostrar login 
-        JLabel textoLogin = new JLabel("Registrarse");
+        textoLogin = new JLabel("Registrarse");
         textoLogin.setFont(new Font ("SansSerif", Font.PLAIN, 32)); //Poner una fuente al texto. 
         textoLogin.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
        
         //Ingresar usuario
-        JLabel textUsuario = new JLabel ("Usuario");
+        textUsuario = new JLabel ("Usuario");
         textUsuario.setAlignmentX(CENTER_ALIGNMENT);
-        JTextField campoUsuario = new JTextField(); // Entrada de datos
+        campoUsuario = new JTextField(); // Entrada de datos
         campoUsuario.setMaximumSize(new Dimension(300,35));  //Deteriminar tamaño dell campo
         campoUsuario.setAlignmentX(CENTER_ALIGNMENT);
         campoUsuario.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar texto y campo especial para contraseñas
-        JLabel textContrasena = new JLabel ("Contraseña");
+        textContrasena = new JLabel ("Contraseña");
         textContrasena.setAlignmentX(CENTER_ALIGNMENT);
-        JPasswordField campoContrena = new JPasswordField();
+        campoContrena = new JPasswordField();
         campoContrena.setMaximumSize(new Dimension(300,35)); //Determinar una tamaño para el campo porque si no aparece super grande
         campoContrena.setAlignmentX(CENTER_ALIGNMENT);
        
 
         //Añadir BOTÓN
-        JButton botonSignUp = new JButton("Registrarse"); // Crea un boton que va a tener escerito log in
+        botonSignUp = new JButton("Registrarse"); // Crea un boton que va a tener escerito log in
         botonSignUp.setMaximumSize(new Dimension(300,40)); //Limitamos tamaño
         botonSignUp.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
-        JButton botonRegresar = new JButton("Regresar");
+        botonSignUp.addActionListener(shute);
+        
+        botonRegresar = new JButton("Regresar");
         botonRegresar.setAlignmentX(CENTER_ALIGNMENT);
+        botonRegresar.addActionListener(shute);
         
         JPanel ilustracion = new JPanel();
-
-
-        botonSignUp.addActionListener( e -> { // cuando ocurra la acción de este botón ejecuta lo que está dentro
-            
-            String userName = campoUsuario.getText(); // Pasar lo que recibe lo pasa a string ese metodo .getText lo traae JTextField        
-            String contrasena = new String (campoContrena.getPassword()); // Para obtener la contraseña 
-            
-            if(userName.isBlank() || contrasena.isBlank()){ // verifica si el campo de usuario o contraseña están en blanco
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña está vacía.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
-
-                return ; // para que hasta ahi llegue y evitar que se ejecture el resto de programa
-            }
-        
-                JOptionPane.showMessageDialog(this, sistema.registrarUsuario(userName,contrasena)); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
-        
-            campoUsuario.setText("");
-            campoContrena.setText("");
-        });
-
-        botonRegresar.addActionListener(e -> {
-            sistema.mostrarLogin();
-            campoUsuario.setText("");
-            campoContrena.setText("");
-        });
-
 
         // Se añanden para que se muestre si no no se muestra!!!!
         contenido.add(formulario);
@@ -138,7 +133,6 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         formulario.add(botonRegresar);
 
 
-
         //Cargar imagen LOGO MATE
         ImageIcon imagenDecorativa = new ImageIcon("BiblioMath/recursos/imagenRegistro.png");
         //Modifcar tamaño
@@ -146,18 +140,9 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         //Convetir nuevamente a ImageIcon
         ImageIcon imagenDeEscaladaEscalado = new ImageIcon(imagenDeEscalada);
         //Agregar a Jlabel para mostrar
-        JLabel imagenDecorativaEscalonado = new JLabel(imagenDeEscaladaEscalado);
+        imagenDecorativaEscalonado = new JLabel(imagenDeEscaladaEscalado);
         encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
         ilustracion.add(imagenDecorativaEscalonado);
-
-// ACTIONES "actionListeer"
-    botonlogoMate.addActionListener(e -> {
-        //Agregamos lo que secede cuando se presiona
-        JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
-
-        campoUsuario.setText("");
-        campoContrena.setText("");
-    });
 
         //Agregar los Jpanel y dalres una ubicacacion de referencia
         
@@ -165,6 +150,53 @@ public class PanelRegistro extends JPanel { // Funció: Interfaz de registro
         this.add(contenido, BorderLayout.CENTER); //Los agregamos y colcoamos donde queremos que aparezcan 
 
     
+    }
+
+    private class Chismoso implements ActionListener{
+
+        public void actionPerformed(ActionEvent e){
+
+            if(e.getSource() ==  botonSignUp){ // Válida si es que proviene de botonSingUp
+
+                String userName = campoUsuario.getText(); // Pasar lo que recibe lo pasa a string ese metodo .getText lo traae JTextField        
+                String contrasena = new String (campoContrena.getPassword()); // Para obtener la contraseña 
+                
+                if(userName.isBlank() || contrasena.isBlank()){ // verifica si el campo de usuario o contraseña están en blanco
+                    JOptionPane.showMessageDialog(PanelRegistro.this, "Usuario o contraseña está vacía.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+
+                    return ; // para que hasta ahi llegue y evitar que se ejecture el resto de programa
+                }
+            
+                    JOptionPane.showMessageDialog(PanelRegistro.this, sistema.registrarUsuario(userName,contrasena)); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
+            
+                campoUsuario.setText("");
+                campoContrena.setText("");
+            }
+
+
+            if(e.getSource() == botonRegresar){
+                sistema.mostrarLogin();
+                campoUsuario.setText("");
+                campoContrena.setText("");
+            }
+            
+            if(e.getSource()== botonlogoMate){
+
+                    try{
+                        //Verifica si el sistema operativo puedo abrir el navegador 
+                                                                                            //Es una constante de tiempo enumerada que representa una acción específica del sistema operativo, la capacidad de abrir una direccion web 
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
+                            //obtiene la instancia del entorno del escritorio del sistam y abre el URL en el navedaro predetermiando
+                            Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
+                        }
+                    } catch (Exception r){
+                        JOptionPane.showMessageDialog(PanelRegistro.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                    }
+            }
+            
+        }
+
+
     }
 
 }

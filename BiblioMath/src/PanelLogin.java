@@ -29,7 +29,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
 
     public PanelLogin(Sistema sistema) { // Tiene Sistema sistema porque reciben referencia de Sistema, pues es ahí donde se "activa/muestra"
 
-         this.sistema = sistema; // Guarda la referencia global 
+        this.sistema = sistema; // Guarda la referencia global 
         Chismoso shute = new Chismoso();
 
         this.setLayout(new BorderLayout()); // Layout principal   se divide en regiones 
