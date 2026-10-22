@@ -8,18 +8,33 @@ import javax.swing.JButton;
 import javax.swing.JTextField; //Recibe el texto normal
 import javax.swing.JOptionPane; //Para mostrar mensaje por medio de una ventanita emergente
 
+
 import java.awt.Image; // Agregar imageness
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color; // Permite agregar colores
 import java.awt.Dimension;
 import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
 import java.awt.Graphics; //Permite agregar graficos (figuras)
 import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
+import java.awt.Desktop; // Permite que el programa solicite al sistema operativo que abra archivos o navegador web predetermiando
+import java.net.URI; // URI (Identificador de Recursos Uniforme) lo que permite manerar o represntar direcciones o enlaces
+ 
 
 public class PanelInicio extends JPanel { // Función: Interfaz de inicio
+
+    private JButton botonLogoBiblio, botonHerramientas, botonBiblioConcepto, botonKits, botonlogoMate, botonBuscar, botonCerrarSesion, botonVer;
+    private JLabel textoBienvenidaInicio, textoBusquedasPopulares;
+    private JTextField campoBuscar;
+    private Sistema sistema; //Para que todos los que esten aquí adentro tengan acceso a sistema
 
     public PanelInicio(Sistema sistema) {
 
         add(new JLabel("Inicio"));
+
+        this.sistema = sistema; // Guarda la referencia global
+        Chismoso shute = new Chismoso();
+
 
         // ese this es tomar el JPanel y lo que hagas se modifica ahí
         this.setBackground(new Color(210, 224, 255));
@@ -42,13 +57,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon logoBiblioEscalado = new ImageIcon(logoBiEscalada);
 
 
-        JButton botonLogoBiblio = new JButton(logoBiblioEscalado); // Creamos boton dunde vamos a colocar la imagen
+        botonLogoBiblio = new JButton(logoBiblioEscalado); // Creamos boton dunde vamos a colocar la imagen
         //Preferencias para el botón
         botonLogoBiblio.setContentAreaFilled(false); //Quitar el color del fondo botón
         botonLogoBiblio.setFocusPainted(false); // Quitar la línea que aparece cuando le das click
         botonLogoBiblio.setBorderPainted(false); //Quitar el borte del botón
         botonLogoBiblio.setPreferredSize(new Dimension(230,50)); // determinar una dimension "forzada" para el boton
-        
+        botonLogoBiblio.addActionListener(shute);
         encabezado.add(botonLogoBiblio,BorderLayout.WEST);
 
     //** 
@@ -66,12 +81,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon logoErramientasEscalada = new ImageIcon(logoHeEscalada);
         //Agregar a Jlabel para mostrar
 
-        JButton botonHerramientas = new JButton(logoErramientasEscalada); // Agregamos la imagen que queremos que aparezca en el botón
+        botonHerramientas = new JButton(logoErramientasEscalada); // Agregamos la imagen que queremos que aparezca en el botón
         //Preferncias para el botón
         botonHerramientas.setContentAreaFilled(false); //Quitar el color del botón
         botonHerramientas.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonHerramientas.setBorderPainted(false); //Quitar el borde del botó
         botonHerramientas.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonHerramientas.addActionListener(shute);
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
     
     //BOTON BIBLIOTECA CONCEPTOS
@@ -84,12 +100,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon logoBilbioConceptoEscalada = new ImageIcon(logoBiCoEscalado);
         //Agregar a Jlabel para mostrar
 
-        JButton botonBiblioConcepto = new JButton(logoBilbioConceptoEscalada); // Agregamos la imagen que queremos que aparezca en el botón
+        botonBiblioConcepto = new JButton(logoBilbioConceptoEscalada); // Agregamos la imagen que queremos que aparezca en el botón
         // //Preferncias para el botón
         botonBiblioConcepto.setContentAreaFilled(false); //Quitar el color del botón
         botonBiblioConcepto.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonBiblioConcepto.setBorderPainted(false); //Quitar el borde del botó
         botonBiblioConcepto.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonBiblioConcepto.addActionListener(shute);
         panelLogosDerecho.add(botonBiblioConcepto); // Agregarlo al panel que lo va a mostrar
     
     //BOTON KITS
@@ -101,12 +118,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon logoKitsEscalado = new ImageIcon(logoKiEscalada);
         //Agregar a Jlabel para mostrar
 
-        JButton botonKits = new JButton(logoKitsEscalado); // Agregamos la imagen que queremos que aparezca en el botón
+        botonKits = new JButton(logoKitsEscalado); // Agregamos la imagen que queremos que aparezca en el botón
         // //Preferncias para el botón
         botonKits.setContentAreaFilled(false); //Quitar el color del botón
         botonKits.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonKits.setBorderPainted(false); //Quitar el borde del botó
         botonKits.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonKits.addActionListener(shute);
         panelLogosDerecho.add(botonKits); // Agregarlo al panel que lo va a mostrar
 
 
@@ -120,12 +138,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
         //Agregar a Jlabel para mostrar
         
-        JButton botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
+        botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
         //Preferencias para el diseño del botón
         botonlogoMate.setContentAreaFilled(false); //Quitar el color del botón
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonlogoMate.addActionListener(shute);
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
         
         panelLogosDerecho.add(botonlogoMate);  // Agregar al panel que lo va a mostrar
@@ -143,7 +162,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon textoBienvenida = new ImageIcon("BiblioMath/recursos/bienvenida.png");
         Image textoBiEscalada = textoBienvenida.getImage().getScaledInstance(800,200, Image.SCALE_SMOOTH); //Modificar la escala de la imagen 
         ImageIcon textoBienvenidaEscalado = new ImageIcon(textoBiEscalada); //Regresar a set tipo imageIcone
-        JLabel textoBienvenidaInicio = new JLabel(textoBienvenidaEscalado);
+        textoBienvenidaInicio = new JLabel(textoBienvenidaEscalado);
         textoBienvenidaInicio.setAlignmentX(CENTER_ALIGNMENT); 
 
 
@@ -151,12 +170,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         JPanel campoContenido = new JPanel(new FlowLayout(FlowLayout.CENTER,15,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
         campoContenido.setOpaque(false);  // no tenga color
 
-        JTextField campoBuscar = new JTextField(); //Para que el usuarioIngrese datos
+        campoBuscar = new JTextField(); //Para que el usuarioIngrese datos
         campoBuscar.setPreferredSize(new Dimension(700, 35));  // Se usa este para modificar y no el setMaximumSize porque al usar FlowLayout este ignora lo que le ponemos, pero con este nuevo le obligamos a tomar este tamaño
         campoContenido.add(campoBuscar);
 
-        JButton botonBuscar = new JButton("🔍");
+        botonBuscar = new JButton("🔍");
         botonBuscar.setPreferredSize(new Dimension(100, 35)); 
+        botonBuscar.addActionListener(shute);
         campoContenido.add(botonBuscar);
 
         campoContenido.setMaximumSize(new Dimension(850, 40));  //limitamos el estapacion de todo el panel
@@ -168,11 +188,11 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         ImageIcon textoBusquedas = new ImageIcon("BiblioMath/recursos/busquedasPopulares.png");
         Image textoBuEscalado = textoBusquedas.getImage().getScaledInstance(200,50, Image.SCALE_SMOOTH); //Modificar la escala de la imagen 
         ImageIcon textoBusquedaEscalada = new ImageIcon(textoBuEscalado); //Regresar a set tipo imageIcone
-        JLabel textoBusquedasPopulares = new JLabel(textoBusquedaEscalada);
+        textoBusquedasPopulares = new JLabel(textoBusquedaEscalada);
         textoBusquedasPopulares.setAlignmentX(CENTER_ALIGNMENT); 
         
           // Boton para ver el reciente 
-        JButton botonVer =  new JButton("Ver");
+        botonVer =  new JButton("Ver");
         botonVer.setOpaque(true); // Fuerza a que respete el nuevo color
         botonVer.setContentAreaFilled(true); //Permite rellenar, pues dice que si está lleno
         botonVer.setMaximumSize(new Dimension(100,35)); //Limitamos tamaño
@@ -180,65 +200,12 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonVer.setForeground(Color.WHITE); // Cambiar el color de la letra
         botonVer.setBorderPainted(false); // Quitar el borde del botón
         botonVer.setAlignmentX(CENTER_ALIGNMENT);
+        botonVer.addActionListener(shute);
 
-
-        JButton botonCerrarSesion = new JButton("Cerrar Sesión");
+        botonCerrarSesion = new JButton("Cerrar Sesión");
         botonCerrarSesion.setPreferredSize(new Dimension(100,35)); //Limitamos tamaño
 
         
-// ACTIONES "actionListeer"
-    
-    botonCerrarSesion.addActionListener(e ->{
-        sistema.mostrarLogin();
-    });
-    botonLogoBiblio.addActionListener(e ->{ // Cuando lo preciones sucedará:
-
-        sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
-
-    });
-
-    botonHerramientas.addActionListener(e -> {
-        //Agregar que sucede cuando se presiona
-        sistema.mostrarAgregarConcepto();
-    });
-
-    /* botonKits.addActionListener(e -> {
-        //Agregar que sucede cuando se presiona
-        sistema.mostrarKits();
-    });
- */
-    botonlogoMate.addActionListener(e -> {
-        //Agregamos lo que secede cuando se presiona
-        JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
-    });
-
-    botonBuscar.addActionListener(e -> {
-        //Obtencion de datos del formulario.
-        String nombre = campoBuscar.getText().trim();
-
-        if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
-            JOptionPane.showMessageDialog(this, "Ingresa el nombre del concepto que deseas buscar.");
-        }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-            Object m = sistema.buscar(nombre); //Se llama a método en sistema
-            if (m instanceof Concepto){ //Si es un concepto
-                sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
-            }
-            else{
-                JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
-            }
-        }
-
-    });
-
-    botonVer.addActionListener(e -> {
-        Object m = sistema.verUltimo();
-        if (m instanceof Concepto){ //Si es un concepto
-                sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
-            }
-        else{
-            JOptionPane.showMessageDialog(this, m); //Se muestra notificacion con mensaje retornado.
-        }
-    });
 
 //AGREGAR PARA MOSTRAR
         encabezado.add(panelLogosDerecho);
@@ -275,6 +242,72 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
     
         g.setColor(Color.WHITE);
         g.fillRect(150, 430, 700, 200);
+    }
+
+    public class Chismoso implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if(e.getSource()== botonlogoMate){ // Valida si viene de este botón
+
+                    try{
+                        //Verifica si el sistema operativo puedo abrir el navegador 
+                                                                                            //Es una constante de tiempo enumerada que representa una acción específica del sistema operativo, la capacidad de abrir una direccion web 
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
+                            //obtiene la instancia del entorno del escritorio del sistam y abre el URL en el navedaro predetermiando
+                            Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
+                        }
+                    } catch (Exception r){
+                        JOptionPane.showMessageDialog(PanelInicio.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                    }
+            }
+
+            if(e.getSource() == botonCerrarSesion){
+                sistema.mostrarLogin();
+            }
+
+            if(e.getSource() == botonLogoBiblio){
+                sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
+            }
+
+            if(e.getSource() == botonHerramientas){
+                        sistema.mostrarAgregarConcepto();
+            }
+            
+            if(e.getSource() == botonKits){
+                // sistema.mostrarKits(); 
+            }
+
+            if(e.getSource() == botonBuscar){
+                String nombre = campoBuscar.getText().trim();
+
+                if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
+                    JOptionPane.showMessageDialog(PanelInicio.this, "Ingresa el nombre del concepto que deseas buscar.");
+                }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
+                    Object m = sistema.buscar(nombre); //Se llama a método en sistema
+                    if (m instanceof Concepto){ //Si es un concepto
+                        sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
+                    }
+                }
+            }
+
+            if(e.getSource() == botonVer){
+
+                Object m = sistema.verUltimo();
+                if (m instanceof Concepto){ //Si es un concepto
+                        sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
+                    }
+                else{
+                    JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
+                }
+            }
+        }
+
+        
     }
 }
 
