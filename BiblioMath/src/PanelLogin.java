@@ -2,8 +2,12 @@ import java.awt.BorderLayout; // Importa un administrador de diseño que divide 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Font; //Permite agregar fuentes
-
+import java.awt.Desktop; // Permite que el programa solicite al sistema operativo que abra archivos o navegador web predetermiando
+import java.net.URI; // URI (Identificador de Recursos Uniforme) lo que permite manerar o represntar direcciones o enlaces
+ 
 
 import javax.swing.JPanel; // Agrupar elementos visuales dentro de la ventana
 import javax.swing.ImageIcon; //Agregar imagenes 
@@ -18,7 +22,15 @@ import javax.swing.JOptionPane; //Para mostrar mensaje por medio de una ventanit
 
 public class PanelLogin extends JPanel { // Función: Interfaz de login
 
+    private JButton botonlogoMate, botonLogin,botonRegistro ;
+    private JTextField campoUsuario;
+    private JPasswordField campoContrena;
+    private Sistema sistema; //Para que todos puedan tener acceso (todos dentro de esta clase)
+
     public PanelLogin(Sistema sistema) { // Tiene Sistema sistema porque reciben referencia de Sistema, pues es ahí donde se "activa/muestra"
+
+         this.sistema = sistema; // Guarda la referencia global 
+        Chismoso shute = new Chismoso();
 
         this.setLayout(new BorderLayout()); // Layout principal   se divide en regiones 
 
@@ -49,13 +61,15 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
         //Agregar a Jlabel para mostrar
         
-        JButton botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
+        botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
         //Preferencias para el diseño del botón
         botonlogoMate.setContentAreaFilled(false); //Quitar el color del botón
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonlogoMate.addActionListener(shute);
         encabezado.add(botonlogoMate,BorderLayout.EAST);
+        
 
 
         //Contenido Principal
@@ -73,7 +87,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         //Ingresar usuario
         JLabel textUsuario = new JLabel ("Usuario ");
         textUsuario.setAlignmentX(CENTER_ALIGNMENT);
-        JTextField campoUsuario = new JTextField(); // Entrada de datos
+        campoUsuario = new JTextField(); // Entrada de datos
         campoUsuario.setMaximumSize(new Dimension(300,35));  //Deteriminar tamaño dell campo
         campoUsuario.setAlignmentX(CENTER_ALIGNMENT);
         campoUsuario.setAlignmentY(CENTER_ALIGNMENT);//Alinear
@@ -81,48 +95,22 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         //Mostrar texto y campo especial para contraseñas
         JLabel textContrasena = new JLabel ("Contraseña");
         textContrasena.setAlignmentX(CENTER_ALIGNMENT);
-        JPasswordField campoContrena = new JPasswordField();
+        campoContrena = new JPasswordField();
         campoContrena.setMaximumSize(new Dimension(300,35)); //Determinar una tamaño para el campo porque si no aparece super grande
         campoContrena.setAlignmentX(CENTER_ALIGNMENT);
        
 
         //Añadir BOTÓN
-        JButton botonLogin = new JButton("Iniciar Sesión"); // Crea un boton que va a tener escerito log in
+        botonLogin = new JButton("Iniciar Sesión"); // Crea un boton que va a tener escerito log in
         botonLogin.setMaximumSize(new Dimension(300,40)); //Limitamos tamaño
         botonLogin.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
-        JButton botonRegistro = new JButton("Registrarse");
+        botonLogin.addActionListener(shute);
+        
+        botonRegistro = new JButton("Registrarse");
         botonRegistro.setAlignmentX(CENTER_ALIGNMENT);
+        botonRegistro.addActionListener(shute);
         
         JPanel ilustracion = new JPanel();
-
-//Action Listener 
-        botonLogin.addActionListener( e -> { // cuando ocurra la acción de este botón ejecuta lo que está dentro
-            
-            String userName = campoUsuario.getText(); // Pasar lo que recibe lo pasa a string ese metodo .getText lo traae JTextField        
-            String contrasena = new String (campoContrena.getPassword()); // Para obtener la contraseña 
-            
-            if(userName.isBlank() || contrasena.isBlank()){ // verifica si el campo de usuario o contraseña están en blanco
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña está vacía.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
-
-                return ; // para que hasta ahi llegue y evitar que se ejecture el resto de programa
-            }
-            
-            boolean ingresadoCorrecto = sistema.iniciarSesion(userName, contrasena);
-            campoUsuario.setText("");
-            campoContrena.setText("");
-
-            if(!ingresadoCorrecto){
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.","Datos Incompletos", JOptionPane.WARNING_MESSAGE); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
-            }
-        });
-
-        botonRegistro.addActionListener(e -> {
-            sistema.mostrarRegistro();
-
-            campoUsuario.setText("");
-            campoContrena.setText("");
-        });
-
 
         // Se añanden para que se muestre si no no se muestra!!!!
         contenido.add(formulario);
@@ -155,20 +143,65 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
         ilustracion.add(imagenDecorativaEscalonado);
 
-// ACTIONES "actionListeer"
-        botonlogoMate.addActionListener(e -> {
-        //Agregamos lo que secede cuando se presiona
-        JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
-
-        });
-
-
         //Agregar los Jpanel y dalres una ubicacacion de referencia
         
         this.add(encabezado, BorderLayout.NORTH); //Los agregamos y colcoamos donde queremos que aparezcan 
         this.add(contenido, BorderLayout.CENTER); //Los agregamos y colcoamos donde queremos que aparezcan 
 
         
+    }
+
+    private class Chismoso implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e){
+
+            if(e.getSource()== botonLogin){
+                String userName = campoUsuario.getText(); // Pasar lo que recibe lo pasa a string ese metodo .getText lo traae JTextField        
+                String contrasena = new String (campoContrena.getPassword()); // Para obtener la contraseña 
+                
+                if(userName.isBlank() || contrasena.isBlank()){ // verifica si el campo de usuario o contraseña están en blanco
+                    JOptionPane.showMessageDialog(PanelLogin.this, "Usuario o contraseña está vacía.", "Campos Vacíos", JOptionPane.WARNING_MESSAGE);
+
+                    return ; // para que hasta ahi llegue y evitar que se ejecture el resto de programa
+                }
+                
+                    boolean ingresadoCorrecto = sistema.iniciarSesion(userName, contrasena);
+                    campoUsuario.setText("");
+                    campoContrena.setText("");
+
+                if(!ingresadoCorrecto){
+                    JOptionPane.showMessageDialog(PanelLogin.this, "Usuario o contraseña incorrectos.","Datos Incompletos", JOptionPane.WARNING_MESSAGE); // mostramos mensaje por medio de ventana y aparece como un mensaje de aviso va el mensaje, titulo y la config. de que es un aviso de error
+                }
+            }
+            
+            if(e.getSource() == botonRegistro){
+                sistema.mostrarRegistro();
+                campoUsuario.setText("");
+                campoContrena.setText("");
+            }
+
+            if(e.getSource()== botonlogoMate){
+
+                    try{
+                        //Verifica si el sistema operativo puedo abrir el navegador 
+                                                                                            //Es una constante de tiempo enumerada que representa una acción específica del sistema operativo, la capacidad de abrir una direccion web 
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
+                            //obtiene la instancia del entorno del escritorio del sistam y abre el URL en el navedaro predetermiando
+                            Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
+                        }
+                    } catch (Exception r){
+                        JOptionPane.showMessageDialog(PanelLogin.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                    }
+            }
+
+
+
+        }
+
+        
+    
+       
     }
 }
 
