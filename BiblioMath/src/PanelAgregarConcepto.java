@@ -6,6 +6,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Desktop; // Permite que el programa solicite al sistema operativo que abra archivos o navegador web predetermiando
+import java.net.URI; // URI (Identificador de Recursos Uniforme) lo que permite manerar o represntar direcciones o enlaces
+ 
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,8 +30,18 @@ import javax.swing.border.LineBorder; // Permite agregar colores
 
 public class PanelAgregarConcepto extends JPanel { // Función: Formulario para conceptos
 
+    private JButton botonLogoBiblio, botonHerramientas, botonlogoMate, botonRegistar;
+    private JLabel tectoAprenderHoy, textoCategoria, textoNombre, textoCurso, textoInstrucciones;
+    private JTextField campoCategoria, campoNombre, campoCurso;
+    private JTextArea informacionConcepto;
+    private Sistema sistema;
+
     public PanelAgregarConcepto(Sistema sistema) {
+        
         add(new JLabel("Agregar concepto"));
+
+        this.sistema = sistema; // Guarda la referncia global 
+        Chismoso shute = new Chismoso();
 
         //this es
         this.setBackground(new Color(210, 224, 255));
@@ -44,13 +60,13 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         ImageIcon logoBiblioEscalado = new ImageIcon(logoBiEscalada);
 
 
-        JButton botonLogoBiblio = new JButton(logoBiblioEscalado); // Creamos boton dunde vamos a colocar la imagen
+        botonLogoBiblio = new JButton(logoBiblioEscalado); // Creamos boton dunde vamos a colocar la imagen
         //Preferencias para el botón
         botonLogoBiblio.setContentAreaFilled(false); //Quitar el color del fondo botón
         botonLogoBiblio.setFocusPainted(false); // Quitar la línea que aparece cuando le das click
         botonLogoBiblio.setBorderPainted(false); //Quitar el borte del botón
         botonLogoBiblio.setPreferredSize(new Dimension(230,50)); // determinar una dimension "forzada" para el boton
-        
+        botonLogoBiblio.addActionListener(shute);
         encabezado.add(botonLogoBiblio,BorderLayout.WEST);
 
     //** 
@@ -69,12 +85,13 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         ImageIcon logoErramientasEscalada = new ImageIcon(logoHeEscalada);
         //Agregar a Jlabel para mostrar
 
-        JButton botonHerramientas = new JButton(logoErramientasEscalada); // Agregamos la imagen que queremos que aparezca en el botón
+        botonHerramientas = new JButton(logoErramientasEscalada); // Agregamos la imagen que queremos que aparezca en el botón
         //Preferncias para el botón
         botonHerramientas.setContentAreaFilled(false); //Quitar el color del botón
         botonHerramientas.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonHerramientas.setBorderPainted(false); //Quitar el borde del botó
         botonHerramientas.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonHerramientas.addActionListener(shute);
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
 
     //BOTON LOGO UVG
@@ -86,13 +103,13 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         ImageIcon logoMateUVGEscalonado = new ImageIcon(logoMaEscalada);
         //Agregar a Jlabel para mostrar
         
-        JButton botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
+        botonlogoMate = new JButton(logoMateUVGEscalonado); // Agregamos la imagen que queremos que muestre
         //Preferencias para el diseño del botón
         botonlogoMate.setContentAreaFilled(false); //Quitar el color del botón
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
-        
+        botonlogoMate.addActionListener(shute);
         panelLogosDerecho.add(botonlogoMate);  // Agregar al panel que lo va a mostrar
     
 
@@ -104,7 +121,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         //Convertir nuevamente a ImageIcon
         ImageIcon textoAprenderEscalonado = new ImageIcon(textoApEscalonada);
 
-        JLabel tectoAprenderHoy =new JLabel(textoAprenderEscalonado); //Jlabel que mostrrá la imagen
+        tectoAprenderHoy =new JLabel(textoAprenderEscalonado); //Jlabel que mostrrá la imagen
         encabezado.add(tectoAprenderHoy,BorderLayout.SOUTH);
 
 //CONTENIDO 
@@ -117,48 +134,48 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         formulario.setOpaque(false); //para que no se muestre con color 
 
         //Mostrar Categoria 
-        JLabel textoCategoria = new JLabel("Categoría");
+        textoCategoria = new JLabel("Categoría");
         textoCategoria.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoCategoria.setForeground( Color.WHITE); // cambiar de color de letra 
         textoCategoria.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
        
         //Mostrar ingreso y comboBox
         //Temporal textField
-        JTextField campoCategoria = new JTextField();
+        campoCategoria = new JTextField();
         campoCategoria.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
         campoCategoria.setAlignmentX(CENTER_ALIGNMENT);
         campoCategoria.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar Nombre
-        JLabel textoNombre = new JLabel("Nombre");
+        textoNombre = new JLabel("Nombre");
         textoNombre.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoNombre.setForeground( Color.WHITE); // cambiar de color de letra 
         textoNombre.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
 
         //Temporal textField
-        JTextField campoNombre = new JTextField();
+        campoNombre = new JTextField();
         campoNombre.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
         campoNombre.setAlignmentX(CENTER_ALIGNMENT);
         campoCategoria.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar Curso
-        JLabel textoCurso = new JLabel("Curso");
+        textoCurso = new JLabel("Curso");
         textoCurso.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoCurso.setForeground( Color.WHITE); // cambiar de color de letra 
         textoCurso.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
 
         //Temporal textField
-        JTextField campoCurso = new JTextField();
+        campoCurso = new JTextField();
         campoCurso.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
         campoCurso.setAlignmentX(CENTER_ALIGNMENT);
         campoCurso.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
-        JButton botonRegistar = new JButton("Registrar"); // Crea un boton que va a tener escerito log in
+        botonRegistar = new JButton("Registrar"); // Crea un boton que va a tener escerito log in
         botonRegistar.setMaximumSize(new Dimension(100,40)); //Limitamos tamaño
         botonRegistar.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
-        
+        botonRegistar.addActionListener(shute);
 
         //Agregar al Panel formulario
 
@@ -185,13 +202,13 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         informacion.setOpaque(false); //Para que no muestre color 
 
         //Mostrar instrucciones 
-        JLabel textoInstrucciones = new JLabel("Explicación del Concepto");
+        textoInstrucciones = new JLabel("Explicación del Concepto");
         textoInstrucciones.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
         textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
         //JtextArea
-        JTextArea informacionConcepto = new JTextArea();
+        informacionConcepto = new JTextArea();
         informacionConcepto.setLineWrap(true); // para un salto de linea
         informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
         informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
@@ -209,56 +226,12 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         contenido.add(informacion);
         informacion.add(barra); 
 
-
-        
-// ACTIONES "actionListeer"
-
-        botonLogoBiblio.addActionListener(e ->{ // Cuando lo preciones sucedará:
-
-            sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
-
-        });
-
-        botonHerramientas.addActionListener(e -> {
-            //Agregar que sucede cuando se presiona
-            sistema.mostrarAgregarConcepto();
-        });
-
-        botonlogoMate.addActionListener(e -> {
-            //Agregamos lo que secede cuando se presiona
-            JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲");
-
-        });
-
     //AGREGAR PARA MOSTRAR
             encabezado.add(panelLogosDerecho);
             this.add(encabezado, BorderLayout.NORTH); 
             this.add(contenido, BorderLayout.CENTER);
-//ActionListener
 
-        botonRegistar.addActionListener(e->{
-            //Obtencion de datos del formulario.
-            String nombre = campoNombre.getText().trim();
-            String categoria = campoCategoria.getText().trim();
-            String curso = campoCurso.getText().trim();
-            String explicacion = informacionConcepto.getText().trim();
-
-            if (nombre.isEmpty() || categoria.isEmpty() || curso.isEmpty() || explicacion.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
-                JOptionPane.showMessageDialog(this, "Completa todos los campos para poder registrar el nuevo concepto.");
-            }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-                String m = sistema.registrarConcepto(nombre, explicacion, categoria, curso); //Recibe mensaje
-                JOptionPane.showMessageDialog(this, m); //Lo muestra como notificacion
-            }
-
-            campoCategoria.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
-            campoCurso.setText("");
-            campoNombre.setText("");
-            informacionConcepto.setText("");
-
-            
-        });
         }
-
 
     public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuidad al escribir. Graphics -> g (el nombre de la cariables o algo así)
         
@@ -282,4 +255,53 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
             g.fillRect(545, 220, 410, 410);
             
         }
+
+    private class Chismoso implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()== botonlogoMate){ // Valida si viene de este botón
+
+                    try{
+                        //Verifica si el sistema operativo puedo abrir el navegador 
+                                                                                            //Es una constante de tiempo enumerada que representa una acción específica del sistema operativo, la capacidad de abrir una direccion web 
+                        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
+                            //obtiene la instancia del entorno del escritorio del sistam y abre el URL en el navedaro predetermiando
+                            Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
+                        }
+                    } catch (Exception r){
+                        JOptionPane.showMessageDialog(PanelAgregarConcepto.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                    }
+            }
+
+            if(e.getSource() == botonLogoBiblio){
+                sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
+            }
+
+            if(e.getSource() == botonHerramientas){
+                        sistema.mostrarAgregarConcepto();
+            }
+
+            if(e.getSource() == botonRegistar){
+                 String nombre = campoNombre.getText().trim();
+                String categoria = campoCategoria.getText().trim();
+                String curso = campoCurso.getText().trim();
+                String explicacion = informacionConcepto.getText().trim();
+
+                if (nombre.isEmpty() || categoria.isEmpty() || curso.isEmpty() || explicacion.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
+                    JOptionPane.showMessageDialog(PanelAgregarConcepto.this, "Completa todos los campos para poder registrar el nuevo concepto.");
+                }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
+                    String m = sistema.registrarConcepto(nombre, explicacion, categoria, curso); //Recibe mensaje
+                    JOptionPane.showMessageDialog(PanelAgregarConcepto.this, m); //Lo muestra como notificacion
+
+                    campoCategoria.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
+                    campoCurso.setText("");
+                    campoNombre.setText("");
+                    informacionConcepto.setText("");
+                }
+            }
+
+        }
+
+    }
 }
