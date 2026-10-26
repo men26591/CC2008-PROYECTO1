@@ -76,14 +76,16 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
             }
         }
 
+        String hash = generar(contrasena.toCharArray()); //Genera el hash de la contraseña (almacena las iteraciones, el salt y el hash.)
+
         Usuario nuevoUsuario = new Usuario();
 
         nuevoUsuario.setNombre(nombre);
-        nuevoUsuario.setContrasena(contrasena);
+        nuevoUsuario.setContrasena(hash); //Almacena hash de la contraseña.
         nuevoUsuario.archivosBases();
 
         try (BufferedWriter escritor = new BufferedWriter(new FileWriter(aUsuarios, true))) { //Abre el archivo en modo escritura y lo cierra el archivo automáticamente después de usarlo.
-            escritor.write(nombre + "," + contrasena); //Escribe usuario y contraseña
+            escritor.write(nombre + "," + hash); //Escribe usuario y contraseña cifrada
             escritor.newLine(); //Cambia de linea para no sobreescribir en la siguiente ocasion
             
         } catch (IOException e) { //En caso no se pueda abrir el archivo
@@ -101,7 +103,7 @@ public class Biblioteca { //Función: Lógica de usuarios/sesión
 
         for (Usuario usuario : baseUsuarios) {
 
-            if (usuario.getNombre().equals(nombre) && usuario.getContrasena().equals(contrasena)) {
+            if (usuario.getNombre().equals(nombre) && verificar(contrasena.toCharArray(), usuario.getContrasena())) {
                 
                 setUsuarioActual(usuario);
                 return "Inicio de sesión correcto";
