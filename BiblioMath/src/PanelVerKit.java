@@ -45,6 +45,7 @@ public class PanelVerKit extends JPanel { //Función: Interfaz para ver un kit y
         botonLogoBiblio.setFocusPainted(false); // Quitar la línea que aparece cuando le das click
         botonLogoBiblio.setBorderPainted(false); //Quitar el borte del botón
         botonLogoBiblio.setPreferredSize(new Dimension(230,50)); // determinar una dimension "forzada" para el boton
+        botonLogoBiblio.setToolTipText("Ir a Pantalla de Inicio");//Texto al posicionarse sobre el botón.
         
         encabezado.add(botonLogoBiblio,BorderLayout.WEST);
 
@@ -70,6 +71,7 @@ public class PanelVerKit extends JPanel { //Función: Interfaz para ver un kit y
         botonHerramientas.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonHerramientas.setBorderPainted(false); //Quitar el borde del botó
         botonHerramientas.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonHerramientas.setToolTipText("Agregar Concepto");//Texto al posicionarse sobre el botón.
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
 
     //BOTON LOGO UVG
@@ -87,6 +89,7 @@ public class PanelVerKit extends JPanel { //Función: Interfaz para ver un kit y
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonlogoMate.setToolTipText("Redes Sociales");//Texto al posicionarse sobre el botón.
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
         
         panelLogosDerecho.add(botonlogoMate);  // Agregar al panel que lo va a mostrar

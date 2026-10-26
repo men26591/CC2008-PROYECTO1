@@ -67,6 +67,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonlogoMate.setToolTipText("Redes Sociales");//Texto al posicionarse sobre el botón.
         botonlogoMate.addActionListener(shute);
         encabezado.add(botonlogoMate,BorderLayout.EAST);
         

@@ -63,6 +63,8 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonLogoBiblio.setFocusPainted(false); // Quitar la línea que aparece cuando le das click
         botonLogoBiblio.setBorderPainted(false); //Quitar el borte del botón
         botonLogoBiblio.setPreferredSize(new Dimension(230,50)); // determinar una dimension "forzada" para el boton
+        botonLogoBiblio.setToolTipText("Ir a Pantalla de Inicio");//Texto al posicionarse sobre el botón.
+        
         botonLogoBiblio.addActionListener(shute);
         encabezado.add(botonLogoBiblio,BorderLayout.WEST);
 
@@ -87,6 +89,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonHerramientas.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonHerramientas.setBorderPainted(false); //Quitar el borde del botó
         botonHerramientas.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonHerramientas.setToolTipText("Agregar Concepto");//Texto al posicionarse sobre el botón.
         botonHerramientas.addActionListener(shute);
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
     
@@ -106,6 +109,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonBiblioConcepto.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonBiblioConcepto.setBorderPainted(false); //Quitar el borde del botó
         botonBiblioConcepto.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonBiblioConcepto.setToolTipText("Ver todos los Conceptos");//Texto al posicionarse sobre el botón.
         botonBiblioConcepto.addActionListener(shute);
         panelLogosDerecho.add(botonBiblioConcepto); // Agregarlo al panel que lo va a mostrar
     
@@ -124,6 +128,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonKits.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonKits.setBorderPainted(false); //Quitar el borde del botó
         botonKits.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonKits.setToolTipText("Agregar Kit");//Texto al posicionarse sobre el botón.
         botonKits.addActionListener(shute);
         panelLogosDerecho.add(botonKits); // Agregarlo al panel que lo va a mostrar
 
@@ -144,6 +149,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonlogoMate.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonlogoMate.setBorderPainted(false); //Quitar el borde del botó
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
+        botonlogoMate.setToolTipText("Redes Sociales");//Texto al posicionarse sobre el botón.
         botonlogoMate.addActionListener(shute);
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
         
