@@ -278,11 +278,11 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
             }
 
             if(e.getSource() == botonHerramientas){
-                        sistema.mostrarAgregarConcepto();
+                sistema.mostrarAgregarConcepto();
             }
             
             if(e.getSource() == botonKits){
-                // sistema.mostrarKits(); 
+                //sistema.mostrarKits(); 
             }
 
             if(e.getSource() == botonBuscar){
