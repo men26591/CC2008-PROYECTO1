@@ -23,7 +23,7 @@ import java.net.URI; // URI (Identificador de Recursos Uniforme) lo que permite 
 
 public class PanelInicio extends JPanel { // Función: Interfaz de inicio
 
-    private JButton botonLogoBiblio, botonHerramientas, botonBiblioConcepto, botonKits, botonlogoMate, botonBuscar, botonCerrarSesion, botonVer;
+    private JButton botonLogoBiblio, botonHerramientas, botonBiblioConcepto, botonKits, botonlogoMate, botonBuscar, botonCerrarSesion, botonVer, botonEjercicios;
     private JLabel textoBienvenidaInicio, textoBusquedasPopulares;
     private JTextField campoBuscar;
     private Sistema sistema; //Para que todos los que esten aquí adentro tengan acceso a sistema
@@ -45,8 +45,6 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         JPanel encabezado = new JPanel(new BorderLayout());
         encabezado.setBorder(BorderFactory.createEmptyBorder(25, 55, 30, 55));
         encabezado.setOpaque(false);  // para que el panle que agregagamos no tenga color, osea que se transparente                 //Cargar imagen
-
-
 
     //BOTON LOGO
         //Carga imagen del logo de biblioMath
@@ -112,6 +110,27 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonBiblioConcepto.setToolTipText("Ver todos los Conceptos");//Texto al posicionarse sobre el botón.
         botonBiblioConcepto.addActionListener(shute);
         panelLogosDerecho.add(botonBiblioConcepto); // Agregarlo al panel que lo va a mostrar
+    
+
+    //BOTON EJERCICIOS
+
+        //Cargar imagen LOGO BIBLIO CONCEPTOS
+        ImageIcon logoEjercicio = new ImageIcon("BiblioMath/recursos/logoEjercicios.png");
+        //Modifcar tamaño
+        Image logoEjEscalonado = logoEjercicio.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoEjercicioEscalonada = new ImageIcon(logoEjEscalonado);
+        //Agregar a Jlabel para mostrar
+
+        botonEjercicios = new JButton(logoEjercicioEscalonada); // Agregamos la imagen que queremos que aparezca en el botón
+        // //Preferncias para el botón
+        botonEjercicios.setContentAreaFilled(false); //Quitar el color del botón
+        botonEjercicios.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonEjercicios.setBorderPainted(false); //Quitar el borde del botó
+        botonEjercicios.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonEjercicios.setToolTipText("Agregar Ejercicios a Concepto");//Texto al posicionarse sobre el botón.
+        botonEjercicios.addActionListener(shute);
+        panelLogosDerecho.add(botonEjercicios); // Agregarlo al panel que lo va a mostrar
     
     //BOTON KITS
         //Cargar imagen 
@@ -208,8 +227,31 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonVer.setAlignmentX(CENTER_ALIGNMENT);
         botonVer.addActionListener(shute);
 
-        botonCerrarSesion = new JButton("Cerrar Sesión");
-        botonCerrarSesion.setPreferredSize(new Dimension(100,35)); //Limitamos tamaño
+
+        //ABAJO 
+        JPanel pie = new JPanel(new BorderLayout());
+        pie.setOpaque(false);  // para qu
+
+        //Cargar imagen LOGO BIBLIO CONCEPTOS
+        ImageIcon logoSalir = new ImageIcon("BiblioMath/recursos/logoSalir.png");
+        //Modifcar tamaño
+        Image logoSalirEscalonar = logoSalir.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoSalirEscalonado = new ImageIcon(logoSalirEscalonar);
+        //Agregar a Jlabel para mostrar
+
+
+        botonCerrarSesion = new JButton(logoSalirEscalonado); // Agregamos la imagen que queremos que muestre
+        //Preferencias para el diseño del botón
+        botonCerrarSesion.setContentAreaFilled(false); //Quitar el color del botón
+        botonCerrarSesion.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonCerrarSesion.setBorderPainted(false); //Quitar el borde del botó
+        botonCerrarSesion.setPreferredSize(new Dimension(100,100)); // Obligar a colocar el botón con estas medidas
+        botonCerrarSesion.setToolTipText("Cerrar Sesión");//Texto al posicionarse sobre el botón.
+        botonCerrarSesion.addActionListener(shute);
+
+        pie.add(botonCerrarSesion, BorderLayout.EAST);
+        
 
         
 
@@ -230,7 +272,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         //Los agregamos y colcoamos donde queremos que aparezcan 
         this.add(encabezado, BorderLayout.NORTH); 
         this.add(contenido, BorderLayout.CENTER);
-        this.add(botonCerrarSesion, BorderLayout.SOUTH);
+        this.add(pie, BorderLayout.SOUTH);
 
 
 

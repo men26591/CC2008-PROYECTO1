@@ -30,7 +30,7 @@ import javax.swing.border.LineBorder; // Permite agregar colores
 
 public class PanelAgregarConcepto extends JPanel { // Función: Formulario para conceptos
 
-    private JButton botonLogoBiblio, botonHerramientas, botonlogoMate, botonRegistar;
+    private JButton botonLogoBiblio, botonHerramientas, botonlogoMate, botonRegistar,botonBiblioConcepto,botonEjercicios,botonKits;
     private JLabel tectoAprenderHoy, textoCategoria, textoNombre, textoCurso, textoInstrucciones;
     private JTextField campoCategoria, campoNombre, campoCurso;
     private JTextArea informacionConcepto;
@@ -76,9 +76,24 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
          JPanel panelLogosDerecho = new JPanel(new FlowLayout(FlowLayout.RIGHT,10,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
          panelLogosDerecho.setOpaque(false); //Mantiene l fondo delpanel trasparente o sin color
 
-    //BOTON HERRAMIENTAS
+    //
+      //BOTON LOGO
+        //Carga imagen del logo de biblioMath
+
+        botonLogoBiblio = new JButton(logoBiblioEscalado); // Creamos boton dunde vamos a colocar la imagen
+        //Preferencias para el botón
+        botonLogoBiblio.setContentAreaFilled(false); //Quitar el color del fondo botón
+        botonLogoBiblio.setFocusPainted(false); // Quitar la línea que aparece cuando le das click
+        botonLogoBiblio.setBorderPainted(false); //Quitar el borte del botón
+        botonLogoBiblio.setPreferredSize(new Dimension(230,50)); // determinar una dimension "forzada" para el boton
+        botonLogoBiblio.setToolTipText("Ir a Pantalla de Inicio");//Texto al posicionarse sobre el botón.
+        
+        botonLogoBiblio.addActionListener(shute);
+        encabezado.add(botonLogoBiblio,BorderLayout.WEST);
+
     
-         //Cargar imagen LOGO HERRAMINETAS
+    //BOTON HERRAMIENTAS
+        //Cargar imagen LOGO HERRAMINETAS
         ImageIcon logoHerramientas = new ImageIcon("BiblioMath/recursos/herramientas.png");
         //Modifcar tamaño
         Image logoHeEscalada= logoHerramientas.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
@@ -95,7 +110,69 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         botonHerramientas.setToolTipText("Agregar Concepto");//Texto al posicionarse sobre el botón.
         botonHerramientas.addActionListener(shute);
         panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
+    
+    //BOTON BIBLIOTECA CONCEPTOS
 
+        //Cargar imagen LOGO BIBLIO CONCEPTOS
+        ImageIcon logoBiblioConcepto = new ImageIcon("BiblioMath/recursos/logoBibliConcepto.png");
+        //Modifcar tamaño
+        Image logoBiCoEscalado = logoBiblioConcepto.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoBilbioConceptoEscalada = new ImageIcon(logoBiCoEscalado);
+        //Agregar a Jlabel para mostrar
+
+        botonBiblioConcepto = new JButton(logoBilbioConceptoEscalada); // Agregamos la imagen que queremos que aparezca en el botón
+        // //Preferncias para el botón
+        botonBiblioConcepto.setContentAreaFilled(false); //Quitar el color del botón
+        botonBiblioConcepto.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonBiblioConcepto.setBorderPainted(false); //Quitar el borde del botó
+        botonBiblioConcepto.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonBiblioConcepto.setToolTipText("Ver todos los Conceptos");//Texto al posicionarse sobre el botón.
+        botonBiblioConcepto.addActionListener(shute);
+        panelLogosDerecho.add(botonBiblioConcepto); // Agregarlo al panel que lo va a mostrar
+    
+
+    //BOTON EJERCICIOS
+
+        //Cargar imagen LOGO BIBLIO CONCEPTOS
+        ImageIcon logoEjercicio = new ImageIcon("BiblioMath/recursos/logoEjercicios.png");
+        //Modifcar tamaño
+        Image logoEjEscalonado = logoEjercicio.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoEjercicioEscalonada = new ImageIcon(logoEjEscalonado);
+        //Agregar a Jlabel para mostrar
+
+        botonEjercicios = new JButton(logoEjercicioEscalonada); // Agregamos la imagen que queremos que aparezca en el botón
+        // //Preferncias para el botón
+        botonEjercicios.setContentAreaFilled(false); //Quitar el color del botón
+        botonEjercicios.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonEjercicios.setBorderPainted(false); //Quitar el borde del botó
+        botonEjercicios.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonEjercicios.setToolTipText("Agregar Ejercicios a Concepto");//Texto al posicionarse sobre el botón.
+        botonEjercicios.addActionListener(shute);
+        panelLogosDerecho.add(botonEjercicios); // Agregarlo al panel que lo va a mostrar
+    
+    //BOTON KITS
+        //Cargar imagen 
+        ImageIcon logoKits = new ImageIcon("BiblioMath/recursos/logoKits.png");
+        //Modifcar tamaño
+        Image logoKiEscalada= logoKits.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoKitsEscalado = new ImageIcon(logoKiEscalada);
+        //Agregar a Jlabel para mostrar
+
+        botonKits = new JButton(logoKitsEscalado); // Agregamos la imagen que queremos que aparezca en el botón
+        // //Preferncias para el botón
+        botonKits.setContentAreaFilled(false); //Quitar el color del botón
+        botonKits.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonKits.setBorderPainted(false); //Quitar el borde del botó
+        botonKits.setPreferredSize(new Dimension(60,40)); // Obligar a colocar el botón con estas medidas
+        botonKits.setToolTipText("Agregar Kit");//Texto al posicionarse sobre el botón.
+        botonKits.addActionListener(shute);
+        panelLogosDerecho.add(botonKits); // Agregarlo al panel que lo va a mostrar
+
+
+    
     //BOTON LOGO UVG
         //Cargar imagen LOGO MATE
         ImageIcon logoMateUVG = new ImageIcon("BiblioMath/recursos/logoMate.png");
@@ -113,8 +190,9 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
         botonlogoMate.setPreferredSize(new Dimension(50,50)); // Obligar a colocar el botón con estas medidas
         botonlogoMate.setToolTipText("Redes Sociales");//Texto al posicionarse sobre el botón.
         botonlogoMate.addActionListener(shute);
+        panelLogosDerecho.add(botonHerramientas); // Agregarlo al panel que lo va a mostrar
+        
         panelLogosDerecho.add(botonlogoMate);  // Agregar al panel que lo va a mostrar
-    
 
 
     //AGREGAR IMAGEN DEL TEXTO
