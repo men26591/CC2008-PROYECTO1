@@ -1,5 +1,0 @@
-id,nombre,explicacion,categoria,curso,kitEstudio
-0,Vector,Cantidad con magnitud direccion y sentido,Geometria,Algebra Lineal,[]
-1,Producto punto,Operacion entre vectores que produce un escalar,Vectores,Algebra Lineal,[]
-2,Producto cruz,Operacion entre vectores que produce un vector perpendicular,Vectores,Algebra Lineal,[]
-3,Plano,Superficie definida por un punto y un vector normal,Geometria,Algebra Lineal,[]

@@ -12,6 +12,8 @@ import javax.swing.JOptionPane; //Para mostrar mensaje por medio de una ventanit
 import java.awt.Image; // Agregar imageness
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.Color; // Permite agregar colores
 import java.awt.Dimension;
 import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
@@ -27,6 +29,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
     private JLabel textoBienvenidaInicio, textoBusquedasPopulares;
     private JTextField campoBuscar;
     private Sistema sistema; //Para que todos los que esten aquí adentro tengan acceso a sistema
+    private String mensajeCampoBuscar;
 
     public PanelInicio(Sistema sistema) {
 
@@ -195,13 +198,25 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         JPanel campoContenido = new JPanel(new FlowLayout(FlowLayout.CENTER,15,0)); // Alinial los elemento de forma especifica : alninacion, espacio horizontal(la separación horizontarl) espacio vertica(la distancia los pixeles de estacio entre arriba y abajo)
         campoContenido.setOpaque(false);  // no tenga color
 
+
+
         campoBuscar = new JTextField(); //Para que el usuarioIngrese datos
         campoBuscar.setPreferredSize(new Dimension(700, 35));  // Se usa este para modificar y no el setMaximumSize porque al usar FlowLayout este ignora lo que le ponemos, pero con este nuevo le obligamos a tomar este tamaño
         campoContenido.add(campoBuscar);
 
+        mensajeCampoBuscar = "Ingresa el nombre EXACTO de tu concepto o kit";
+        
+        campoBuscar.setText(mensajeCampoBuscar);
+        campoBuscar.setForeground(Color.GRAY); // Color gris para que parezca temporal
+        campoBuscar.addFocusListener(shute);
+
+
         botonBuscar = new JButton("🔍");
         botonBuscar.setPreferredSize(new Dimension(100, 35)); 
         botonBuscar.addActionListener(shute);
+
+
+
         campoContenido.add(botonBuscar);
 
         campoContenido.setMaximumSize(new Dimension(850, 40));  //limitamos el estapacion de todo el panel
@@ -292,10 +307,11 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         g.fillRect(150, 430, 700, 200);
     }
 
-    public class Chismoso implements ActionListener{
+    public class Chismoso implements ActionListener, FocusListener{ // FocusListener sirve para ver cuando un elemento gana o peride el foco, cuando est selecionado 
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
 
             if(e.getSource()== botonlogoMate){ // Valida si viene de este botón
 
@@ -307,7 +323,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                             Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
                         }
                     } catch (Exception r){
-                        JOptionPane.showMessageDialog(PanelInicio.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                        JOptionPane.showMessageDialog(PanelInicio.this, "¡No se pudo abrir el enlace! \nMATE UVG \n Instragram: @uvgmate \n🐲");
                     }
             }
 
@@ -329,9 +345,12 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
 
             if(e.getSource() == botonBuscar){
                 String nombre = campoBuscar.getText().trim();
+      
 
-                if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
-                    JOptionPane.showMessageDialog(PanelInicio.this, "Ingresa el nombre del concepto que deseas buscar.");
+                if(nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
+                    JOptionPane.showMessageDialog(PanelInicio.this, "Ingresa el nombre del concepto que deseas buscar.","Campo Vacío",JOptionPane.WARNING_MESSAGE);
+                }if(nombre.equals(mensajeCampoBuscar)){
+                    JOptionPane.showMessageDialog(PanelInicio.this, "Ingresa el nombre del concepto que deseas buscar.", "Campo Vacío",JOptionPane.WARNING_MESSAGE);
                 }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
                     Object m = sistema.buscar(nombre); //Se llama a método en sistema
                     if (m instanceof Concepto){ //Si es un concepto
@@ -340,7 +359,10 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                     else{
                         JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
                     }
+
+                    campoBuscar.setText(mensajeCampoBuscar);
                 }
+
             }
 
             if(e.getSource() == botonVer){
@@ -351,6 +373,29 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                     }
                 else{
                     JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
+                }
+            }
+        }
+
+        @Override
+        public void focusGained(FocusEvent e) { // Cuando es el foco 
+             if (e.getSource() == campoBuscar ) {
+
+                String mensajeBusqueda = campoBuscar.getText(); // toma el campo o el texto que contega ese campo y lo asigna a una variable
+
+                if (mensajeBusqueda.equals(mensajeCampoBuscar)) { // si el igual al mensaje entonces 
+                    campoBuscar.setText("");  // lo vacia  // vacial la varaibel
+                }     
+            }
+          
+        }
+
+        @Override
+        public void focusLost(FocusEvent e) { // cuando no es el foco 
+            
+            if(e.getSource() == campoBuscar){
+                if(campoBuscar.getText().trim().isEmpty()){ // si el campo está vació 
+                     campoBuscar.setText(mensajeCampoBuscar);
                 }
             }
         }
