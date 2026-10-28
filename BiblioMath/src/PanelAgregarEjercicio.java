@@ -31,9 +31,9 @@ import javax.swing.border.LineBorder; // Permite agregar colores
 public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para conceptos
 
     private JButton botonLogoBiblio, botonHerramientas, botonlogoMate, botonRegistar,botonBiblioConcepto,botonEjercicios,botonKits;
-    private JLabel tectoAprenderHoy, textoCategoria, textoNombre, textoCurso, textoInstrucciones;
-    private JTextField campoCategoria, campoNombre, campoCurso;
-    private JTextArea informacionConcepto;
+    private JLabel tectoAprenderHoy, textoNombreConcepto,textoInstrucciones, textoInstruccionesRespuesta;
+    private JTextField campoNombreConcepto, campoNombre, campoCurso;
+    private JTextArea informacionEjercicio, informacionRespuesta;
     private Sistema sistema;
 
     public PanelAgregarEjercicio(Sistema sistema) {
@@ -196,7 +196,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
 
 
     //AGREGAR IMAGEN DEL TEXTO
-        ImageIcon textoAprender = new ImageIcon("BiblioMath/recursos/queAprenderemosHoy.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
+        ImageIcon textoAprender = new ImageIcon("BiblioMath/recursos/anadirEjercicio.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
         //Cambiar el TAMAÑO de la imagen
         Image textoApEscalonada =  textoAprender.getImage().getScaledInstance(400, 100, Image.SCALE_SMOOTH);
         //Convertir nuevamente a ImageIcon
@@ -209,103 +209,92 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
         JPanel contenido = new JPanel(new GridLayout(1,2)); // Para dividir el area en dos columnas 
         contenido.setOpaque(false); //Para que el panel no tenga colores 
 
-    //Formaulario 
-        JPanel formulario = new JPanel();
-        formulario.setLayout(new BoxLayout(formulario, BoxLayout.Y_AXIS)); //Perminte que se apilen una sobre otra (componente)
-        formulario.setOpaque(false); //para que no se muestre con color 
 
-        //Mostrar Categoria 
-        textoCategoria = new JLabel("Nombre del Concepto");
-        textoCategoria.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoCategoria.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoCategoria.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
-       
-        //Mostrar ingreso y comboBox
-        //Temporal textField
-        campoCategoria = new JTextField();
-        campoCategoria.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
-        campoCategoria.setAlignmentX(CENTER_ALIGNMENT);
-        campoCategoria.setAlignmentY(CENTER_ALIGNMENT);//Alinear
+    //Lado Izquierdo
+    
+        JPanel ladoIzquiero = new JPanel();
+        ladoIzquiero.setLayout(new BoxLayout(ladoIzquiero, BoxLayout.Y_AXIS)); //Perminte que se apilen una sobre otra (componente)
+        ladoIzquiero.setOpaque(false); //Para que no muestre color 
 
-        //Mostrar Nombre
-        textoNombre = new JLabel("Ejercicio");
-        textoNombre.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoNombre.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoNombre.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
-        campoCategoria.setAlignmentY(CENTER_ALIGNMENT);//Alinear
+        //Mostrar Ingrese el nombre del concepto 
+        textoNombreConcepto = new JLabel("Nombre del Concepto");
+        textoNombreConcepto.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
+        textoNombreConcepto.setForeground( Color.WHITE); // cambiar de color de letra 
+        textoNombreConcepto.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
-        //Mostrar Curso
-        textoCurso = new JLabel("Curso");
-        textoCurso.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoCurso.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoCurso.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
+        //Mostrar intrucciones
+        campoNombreConcepto = new JTextField();
+        campoNombreConcepto.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
+        campoNombreConcepto.setAlignmentX(CENTER_ALIGNMENT);
+        campoNombreConcepto.setAlignmentY(CENTER_ALIGNMENT);//Alinear
+
+         //Mostrar instrucciones 
+        textoInstrucciones = new JLabel("Ingresa el ejercicio");
+        textoInstrucciones.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
+        textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
+        textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
+
+        //JtextArea
+        informacionEjercicio = new JTextArea();
+        informacionEjercicio.setLineWrap(true); // para un salto de linea
+        informacionEjercicio.setWrapStyleWord(false); //para romper palabras si es necesario
+        informacionEjercicio.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
+
+        JScrollPane barra = new JScrollPane(informacionEjercicio); // Crar un Jscrollpanel y se agrega a al cuadro de texto
+        
+        barra.setMaximumSize(new Dimension(350,230)); // Obligamos aque coloque ese tamaño
+        barra.setBorder(new LineBorder(new Color(63, 123, 242)));
+
+        ladoIzquiero.add(Box.createVerticalStrut(30));
+        ladoIzquiero.add(textoNombreConcepto);
+        ladoIzquiero.add(Box.createVerticalStrut(15));
+        ladoIzquiero.add(campoNombreConcepto);
+        ladoIzquiero.add(Box.createVerticalStrut(30));
+        ladoIzquiero.add(textoInstrucciones);
+        ladoIzquiero.add(Box.createVerticalStrut(15));
+        ladoIzquiero.add(barra);
+        ladoIzquiero.add(Box.createVerticalStrut(5));
+
+        contenido.add(ladoIzquiero);
 
 
-        //Temporal textField
-        campoCurso = new JTextField();
-        campoCurso.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
-        campoCurso.setAlignmentX(CENTER_ALIGNMENT);
-        campoCurso.setAlignmentY(CENTER_ALIGNMENT);//Alinear
+    //Lado Derecho
+        JPanel ladoDerecho = new JPanel();
+        ladoDerecho.setLayout(new BoxLayout(ladoDerecho, BoxLayout.Y_AXIS)); //Perminte que se apilen una sobre otra (componente)
+        ladoDerecho.setOpaque(false); //Para que no muestre color 
+
+        //Mostrar instrucciones 
+        textoInstruccionesRespuesta = new JLabel("Ingresa la respuesta del ejercicio");
+        textoInstruccionesRespuesta.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
+        textoInstruccionesRespuesta.setForeground( Color.WHITE); // cambiar de color de letra 
+        textoInstruccionesRespuesta.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
+
+        //JtextArea
+        informacionRespuesta = new JTextArea();
+        informacionRespuesta.setLineWrap(true); // para un salto de linea
+        informacionRespuesta.setWrapStyleWord(false); //para romper palabras si es necesario
+        informacionRespuesta.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
+
+        JScrollPane barraRespuesta = new JScrollPane(informacionRespuesta); // Crar un Jscrollpanel y se agrega a al cuadro de texto
+        
+        barraRespuesta.setMaximumSize(new Dimension(350,230)); // Obligamos aque coloque ese tamaño
+        barraRespuesta.setBorder(new LineBorder(new Color(63, 123, 242)));
 
         botonRegistar = new JButton("Registrar"); // Crea un boton que va a tener escerito log in
         botonRegistar.setMaximumSize(new Dimension(100,40)); //Limitamos tamaño
         botonRegistar.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
         botonRegistar.addActionListener(shute);
 
-        //Agregar al Panel formulario
+        ladoDerecho.add(Box.createVerticalStrut(30));
+        ladoDerecho.add(textoInstruccionesRespuesta);
+        ladoDerecho.add(Box.createVerticalStrut(15));
+        ladoDerecho.add(barraRespuesta);
+        ladoDerecho.add(Box.createVerticalStrut(30));
+        ladoDerecho.add(botonRegistar);
 
-        formulario.add(Box.createVerticalStrut(30)); //Funciona para dejar un espacio
-        formulario.add(textoCategoria);
-        formulario.add(Box.createVerticalStrut(15)); //Funciona para dejar un espacio
-        formulario.add(campoCategoria);
-        formulario.add(Box.createVerticalStrut(30)); //Funciona para dejar un espacio
-        formulario.add(textoNombre);
-        
-        
-                //Temporal textField
-                campoNombre = new JTextField();
-                campoNombre.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
-                campoNombre.setAlignmentX(CENTER_ALIGNMENT);
-                formulario.add(campoNombre);
-        formulario.add(Box.createVerticalStrut(15)); //Funciona para dejar un espacio
-        formulario.add(Box.createVerticalStrut(30)); //Funciona para dejar un espacio
-        formulario.add(textoCurso);
-        formulario.add(Box.createVerticalStrut(15)); //Funciona para dejar un espacio
-        formulario.add(campoCurso);
-        formulario.add(Box.createVerticalStrut(25)); //Funciona para dejar un espacio
-        formulario.add(botonRegistar);
-        
-        contenido.add(formulario);
+        contenido.add(ladoDerecho);
 
-    //Entrada texto 
     
-        JPanel informacion = new JPanel();
-        informacion.setOpaque(false); //Para que no muestre color 
-
-        //Mostrar instrucciones 
-        textoInstrucciones = new JLabel("Respuesta");
-        textoInstrucciones.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
-
-        //JtextArea
-        informacionConcepto = new JTextArea();
-        informacionConcepto.setLineWrap(true); // para un salto de linea
-        informacionConcepto.setWrapStyleWord(false); //para romper palabras si es necesario
-        informacionConcepto.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
-
-        JScrollPane barra = new JScrollPane(informacionConcepto); // Crar un Jscrollpanel y se agrega a al cuadro de texto
-        
-        Dimension tamanoInformacionConcepto = new Dimension(350,340); //Le doy el ancho y alto que yo quiero 
-        barra.setPreferredSize(tamanoInformacionConcepto); // Obligamos aque coloque ese tamaño
-        barra.setBorder(new LineBorder(new Color(63, 123, 242)));
-
-        informacion.add(Box.createVerticalStrut(55)); //Funciona para dejar un espacio
-        informacion.add(textoInstrucciones);
-        informacion.add(Box.createVerticalStrut(10)); //Funciona para dejar un espacio
-
-        contenido.add(informacion);
-        informacion.add(barra); 
 
     //AGREGAR PARA MOSTRAR
             encabezado.add(panelLogosDerecho);
@@ -364,21 +353,18 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
             }
 
             if(e.getSource() == botonRegistar){
-                 String nombre = campoNombre.getText().trim();
-                String categoria = campoCategoria.getText().trim();
-                String curso = campoCurso.getText().trim();
-                String explicacion = informacionConcepto.getText().trim();
+                String nombre = campoNombreConcepto.getText().trim();
+                String ejercicio = informacionEjercicio.getText().trim();
+                String respuesta = informacionRespuesta.getText().trim();
 
-                if (nombre.isEmpty() || categoria.isEmpty() || curso.isEmpty() || explicacion.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
+                if (nombre.isEmpty() || ejercicio.isEmpty() || respuesta.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
                     JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "Completa todos los campos para poder registrar el nuevo concepto.");
                 }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-                    String m = sistema.registrarConcepto(nombre, explicacion, categoria, curso); //Recibe mensaje
-                    JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, m); //Lo muestra como notificacion
+                    JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "EN PROCESO"); //Lo muestra como notificacion
 
-                    campoCategoria.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
-                    campoCurso.setText("");
-                    campoNombre.setText("");
-                    informacionConcepto.setText("");
+                    campoNombreConcepto.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
+                    informacionEjercicio.setText("");
+                    informacionRespuesta.setText("");
                 }
             }
 
