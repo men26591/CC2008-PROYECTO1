@@ -36,7 +36,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
     private JTextArea informacionConcepto;
     private Sistema sistema;
 
-    public PanelAgregarConcepto(Sistema sistema) {
+    public PanelAgregarEjercicio(Sistema sistema) {
         
         add(new JLabel("agregarEjercicio"));
 
@@ -215,7 +215,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
         formulario.setOpaque(false); //para que no se muestre con color 
 
         //Mostrar Categoria 
-        textoCategoria = new JLabel("Categoría");
+        textoCategoria = new JLabel("Nombre del Concepto");
         textoCategoria.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoCategoria.setForeground( Color.WHITE); // cambiar de color de letra 
         textoCategoria.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
@@ -228,16 +228,10 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
         campoCategoria.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar Nombre
-        textoNombre = new JLabel("Nombre");
+        textoNombre = new JLabel("Ejercicio");
         textoNombre.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
         textoNombre.setForeground( Color.WHITE); // cambiar de color de letra 
         textoNombre.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
-
-
-        //Temporal textField
-        campoNombre = new JTextField();
-        campoNombre.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
-        campoNombre.setAlignmentX(CENTER_ALIGNMENT);
         campoCategoria.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
         //Mostrar Curso
@@ -266,8 +260,14 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
         formulario.add(campoCategoria);
         formulario.add(Box.createVerticalStrut(30)); //Funciona para dejar un espacio
         formulario.add(textoNombre);
+        
+        
+                //Temporal textField
+                campoNombre = new JTextField();
+                campoNombre.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
+                campoNombre.setAlignmentX(CENTER_ALIGNMENT);
+                formulario.add(campoNombre);
         formulario.add(Box.createVerticalStrut(15)); //Funciona para dejar un espacio
-        formulario.add(campoNombre);
         formulario.add(Box.createVerticalStrut(30)); //Funciona para dejar un espacio
         formulario.add(textoCurso);
         formulario.add(Box.createVerticalStrut(15)); //Funciona para dejar un espacio
@@ -351,7 +351,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
                             Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
                         }
                     } catch (Exception r){
-                        JOptionPane.showMessageDialog(PanelAgregarConcepto.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                        JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
                     }
             }
 
@@ -370,10 +370,10 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
                 String explicacion = informacionConcepto.getText().trim();
 
                 if (nombre.isEmpty() || categoria.isEmpty() || curso.isEmpty() || explicacion.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
-                    JOptionPane.showMessageDialog(PanelAgregarConcepto.this, "Completa todos los campos para poder registrar el nuevo concepto.");
+                    JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "Completa todos los campos para poder registrar el nuevo concepto.");
                 }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
                     String m = sistema.registrarConcepto(nombre, explicacion, categoria, curso); //Recibe mensaje
-                    JOptionPane.showMessageDialog(PanelAgregarConcepto.this, m); //Lo muestra como notificacion
+                    JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, m); //Lo muestra como notificacion
 
                     campoCategoria.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
                     campoCurso.setText("");
