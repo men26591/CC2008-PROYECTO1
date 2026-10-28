@@ -123,8 +123,14 @@ public class Sistema {
         ventana.mostrarDetalleConcepto(concepto);
     }
 
+    public void mostrarAgregarEjercicio (){
+        ventana.mostrarPanel("agregarEjercicio");
+
+    }
+
     public void cerrarSesion() { 
         biblioteca.setUsuarioActual(null); 
         mostrarLogin();
     }
+
 }
