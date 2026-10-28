@@ -7,7 +7,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     private CardLayout cardLayout;
     private JPanel contenedor;
     private PanelDetalleConcepto panelConcepto; //Permite llamar el panel para facilitar mostrar los datos de cada concepto
-
+    //private PanelDetalleEjercicio panelEjercicio; abilitar luego
     public VentanaPrincipal(Sistema sistema) {
 
         setTitle("BiblioMath");
@@ -26,7 +26,14 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         contenedor.add(new PanelAgregarConcepto(sistema), "agregar" );
         contenedor.add(new PanelKits(sistema), "kits");
         contenedor.add(new PanelTablita(sistema), "tablita");
-        contenedor.add(new  PanelAgregarEjercicio(sistema),"agregarEjercicio");
+        contenedor.add(new PanelAgregarEjercicio(sistema),"agregarEjercicio");
+        
+        //Quitar luego 
+        contenedor.add(new PanelDetalleEjercicio(sistema), "detalleEjercicio");
+        
+        //Estte es el correcto pero no funciona por le momento 
+        //panelEjercicio = new PanelDetalleEjercicio(sistema); //Crea el panel y lo asigna al atriuyo
+        //contenedor.add(panelEjercicio, "detalleEjercicio");
 
         panelConcepto = new PanelDetalleConcepto(sistema); //Crea el panel y lo asigna al atributo
         contenedor.add(panelConcepto, "detalleConcepto"); //Añade el atributo con el panel al contenedor.

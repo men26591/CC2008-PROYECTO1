@@ -119,14 +119,24 @@ public class Sistema {
         ventana.mostrarPanel("kits");
     }
 
-    public void mostrarDetalleConcpeto(Concepto concepto) {
+    public void mostrarDetalleConcepto(Concepto concepto) {
         ventana.mostrarDetalleConcepto(concepto);
     }
 
     public void mostrarAgregarEjercicio (){
         ventana.mostrarPanel("agregarEjercicio");
-
     }
+
+    //quitar luego
+    public void mostrarDetalleEjercicio (){
+        ventana.mostrarPanel("detalleEjercicio");
+    }
+
+
+    // ESTE ES EL CORREFCTO PERO CÓMO TODAVÍA NO HAY UNA ARRAYLIST PARA ESTE NO VA A FUNCIONAR PARA MOSTRAR
+    //public void mostrarDetalleEjercicio(Concepto concepto){
+    //    ventana.mostrarDetalleConcepto(concepto);
+    //}
 
     public void cerrarSesion() { 
         biblioteca.setUsuarioActual(null); 

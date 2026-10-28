@@ -32,7 +32,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
 
     private JButton botonLogoBiblio, botonHerramientas, botonlogoMate, botonRegistar,botonBiblioConcepto,botonEjercicios,botonKits;
     private JLabel tectoAprenderHoy, textoNombreConcepto,textoInstrucciones, textoInstruccionesRespuesta;
-    private JTextField campoNombreConcepto, campoNombre, campoCurso;
+    private JTextField campoNombreConcepto;
     private JTextArea informacionEjercicio, informacionRespuesta;
     private Sistema sistema;
 

@@ -347,6 +347,13 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                 sistema.mostrarAgregarEjercicio();
             }
 
+            if(e.getSource() == botonBiblioConcepto){
+                //moficar luego
+
+                sistema.mostrarDetalleEjercicio();                
+            }
+            
+
             if(e.getSource() == botonBuscar){
                 String nombre = campoBuscar.getText().trim();
       
@@ -358,12 +365,11 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                 }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
                     Object m = sistema.buscar(nombre); //Se llama a método en sistema
                     if (m instanceof Concepto){ //Si es un concepto
-                        sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
+                        sistema.mostrarDetalleConcepto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
                     }
                     else{
                         JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
                     }
-
                     campoBuscar.setText(mensajeCampoBuscar);
                 }
 
@@ -373,12 +379,14 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
 
                 Object m = sistema.verUltimo();
                 if (m instanceof Concepto){ //Si es un concepto
-                        sistema.mostrarDetalleConcpeto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
+                        sistema.mostrarDetalleConcepto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
                     }
                 else{
                     JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
                 }
             }
+
+            
         }
 
         @Override
