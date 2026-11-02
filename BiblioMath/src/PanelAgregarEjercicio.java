@@ -330,7 +330,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource()== botonlogoMate){ // Valida si viene de este botón
+             if(e.getSource()== botonlogoMate){ // Valida si viene de este botón
 
                     try{
                         //Verifica si el sistema operativo puedo abrir el navegador 
@@ -340,7 +340,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
                             Desktop.getDesktop().browse(new URI("https://www.instagram.com/uvgmate?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw=="));   // Se valida previamente que el entorno de escritorio del sistema operativo sea compatible y que sopote la acction de ACTION.BROWS         
                         }
                     } catch (Exception r){
-                        JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "¡No se pudo abrir el enlce! \nMATE UVG \n Instragram: @uvgmate \n🐲");
+                        JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "¡No se pudo abrir el enlace! \nMATE UVG \n Instragram: @uvgmate \n🐲");
                     }
             }
 
@@ -349,7 +349,20 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
             }
 
             if(e.getSource() == botonHerramientas){
-                        sistema.mostrarAgregarConcepto();
+                sistema.mostrarAgregarConcepto();
+            }
+            
+            if(e.getSource() == botonKits){
+                //sistema.mostrarKits(); 
+            }
+
+            if(e.getSource() == botonEjercicios){
+                sistema.mostrarAgregarEjercicio();
+            }
+
+            if(e.getSource() == botonBiblioConcepto){
+                //moficar luego
+                sistema.mostrarDetalleEjercicio();                
             }
 
             if(e.getSource() == botonRegistar){

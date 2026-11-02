@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -334,7 +333,20 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
             }
 
             if(e.getSource() == botonHerramientas){
-                        sistema.mostrarAgregarConcepto();
+                sistema.mostrarAgregarConcepto();
+            }
+            
+            if(e.getSource() == botonKits){
+                //sistema.mostrarKits(); 
+            }
+
+            if(e.getSource() == botonEjercicios){
+                sistema.mostrarAgregarEjercicio();
+            }
+
+            if(e.getSource() == botonBiblioConcepto){
+                //moficar luego
+                sistema.mostrarDetalleEjercicio();                
             }
 
 

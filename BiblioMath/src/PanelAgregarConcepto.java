@@ -360,7 +360,20 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
             }
 
             if(e.getSource() == botonHerramientas){
-                        sistema.mostrarAgregarConcepto();
+                sistema.mostrarAgregarConcepto();
+            }
+            
+            if(e.getSource() == botonKits){
+                //sistema.mostrarKits(); 
+            }
+
+            if(e.getSource() == botonEjercicios){
+                sistema.mostrarAgregarEjercicio();
+            }
+
+            if(e.getSource() == botonBiblioConcepto){
+                //moficar luego
+                sistema.mostrarDetalleEjercicio();                
             }
 
             if(e.getSource() == botonRegistar){
