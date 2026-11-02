@@ -348,8 +348,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
             }
 
             if(e.getSource() == botonBiblioConcepto){
-                //moficar luego
-                sistema.mostrarDetalleEjercicio();                
+                sistema.mostrarTablita();                
             }
             
 
@@ -384,6 +383,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                     JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
                 }
             }
+
 
             
         }

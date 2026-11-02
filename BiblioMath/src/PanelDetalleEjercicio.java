@@ -345,8 +345,7 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
             }
 
             if(e.getSource() == botonBiblioConcepto){
-                //moficar luego
-                sistema.mostrarDetalleEjercicio();                
+                sistema.mostrarTablita();                 
             }
 
 

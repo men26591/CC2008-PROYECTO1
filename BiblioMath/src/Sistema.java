@@ -127,6 +127,10 @@ public class Sistema {
         ventana.mostrarPanel("biblioteca");
     }
 
+    public void mostrarTablita() {
+        ventana.mostrarPanel("tablita");
+    }
+
     public void mostrarAgregarConcepto() {
         ventana.mostrarPanel("agregar");
     }

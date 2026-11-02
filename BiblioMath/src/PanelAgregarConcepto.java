@@ -372,8 +372,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
             }
 
             if(e.getSource() == botonBiblioConcepto){
-                //moficar luego
-                sistema.mostrarDetalleEjercicio();                
+                sistema.mostrarTablita();                   
             }
 
             if(e.getSource() == botonRegistar){
