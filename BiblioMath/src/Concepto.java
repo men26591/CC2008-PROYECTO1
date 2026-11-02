@@ -9,7 +9,8 @@ public class Concepto {
     private String explicacion;
     private String categoria;
     private String curso;
-   private List<String> kitEstudio;
+    private List<String> kitEstudio;
+    private ArrayList<String[]> ejercicios;   
 
     public Concepto() {
         id = 0;
@@ -18,6 +19,7 @@ public class Concepto {
         categoria = "";
         curso = "";
         kitEstudio = new ArrayList<>();
+        ejercicios = new ArrayList<>();
     }
 
     // Get & Set
@@ -74,6 +76,14 @@ public class Concepto {
         this.kitEstudio = kitEstudio;
     }
 
+    public ArrayList<String[]> getEjercicios(){
+        return this.ejercicios;
+    }
+
+    public void setEjercicios(ArrayList<String[]> e){
+        this.ejercicios = e;
+    }
+
     //Otros métodos
     
     public void agregarKit(Kit kit) {
@@ -81,6 +91,14 @@ public class Concepto {
             kit.agregarConcepto(this);
             this.kitEstudio.add(kit.getNombre());
             
+    }
+
+    public void agregarEjercicio(String ejercicio, String r){
+        String[] e = new String[2]; 
+        e[0] = ejercicio;
+        e[1] = r;
+
+        ejercicios.add(e);
     }
 
     public String toString() {

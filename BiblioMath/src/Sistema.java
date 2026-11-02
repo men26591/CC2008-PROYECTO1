@@ -85,6 +85,22 @@ public class Sistema {
         
     }
 
+    public String agregarEjercicio(String concepto, String ejercicio, String respuesta){
+        Usuario u = getUsuarioActual(); //Se obtiene el usuario
+
+        Concepto c;
+        c = u.buscarConcepto(concepto);
+
+        try {
+            c.agregarEjercicio(ejercicio, respuesta);
+            return "Ejercicio agregado";
+        } catch (Exception e) {
+            return "Ha ocurrido un error.";
+        }
+
+
+    }
+
 
     public Biblioteca getBiblioteca() { //Le da acceso a otros paneles para obtener la informacion
         return biblioteca;

@@ -360,7 +360,8 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
                 if (nombre.isEmpty() || ejercicio.isEmpty() || respuesta.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
                     JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "Completa todos los campos para poder registrar el nuevo concepto.");
                 }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-                    JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, "EN PROCESO"); //Lo muestra como notificacion
+                    String m = sistema.agregarEjercicio(nombre,ejercicio,respuesta);
+                    JOptionPane.showMessageDialog(PanelAgregarEjercicio.this, m); //Lo muestra como notificacion
 
                     campoNombreConcepto.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
                     informacionEjercicio.setText("");
