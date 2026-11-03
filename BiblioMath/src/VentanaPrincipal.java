@@ -1,7 +1,5 @@
 import java.awt.CardLayout; // Es como para poner varios componentes en un espacio
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -30,7 +28,6 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         contenedor.add(new PanelBiblioteca(sistema), "biblioteca");
         contenedor.add(new PanelAgregarConcepto(sistema), "agregar" );
         contenedor.add(new PanelKits(sistema), "kits");
-        contenedor.add(new PanelTablita(sistema), "tablita");
         contenedor.add(new PanelAgregarEjercicio(sistema),"agregarEjercicio");
         contenedor.add(new PanelAgregarKit(sistema), "agregarKit");
 

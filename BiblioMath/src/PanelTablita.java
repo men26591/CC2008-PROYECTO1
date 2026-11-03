@@ -12,7 +12,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -38,6 +37,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
     private JComboBox<String> comboCurso;
     private JComboBox<String> comboKit;
     private JPanel filas;          // aquí van las filas de la tabla
+    private JScrollPane scrollTabla;
     private JButton botonAgregar;
 
     public PanelTablita(Sistema sistema) {
@@ -54,28 +54,27 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         this.add(superior, BorderLayout.NORTH);
 
         // TABLA
-        JPanel tabla = new JPanel(new BorderLayout());
+        JPanel tabla = new JPanel();
+        tabla.setLayout(new BoxLayout(tabla, BoxLayout.Y_AXIS));
         tabla.setBorder(BorderFactory.createEmptyBorder(25, 55, 25, 55));
         tabla.setOpaque(false);
-        tabla.add(crearFilaTitulos(), BorderLayout.NORTH);
+        JPanel titulos = crearFilaTitulos();
+        titulos.setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
+        tabla.add(titulos);
 
         filas = new JPanel();
         filas.setLayout(new BoxLayout(filas, BoxLayout.Y_AXIS));
         filas.setBackground(Color.WHITE);
 
-        JScrollPane scroll = new JScrollPane(filas);
-        scroll.setBorder(BorderFactory.createLineBorder(AZUL));
-        scroll.getVerticalScrollBar().setUnitIncrement(16);
-        tabla.add(scroll, BorderLayout.CENTER);
+        scrollTabla = new JScrollPane(filas);
+        scrollTabla.setBorder(BorderFactory.createLineBorder(AZUL));
+        scrollTabla.getVerticalScrollBar().setUnitIncrement(16);
+        tabla.add(scrollTabla);
         this.add(tabla, BorderLayout.CENTER);
 
-        // Última fila fija con el botón Agregar
+        // La tabla termina con la fila del botón Agregar.
         filas.add(crearFilaAgregar(sistema));
-
-        // Filas de diseño: solo el botón "Explicación", el texto lo pone la lógica
-        for (int i = 0; i < 3; i++) {
-            agregarFila("", "", "");
-        }
+        ajustarAlturaTabla();
 
     }
 
@@ -190,9 +189,22 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         fila.add(crearCeldaCampo(f.campoCurso));
 
         filas.add(fila, filas.getComponentCount() - 1); // antes de la fila "Agregar"
+        ajustarAlturaTabla();
         filas.revalidate();
         filas.repaint();
         return f;
+    }
+
+    // Ajusta el borde a las filas visibles y deja scroll si hay muchas.
+    private void ajustarAlturaTabla() {
+        if (scrollTabla == null || filas == null) {
+            return;
+        }
+
+        int altoContenido = filas.getPreferredSize().height;
+        int altoVisible = Math.min(altoContenido, 360);
+        scrollTabla.setPreferredSize(new Dimension(0, altoVisible));
+        scrollTabla.setMaximumSize(new Dimension(Integer.MAX_VALUE, altoVisible));
     }
 
     // Campo de texto sin borde, centrado, para escribir dentro de la celda
@@ -309,6 +321,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         while (filas.getComponentCount() > 1) {
             filas.remove(0);
         }
+        ajustarAlturaTabla();
         filas.revalidate();
         filas.repaint();
     }
