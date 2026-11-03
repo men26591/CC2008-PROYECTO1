@@ -333,9 +333,9 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
 
                 if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
                     JOptionPane.showMessageDialog(PanelAgregarKit.this, "Completa todos los campos para poder registrar el nuevo concepto.");
-                }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-                    //String m = sistema.agregarEjercicio(nombre);
-                    //JOptionPane.showMessageDialog(PanelAgregarKit.this, m); //Lo muestra como notificacion
+                }else{ //Si todos los campos estan llenos, se llama al metdo de registrar del sistema
+                    String m = sistema.nuevoKit(nombre);                    
+                    JOptionPane.showMessageDialog(PanelAgregarKit.this, m); //Lo muestra como notificacion
 
                     campoNombreKit.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
                    

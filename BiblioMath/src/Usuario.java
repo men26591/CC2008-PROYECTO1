@@ -20,7 +20,7 @@ public class Usuario {
         this.ultimaVisita = null;
     }
 
-    public <tipo> void BajarBaseDatos(String direccion, ArrayList<tipo> local)throws Exception {
+    public void BajarBaseDatos(String direccion, ArrayList<?> local)throws Exception {
         //Relacion con archivo .csv
         try(BufferedReader br = new BufferedReader(new FileReader(direccion))){ //Abre el archivo a manera de lector
         br.readLine(); // Saltar el encabezado
@@ -59,12 +59,12 @@ public class Usuario {
 
     }
     
-    public <tipo> void GuardarBaseDatos(String direccion, ArrayList<tipo> local)throws Exception{
+    public void GuardarBaseDatos(String direccion, ArrayList<?> local)throws Exception{
         //Relacion con archivo .csv
         if (!local.isEmpty()) { //Si no esta vacia
             ArrayList<String> datos = new ArrayList<>(); //Lista que almacena listas de datos.
             
-            for (tipo e:local){
+            for (Object e:local){
                 if (e instanceof Concepto) {
                     Concepto c = (Concepto) e;
                     datos.add(c.toDatos());
@@ -73,6 +73,7 @@ public class Usuario {
                     Kit k = (Kit) e;
                     datos.add(k.toDatos());
                 }
+            }
 
             new File(direccion).getParentFile().mkdirs(); //Se crea la carpeta del archivo si no existe
 
@@ -90,7 +91,7 @@ public class Usuario {
                     bw.write(fila); // Escribe la linea con los datos de un elemento
                     bw.newLine(); //Cambio de fila
                 }
-            }
+            
             }
         }  
     }
@@ -272,7 +273,13 @@ public class Usuario {
             Kit k = new Kit();
             k.setNombre(nombre);
             baseKits.add(k);
-            setUltimaVisita(k.getNombre());
+            try {
+                GuardarBaseDatos(aKits, baseKits);
+                setUltimaVisita(k.getNombre());
+            } catch (Exception e) {
+                baseKits.remove(k);
+                throw new RuntimeException("No se pudo guardar el Kit" + e);
+            }
         }
     }
 
@@ -340,6 +347,14 @@ public class Usuario {
         }
 
         kit.agregarConcepto(concepto);
+        concepto.agregarKit(kit);
+        try{
+            GuardarBaseDatos(aKits, baseKits);
+            GuardarBaseDatos(aConceptos, baseConceptos);
+        } catch (Exception e) {
+            return "Ha ocurrido un error. "+e;
+        }
+
         return "Concepto agregado al kit correctamente.";
     }
     

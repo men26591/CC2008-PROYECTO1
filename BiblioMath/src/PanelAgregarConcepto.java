@@ -376,7 +376,7 @@ public class PanelAgregarConcepto extends JPanel { // Función: Formulario para 
             }
 
             if(e.getSource() == botonRegistar){
-                 String nombre = campoNombre.getText().trim();
+                String nombre = campoNombre.getText().trim();
                 String categoria = campoCategoria.getText().trim();
                 String curso = campoCurso.getText().trim();
                 String explicacion = informacionConcepto.getText().trim();

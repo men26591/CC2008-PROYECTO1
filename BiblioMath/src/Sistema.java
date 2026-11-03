@@ -57,6 +57,21 @@ public class Sistema {
         return mensaje;    
     }
 
+    public String nuevoKit(String nombre) {
+        Usuario u = getUsuarioActual();
+
+
+        String mensaje;
+        try {
+            u.crearKitStudio(nombre);
+            mensaje = "Kit creado correctamente.";
+        } catch (Exception e) {
+            mensaje = "No se pudo crear el Kit.";
+        }
+
+        return mensaje;    
+    }
+
     public Object buscar(String nombre) {
         Usuario u = getUsuarioActual(); //Se obtiene el usuario
 
@@ -80,7 +95,7 @@ public class Sistema {
     public String agregarAKit(Concepto c,String k) {
         Usuario u = getUsuarioActual(); //Se obtiene el usuario
 
-        String m = u.agregarCaKit(c.getNombre(), k); //Se manda a llamar metodo en clase usuario
+        String m = u.agregarCaKit(k,c.getNombre()); //Se manda a llamar metodo en clase usuario
         return m; //Se retorna el mensaje obtenido
         
     }
