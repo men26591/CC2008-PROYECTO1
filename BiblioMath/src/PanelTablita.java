@@ -60,11 +60,11 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         tabla.setOpaque(false);
         JPanel titulos = crearFilaTitulos();
         titulos.setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
-        tabla.add(titulos);
 
         filas = new JPanel();
         filas.setLayout(new BoxLayout(filas, BoxLayout.Y_AXIS));
         filas.setBackground(Color.WHITE);
+        filas.add(titulos);
 
         scrollTabla = new JScrollPane(filas);
         scrollTabla.setBorder(BorderFactory.createLineBorder(AZUL));
@@ -147,7 +147,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         JPanel fila = new JPanel(new GridLayout(1, 4));
         fila.setPreferredSize(new Dimension(0, 55));
         fila.setBackground(AZUL_CLARO);
-        fila.setBorder(BorderFactory.createLineBorder(AZUL));
+        fila.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, AZUL));
 
         String[] titulos = {"Nombre", "Expresión", "Demostración", "Curso"};
         for (String t : titulos) {
@@ -318,8 +318,8 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
 
     // Borra las filas de datos y deja solo la fila "Agregar"
     public void limpiarFilas() {
-        while (filas.getComponentCount() > 1) {
-            filas.remove(0);
+        while (filas.getComponentCount() > 2) {
+            filas.remove(1);
         }
         ajustarAlturaTabla();
         filas.revalidate();
