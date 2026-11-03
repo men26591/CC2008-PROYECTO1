@@ -99,7 +99,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
     private JButton crearBotonImagen(String ruta, int ancho, int alto, String tooltip) {
         Image img = new ImageIcon(ruta).getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH); //edita como se ve el botón
         JButton b = new JButton(new ImageIcon(img));
-        b.setContentAreaFilled(false); // asi no se ven como estan por predeterminado
+        b.setContentAreaFilled(false); // con esto, los botones no se ven con el diseño predeterminado
         b.setFocusPainted(false);
         b.setBorderPainted(false);
         b.setPreferredSize(new Dimension(ancho, alto));
@@ -122,7 +122,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         comboKit = new JComboBox<>();
         comboKit.setPreferredSize(new Dimension(220, 35));
 
-        filtros.add(conTitulo("Teorema/definición/fórmula", campoBuscar));
+        filtros.add(conTitulo("Teorema/definición/fórmula", campoBuscar)); // si se pueden buscar pero no se filtran 
         filtros.add(conTitulo("Curso", comboCurso));
         filtros.add(conTitulo("Kit de estudio", comboKit));
         
@@ -217,7 +217,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         return c;
     }
 
-    // Celda que ocupa todo el espacio para que se pueda hacer clic y escribir
+    // Celda que ocupa todo el espacio para que se pueda hacer clic y escribir, donde esta e boton de agregar
     private JPanel crearCeldaCampo(JTextField campo) {
         JPanel celda = new JPanel(new BorderLayout());
         celda.setOpaque(false);
