@@ -33,7 +33,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
     private static final Color AZUL_CLARO = new Color(116, 157, 247);
     private static final Color FONDO = new Color(193, 211, 253);
 
-    private JTextField campoBuscar;
+    private JTextField campoBuscar; // se crea el campo buscar pero no se usa aún porque no tenemos la opcion de filtros 
     private JComboBox<String> comboCurso;
     private JComboBox<String> comboKit;
     private JPanel filas;          // aquí van las filas de la tabla
@@ -85,21 +85,21 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         encabezado.setOpaque(false);
 
         JButton botonLogo = crearBotonImagen("BiblioMath/recursos/logoBiblio.png", 230, 50, "Ir a Pantalla de Inicio");
-        botonLogo.addActionListener(e -> sistema.mostrarInicio());
+        botonLogo.addActionListener(e -> sistema.mostrarInicio()); // pide al sistema mostrar la pantalla de inicio
         encabezado.add(botonLogo, BorderLayout.WEST);
 
         JButton botonMate = crearBotonImagen("BiblioMath/recursos/logoMate.png", 50, 50, "Redes Sociales");
         botonMate.addActionListener(e ->
-            JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲"));
+            JOptionPane.showMessageDialog(this, " MATE UVG \n Instragram: @uvgmate \n🐲")); // pide a Joptionpane mostrar un mensaje
         encabezado.add(botonMate, BorderLayout.EAST);
 
         return encabezado;
     }
 
     private JButton crearBotonImagen(String ruta, int ancho, int alto, String tooltip) {
-        Image img = new ImageIcon(ruta).getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        Image img = new ImageIcon(ruta).getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH); //edita como se ve el botón
         JButton b = new JButton(new ImageIcon(img));
-        b.setContentAreaFilled(false);
+        b.setContentAreaFilled(false); // asi no se ven como estan por predeterminado
         b.setFocusPainted(false);
         b.setBorderPainted(false);
         b.setPreferredSize(new Dimension(ancho, alto));
