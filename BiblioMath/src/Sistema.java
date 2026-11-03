@@ -147,6 +147,10 @@ public class Sistema {
         ventana.mostrarPanel("agregarEjercicio");
     }
 
+    public void mostrarAgregarKit(){
+        ventana.mostrarPanel("agregarKit");
+    }
+
     //quitar luego
     public void mostrarDetalleEjercicio (){
         ventana.mostrarPanel("detalleEjercicio");

@@ -351,6 +351,9 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                 sistema.mostrarTablita();                
             }
             
+            if(e.getSource() == botonKits){
+                sistema.mostrarAgregarKit();
+            }
 
             if(e.getSource() == botonBuscar){
                 String nombre = campoBuscar.getText().trim();

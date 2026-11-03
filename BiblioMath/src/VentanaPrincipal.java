@@ -27,7 +27,8 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         contenedor.add(new PanelKits(sistema), "kits");
         contenedor.add(new PanelTablita(sistema), "tablita");
         contenedor.add(new PanelAgregarEjercicio(sistema),"agregarEjercicio");
-        
+        contenedor.add(new PanelAgregarKit(sistema), "agregarKit");
+
         //Quitar luego 
         contenedor.add(new PanelDetalleEjercicio(sistema), "detalleEjercicio");
         
