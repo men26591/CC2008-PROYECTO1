@@ -35,7 +35,6 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
     private JComboBox<String> comboKit;
     private JPanel filas;          // aquí van las filas de la tabla
     private JButton botonAgregar;
-    private JButton botonNombre, botonExpresion, botonDemostracion, botonCurso; // títulos de la tabla
 
     public PanelTablita(Sistema sistema) {
         this.setLayout(new BorderLayout());
@@ -141,33 +140,15 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         fila.setBackground(AZUL_CLARO);
         fila.setBorder(BorderFactory.createLineBorder(AZUL));
 
-        botonNombre = crearBotonTitulo("Nombre");
-        botonExpresion = crearBotonTitulo("Expresión");
-        botonDemostracion = crearBotonTitulo("Demostración");
-        botonCurso = crearBotonTitulo("Curso");
-
-        fila.add(envolverTitulo(botonNombre));
-        fila.add(envolverTitulo(botonExpresion));
-        fila.add(envolverTitulo(botonDemostracion));
-        fila.add(envolverTitulo(botonCurso));
+        String[] titulos = {"Nombre", "Expresión", "Demostración", "Curso"};
+        for (String t : titulos) {
+            JLabel l = new JLabel(t, SwingConstants.CENTER);
+            l.setFont(new Font("Arial", Font.BOLD, 18));
+            l.setForeground(Color.BLACK);
+            l.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, AZUL));
+            fila.add(l);
+        }
         return fila;
-    }
-
-    // Botón azul que ocupa toda la celda del título (cambia de color al pasar el mouse)
-    private JButton crearBotonTitulo(String texto) {
-        BotonAzul b = new BotonAzul(texto, AZUL_CLARO, new Color(138, 175, 250), new Color(92, 138, 240), 0);
-        b.setForeground(Color.BLACK);
-        b.setFont(new Font("Arial", Font.BOLD, 18));
-        return b;
-    }
-
-    // Envuelve el botón en un panel para dibujar la línea vertical entre columnas
-    private JPanel envolverTitulo(JButton boton) {
-        JPanel p = new JPanel(new BorderLayout());
-        p.setBackground(AZUL_CLARO);
-        p.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, AZUL));
-        p.add(boton, BorderLayout.CENTER);
-        return p;
     }
 
     // Los componentes de una fila, para que quien conecte la lógica los use
@@ -312,10 +293,6 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
     public JComboBox<String> getComboCurso() { return comboCurso; }
     public JComboBox<String> getComboKit() { return comboKit; }
     public JButton getBotonAgregar() { return botonAgregar; }
-    public JButton getBotonNombre() { return botonNombre; }
-    public JButton getBotonExpresion() { return botonExpresion; }
-    public JButton getBotonDemostracion() { return botonDemostracion; }
-    public JButton getBotonCurso() { return botonCurso; }
 
     // Borra las filas de datos y deja solo la fila "Agregar"
     public void limpiarFilas() {
