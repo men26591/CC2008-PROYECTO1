@@ -6,7 +6,7 @@ public class Kit {
 
 //Atributos
     private String nombre;
-    private ArrayList<Concepto> conceptos;
+    private ArrayList<Integer> conceptos; //Almacena ID de conceptos
 
     public Kit(){
         nombre = "";
@@ -15,7 +15,7 @@ public class Kit {
     
     public Kit(String nombre){
         this.nombre = nombre;
-        conceptos = new ArrayList<Concepto>();
+        conceptos = new ArrayList<Integer>();
         }
     
 //Métodos SET & GET
@@ -28,11 +28,11 @@ public class Kit {
         return nombre;
     }
 
-    public void setConceptos(ArrayList<Concepto>conceptos){
+    public void setConceptos(ArrayList<Integer>conceptos){
         this.conceptos = conceptos;
     }
 
-    public ArrayList<Concepto> getConceptos(){
+    public ArrayList<Integer> getConceptos(){
         return conceptos;
     }
 
@@ -40,14 +40,14 @@ public class Kit {
 
     public void agregarConcepto(Concepto concepto){
         if (concepto != null){
-                conceptos.add(concepto);
+                conceptos.add(concepto.getId());
         }
     }
 
     public void quitarConcepto(int id){
         for(int i = 0; i < conceptos.size(); i++){
            if(conceptos.get(i) != null){
-                if(id == conceptos.get(i).getId()){
+                if(id == conceptos.get(i)){
                     conceptos.remove(conceptos.get(i));
                 }
             } 
@@ -60,6 +60,7 @@ public class Kit {
     public String toDatos(){ //Para el almacenamiento en csv
         String cadena="";
         cadena = nombre+","+conceptos; //Datos separados por comas
+        
         return cadena;
     }
 }

@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.lang.reflect.Array;
 import java.awt.Color; // Permite agregar colores
 import java.awt.Dimension;
 import java.awt.FlowLayout; // Alinial los elemento de forma especifica, los acomoda uno tras otro 
@@ -21,6 +22,7 @@ import java.awt.Graphics; //Permite agregar graficos (figuras)
 import java.awt.BorderLayout; // Importa un administrador de diseño que divide un contenedor en 5 regiones
 import java.awt.Desktop; // Permite que el programa solicite al sistema operativo que abra archivos o navegador web predetermiando
 import java.net.URI; // URI (Identificador de Recursos Uniforme) lo que permite manerar o represntar direcciones o enlaces
+import java.util.ArrayList;
  
 
 public class PanelInicio extends JPanel { // Función: Interfaz de inicio
@@ -369,7 +371,17 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                         sistema.mostrarDetalleConcepto((Concepto)m);//Muestra el panel de Detalle de Concepto con los datos.
                     }
                     else{
-                        JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
+                        ArrayList<Integer> ids = ((Kit)m).getConceptos(); //Lista de ids
+                        ArrayList<Concepto> mostrar = new ArrayList<>(); //Lista para almacenar Conceptos
+
+                        for(Concepto c:sistema.getUsuarioActual().getBaseConceptos()){ //Por cada conceptos en la base de datos
+                            if(ids.contains(c.getId())){ //Si su id se encuentra en la lista de los pertenecientes al kit
+                                mostrar.add(c); //Se agrega el concepto a la Lista para mostrar.
+                            }
+                        }
+
+                        sistema.mostrarTablita(mostrar);
+                        
                     }
                     campoBuscar.setText(mensajeCampoBuscar);
                 }

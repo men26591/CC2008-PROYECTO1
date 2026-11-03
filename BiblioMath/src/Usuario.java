@@ -340,8 +340,8 @@ public class Usuario {
             return "No se encontró el concepto.";
         }
 
-        for (Concepto c : kit.getConceptos()) {
-            if (c.getId() == concepto.getId()) {
+        for (Integer c : kit.getConceptos()) {
+            if (c == concepto.getId()) {
                 return "El concepto ya pertenece a ese kit.";
             }
         }
@@ -371,8 +371,8 @@ public class Usuario {
         }
 
         boolean conceptoEncontrado = false;
-        for (Concepto c : kit.getConceptos()) {
-            if (c.getId() == id) {
+        for (Integer c : kit.getConceptos()) {
+            if (c == id) {
                 conceptoEncontrado = true;
             }
         }

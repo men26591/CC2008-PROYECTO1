@@ -126,6 +126,10 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         filtros.add(conTitulo("Teorema/definición/fórmula", campoBuscar));
         filtros.add(conTitulo("Curso", comboCurso));
         filtros.add(conTitulo("Kit de estudio", comboKit));
+        
+        //Chismoso
+        comboCurso.addActionListener(e -> aplicarFiltros());
+        comboKit.addActionListener(e -> aplicarFiltros());
         return filtros;
     }
 
@@ -325,5 +329,56 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
                sistema.mostrarDetalleConcepto(c);
             });
         }
+    }
+
+    public void cargarFiltros(ArrayList<Concepto> conceptos){
+        //Limpia opciones pasadas
+        comboCurso.removeAllItems();
+        comboKit.removeAllItems();
+
+        //Se agrega la opcion de todos
+        comboCurso.addItem("Todos");
+        comboKit.addItem("Todos");
+
+        ArrayList<String> cursos = new ArrayList<>(); //Lista para almacenar Cursos
+
+        for (Concepto c : conceptos) { //Por cada concepto
+            String curso = c.getCurso(); //Se obtiene su curso
+
+            if (!cursos.contains(curso)) { //Si no se ha agregado
+                cursos.add(curso); //Se agrega a la lista
+                comboCurso.addItem(curso); //Se agrega a las opciones del combobox
+            }
+        }
+
+        for (Kit k : sistema.getUsuarioActual().getBaseKits()) { //Por cada kit del Usuarui
+            comboKit.addItem(k.getNombre()); //Se agrega su nombre como opcion para el combobox
+        }
+
+        llenarTablita(conceptos); //Se llenan los conceptos en la tabla
+    }
+
+    public void aplicarFiltros(){
+        //Se obtienen los filtros seleccionados
+        String curso = (String) comboCurso.getSelectedItem();
+        String nombreKit = (String) comboKit.getSelectedItem();
+
+    
+        ArrayList<Concepto> mostrar = new ArrayList<>(); //Lista para almacenar todos los conceptos a mostrar
+        
+        for (Concepto c : sistema.getUsuarioActual().getBaseConceptos()) {//Para cada concepto
+            
+            //Los Requisitos se cumplen si no hay, se selcciono Todos o si es igual al filtro
+            boolean cumpleCurso = (curso == null) || "Todos".equals(curso) || curso.equals(c.getCurso()); 
+
+            boolean cumpleKit = (nombreKit == null) || "Todos".equals(nombreKit) || (c.getKitEstudio().contains(nombreKit));
+
+            if (cumpleCurso && cumpleKit) { //Si cumple con ambos filtros
+                mostrar.add(c); //Se agrega a la lista de mostrar
+            }
+        }
+
+        llenarTablita(mostrar); //Se llena la tablita con lista filtrada de objetos
+
     }
 }

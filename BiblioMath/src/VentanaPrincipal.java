@@ -67,7 +67,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     }
 
     public void mostrarTablita(ArrayList<Concepto> datos) {
-        tablita.llenarTablita(datos);  //Refiere datos con los que se trabajara
+        tablita.cargarFiltros(datos);  //Refiere datos con los que se trabajara
         mostrarPanel("tablita"); //Muestra el panel
     }
 }
