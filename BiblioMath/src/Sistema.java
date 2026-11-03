@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Sistema {
 
     private Biblioteca biblioteca;
@@ -142,8 +144,13 @@ public class Sistema {
         ventana.mostrarPanel("biblioteca");
     }
 
-    public void mostrarTablita() {
-        ventana.mostrarPanel("tablita");
+    //Sobrecarga de métodos
+    public void mostrarTablita(ArrayList<Concepto> datos) { //Si se recibe una lista específica
+        ventana.mostrarTablita(datos); 
+    }
+
+    public void mostrarTablita() {//Si no se recibe se muestran todos los conceptos del usuario
+        ventana.mostrarTablita(getUsuarioActual().getBaseConceptos());
     }
 
     public void mostrarAgregarConcepto() {
@@ -171,11 +178,6 @@ public class Sistema {
         ventana.mostrarPanel("detalleEjercicio");
     }
 
-
-    // ESTE ES EL CORREFCTO PERO CÓMO TODAVÍA NO HAY UNA ARRAYLIST PARA ESTE NO VA A FUNCIONAR PARA MOSTRAR
-    //public void mostrarDetalleEjercicio(Concepto concepto){
-    //    ventana.mostrarDetalleConcepto(concepto);
-    //}
 
     public void cerrarSesion() { 
         biblioteca.setUsuarioActual(null); 

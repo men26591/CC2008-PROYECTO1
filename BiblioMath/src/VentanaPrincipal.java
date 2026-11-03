@@ -1,4 +1,7 @@
 import java.awt.CardLayout; // Es como para poner varios componentes en un espacio
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -7,6 +10,8 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     private CardLayout cardLayout;
     private JPanel contenedor;
     private PanelDetalleConcepto panelConcepto; //Permite llamar el panel para facilitar mostrar los datos de cada concepto
+    private PanelTablita tablita; //Permite llamar el panel para facilitar mostrar los datos de cada concepto
+
     //private PanelDetalleEjercicio panelEjercicio; abilitar luego
     public VentanaPrincipal(Sistema sistema) {
 
@@ -39,6 +44,9 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         panelConcepto = new PanelDetalleConcepto(sistema); //Crea el panel y lo asigna al atributo
         contenedor.add(panelConcepto, "detalleConcepto"); //Añade el atributo con el panel al contenedor.
 
+        tablita = new PanelTablita(sistema); //Crea el panel y lo asigna al atributo
+        contenedor.add(tablita, "tablita"); //Añade el atributo con el panel al contenedor.
+
         add(contenedor);//añade pantallas
 
 
@@ -56,5 +64,10 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     public void mostrarDetalleConcepto(Concepto concepto) {
         panelConcepto.mostrarConcepto(concepto);  //Refiere l Concepto con el que se esta trabajando
         mostrarPanel("detalleConcepto"); //Muestra el panel
+    }
+
+    public void mostrarTablita(ArrayList<Concepto> datos) {
+        tablita.llenarTablita(datos);  //Refiere datos con los que se trabajara
+        mostrarPanel("tablita"); //Muestra el panel
     }
 }

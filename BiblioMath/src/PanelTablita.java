@@ -11,6 +11,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -26,6 +28,8 @@ import javax.swing.SwingConstants;
 
 public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de conceptos (solo diseño)
 
+    private Sistema sistema;//Para facilitar su uso en la clase
+
     private static final Color AZUL = new Color(63, 123, 242);
     private static final Color AZUL_CLARO = new Color(116, 157, 247);
     private static final Color FONDO = new Color(193, 211, 253);
@@ -37,6 +41,8 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
     private JButton botonAgregar;
 
     public PanelTablita(Sistema sistema) {
+        this.sistema = sistema;
+
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 
@@ -288,7 +294,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         }
     }
 
-    // ---------------- GETTERS para quien conecte la lógica ----------------
+    // ---------------- GETTERS para conectar la lógica ----------------
     public JTextField getCampoBuscar() { return campoBuscar; }
     public JComboBox<String> getComboCurso() { return comboCurso; }
     public JComboBox<String> getComboKit() { return comboKit; }
@@ -301,5 +307,23 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         }
         filas.revalidate();
         filas.repaint();
+    }
+
+    public void llenarTablita(ArrayList<Concepto> conceptos){
+        limpiarFilas(); // Le limpian las filas para evitar repeticiones
+
+        for(Concepto c:conceptos){//Para cada concepto 
+            FilaTabla f = agregarFila(c.getNombre(), c.getExplicacion().substring(0, Math.min(15, c.getExplicacion().length())),c.getCurso());//Se crea fila, descripcion = máx. los primeros 15 caracteres de la explicacion
+
+            //Se bloquea la edicion de la fila
+            f.campoNombre.setEditable(false);
+            f.campoCurso.setEditable(false);
+            f.campoExpresion.setEditable(false);
+
+            //Boton
+            f.botonExplicacion.addActionListener(e -> {
+               sistema.mostrarDetalleConcepto(c);
+            });
+        }
     }
 }
