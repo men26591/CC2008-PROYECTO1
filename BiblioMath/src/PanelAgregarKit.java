@@ -31,9 +31,9 @@ import javax.swing.border.LineBorder; // Permite agregar colores
 public class PanelAgregarKit extends JPanel { // Función: Formulario para conceptos
 
     private JButton botonLogoBiblio, botonHerramientas, botonlogoMate, botonRegistar,botonBiblioConcepto,botonEjercicios,botonKits;
-    private JLabel tectoAprenderHoy, textoNombreConcepto,textoInstrucciones, textoInstruccionesRespuesta;
-    private JTextField campoNombreConcepto;
-    private JTextArea informacionEjercicio, informacionRespuesta;
+    private JLabel tectoAprenderHoy, imagenDecorativaEscalonado, textonombreKit;
+    private JTextField campoNombreKit;
+
     private Sistema sistema;
 
     public PanelAgregarKit(Sistema sistema) {
@@ -53,7 +53,7 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
     
     //BOTON LOGO
         //Carga imagen del logo de biblioMath
-        ImageIcon logoBiblioOriginal = new ImageIcon("BiblioMath/recursos/anadirKit.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
+        ImageIcon logoBiblioOriginal = new ImageIcon("BiblioMath/recursos/logoBiblio.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
         //Cambiar el TAMAÑO de la imagen
         Image logoBiEscalada =  logoBiblioOriginal.getImage().getScaledInstance(230, 50, Image.SCALE_SMOOTH);
         //Convertir nuevamente a ImageIcon
@@ -196,7 +196,7 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
 
 
     //AGREGAR IMAGEN DEL TEXTO
-        ImageIcon textoAprender = new ImageIcon("BiblioMath/recursos/anadirEjercicio.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
+        ImageIcon textoAprender = new ImageIcon("BiblioMath/recursos/anadirKit.png"); //Agregamos la imagen "carpeta/carpeta/archivo.loqueEs"
         //Cambiar el TAMAÑO de la imagen
         Image textoApEscalonada =  textoAprender.getImage().getScaledInstance(400, 100, Image.SCALE_SMOOTH);
         //Convertir nuevamente a ImageIcon
@@ -217,81 +217,49 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
         ladoIzquiero.setOpaque(false); //Para que no muestre color 
 
         //Mostrar Ingrese el nombre del concepto 
-        textoNombreConcepto = new JLabel("Nombre del Concepto");
-        textoNombreConcepto.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoNombreConcepto.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoNombreConcepto.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
+        textonombreKit = new JLabel("Nombre del Kit");
+        textonombreKit.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
+        textonombreKit.setForeground( Color.WHITE); // cambiar de color de letra 
+        textonombreKit.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
         //Mostrar intrucciones
-        campoNombreConcepto = new JTextField();
-        campoNombreConcepto.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
-        campoNombreConcepto.setAlignmentX(CENTER_ALIGNMENT);
-        campoNombreConcepto.setAlignmentY(CENTER_ALIGNMENT);//Alinear
+        campoNombreKit = new JTextField();
+        campoNombreKit.setMaximumSize(new Dimension(350,35));  //Deteriminar tamaño dell campo
+        campoNombreKit.setAlignmentX(CENTER_ALIGNMENT);
+        campoNombreKit.setAlignmentY(CENTER_ALIGNMENT);//Alinear
 
-         //Mostrar instrucciones 
-        textoInstrucciones = new JLabel("Ingresa el ejercicio");
-        textoInstrucciones.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoInstrucciones.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoInstrucciones.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
-
-        //JtextArea
-        informacionEjercicio = new JTextArea();
-        informacionEjercicio.setLineWrap(true); // para un salto de linea
-        informacionEjercicio.setWrapStyleWord(false); //para romper palabras si es necesario
-        informacionEjercicio.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
-
-        JScrollPane barra = new JScrollPane(informacionEjercicio); // Crar un Jscrollpanel y se agrega a al cuadro de texto
-        
-        barra.setMaximumSize(new Dimension(350,230)); // Obligamos aque coloque ese tamaño
-        barra.setBorder(new LineBorder(new Color(63, 123, 242)));
-
-        ladoIzquiero.add(Box.createVerticalStrut(30));
-        ladoIzquiero.add(textoNombreConcepto);
-        ladoIzquiero.add(Box.createVerticalStrut(15));
-        ladoIzquiero.add(campoNombreConcepto);
-        ladoIzquiero.add(Box.createVerticalStrut(30));
-        ladoIzquiero.add(textoInstrucciones);
-        ladoIzquiero.add(Box.createVerticalStrut(15));
-        ladoIzquiero.add(barra);
-        ladoIzquiero.add(Box.createVerticalStrut(5));
-
-        contenido.add(ladoIzquiero);
-
-
-    //Lado Derecho
-        JPanel ladoDerecho = new JPanel();
-        ladoDerecho.setLayout(new BoxLayout(ladoDerecho, BoxLayout.Y_AXIS)); //Perminte que se apilen una sobre otra (componente)
-        ladoDerecho.setOpaque(false); //Para que no muestre color 
-
-        //Mostrar instrucciones 
-        textoInstruccionesRespuesta = new JLabel("Ingresa la respuesta del ejercicio");
-        textoInstruccionesRespuesta.setFont(new Font ("SansSerif", Font.PLAIN, 20)); //Poner una fuente al texto. 
-        textoInstruccionesRespuesta.setForeground( Color.WHITE); // cambiar de color de letra 
-        textoInstruccionesRespuesta.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
-
-        //JtextArea
-        informacionRespuesta = new JTextArea();
-        informacionRespuesta.setLineWrap(true); // para un salto de linea
-        informacionRespuesta.setWrapStyleWord(false); //para romper palabras si es necesario
-        informacionRespuesta.setFont(new Font("Arial", Font.PLAIN,12)); // Cambiar el tipo y tamaño de letra
-
-        JScrollPane barraRespuesta = new JScrollPane(informacionRespuesta); // Crar un Jscrollpanel y se agrega a al cuadro de texto
-        
-        barraRespuesta.setMaximumSize(new Dimension(350,230)); // Obligamos aque coloque ese tamaño
-        barraRespuesta.setBorder(new LineBorder(new Color(63, 123, 242)));
-
+        //Añadir BOTÓN
         botonRegistar = new JButton("Registrar"); // Crea un boton que va a tener escerito log in
         botonRegistar.setMaximumSize(new Dimension(100,40)); //Limitamos tamaño
         botonRegistar.setAlignmentX(CENTER_ALIGNMENT); //Aliniamos al centro
         botonRegistar.addActionListener(shute);
 
-        ladoDerecho.add(Box.createVerticalStrut(30));
-        ladoDerecho.add(textoInstruccionesRespuesta);
-        ladoDerecho.add(Box.createVerticalStrut(15));
-        ladoDerecho.add(barraRespuesta);
-        ladoDerecho.add(Box.createVerticalStrut(30));
-        ladoDerecho.add(botonRegistar);
 
+        ladoIzquiero.add(Box.createVerticalStrut(140));
+        ladoIzquiero.add(textonombreKit);
+        ladoIzquiero.add(Box.createVerticalStrut(15));
+        ladoIzquiero.add(campoNombreKit);
+        ladoIzquiero.add(Box.createVerticalStrut(15));
+        ladoIzquiero.add(botonRegistar);
+        ladoIzquiero.add(Box.createVerticalStrut(30));
+        contenido.add(ladoIzquiero);
+
+
+    //Lado Derecho
+        JPanel ladoDerecho = new JPanel();
+
+        ladoDerecho.setOpaque(false);
+
+
+        ImageIcon imagenDecorativa = new ImageIcon("BiblioMath/recursos/imagenKit.png");
+        //Modifcar tamaño
+        Image imagenDeEscalada = imagenDecorativa.getImage().getScaledInstance(450,450,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon imagenDeEscaladaEscalado = new ImageIcon(imagenDeEscalada);
+        //Agregar a Jlabel para mostrar
+        imagenDecorativaEscalonado = new JLabel(imagenDeEscaladaEscalado);
+        
+        ladoDerecho.add(imagenDecorativaEscalonado);
         contenido.add(ladoDerecho);
 
     
@@ -318,11 +286,6 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
             //BLOQUE IZQUIERDA
             g.setColor(new Color(63, 123, 242));
             g.fillRect(50, 220, 410, 410);
-
-            //BLOQUE DERECHA
-            //BLOQUE IZQUIERDA
-            g.setColor(new Color(123, 158, 235));
-            g.fillRect(545, 220, 410, 410);
             
         }
 
@@ -353,7 +316,7 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
             }
             
             if(e.getSource() == botonKits){
-                //sistema.mostrarKits(); 
+                sistema.mostrarKits(); 
             }
 
             if(e.getSource() == botonEjercicios){
@@ -365,19 +328,17 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
             }
 
             if(e.getSource() == botonRegistar){
-                String nombre = campoNombreConcepto.getText().trim();
-                String ejercicio = informacionEjercicio.getText().trim();
-                String respuesta = informacionRespuesta.getText().trim();
+                String nombre = campoNombreKit.getText().trim();
 
-                if (nombre.isEmpty() || ejercicio.isEmpty() || respuesta.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
+
+                if (nombre.isEmpty()) { //Si no se ha completado el formulario se solicita que lo haga
                     JOptionPane.showMessageDialog(PanelAgregarKit.this, "Completa todos los campos para poder registrar el nuevo concepto.");
                 }else{ //Si todos los campos estan llenos, se llama al metdo de registrad concepto del sistema
-                    String m = sistema.agregarEjercicio(nombre,ejercicio,respuesta);
-                    JOptionPane.showMessageDialog(PanelAgregarKit.this, m); //Lo muestra como notificacion
+                    //String m = sistema.agregarEjercicio(nombre);
+                    //JOptionPane.showMessageDialog(PanelAgregarKit.this, m); //Lo muestra como notificacion
 
-                    campoNombreConcepto.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
-                    informacionEjercicio.setText("");
-                    informacionRespuesta.setText("");
+                    campoNombreKit.setText(""); //Para que la entra de texto se vacié le ponemos "", que es para definir lo que muesta
+                   
                 }
             }
 
