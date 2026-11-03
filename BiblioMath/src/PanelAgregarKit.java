@@ -316,7 +316,7 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
             }
             
             if(e.getSource() == botonKits){
-                sistema.mostrarKits(); 
+                sistema.mostrarAgregarKit(); 
             }
 
             if(e.getSource() == botonEjercicios){

@@ -141,6 +141,7 @@ public class PanelLogin extends JPanel { // Función: Interfaz de login
         ImageIcon imagenDeEscaladaEscalado = new ImageIcon(imagenDeEscalada);
         //Agregar a Jlabel para mostrar
         JLabel imagenDecorativaEscalonado = new JLabel(imagenDeEscaladaEscalado);
+        
         encabezado.add(imagenDecorativaEscalonado,BorderLayout.CENTER);
         ilustracion.add(imagenDecorativaEscalonado);
 

@@ -353,7 +353,7 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
             }
             
             if(e.getSource() == botonKits){
-                //sistema.mostrarKits(); 
+                sistema.mostrarAgregarKit(); 
             }
 
             if(e.getSource() == botonEjercicios){
