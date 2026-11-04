@@ -9,6 +9,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     private JPanel contenedor;
     private PanelDetalleConcepto panelConcepto; //Permite llamar el panel para facilitar mostrar los datos de cada concepto
     private PanelTablita tablita; //Permite llamar el panel para facilitar mostrar los datos de cada concepto
+    private PanelDetalleEjercicio panelEjercicio;
 
     //private PanelDetalleEjercicio panelEjercicio; abilitar luego
     public VentanaPrincipal(Sistema sistema) {
@@ -29,13 +30,10 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         contenedor.add(new PanelKits(sistema), "kits");
         contenedor.add(new PanelAgregarEjercicio(sistema),"agregarEjercicio");
         contenedor.add(new PanelAgregarKit(sistema), "agregarKit");
-
-        //Quitar luego 
-        contenedor.add(new PanelDetalleEjercicio(sistema), "detalleEjercicio");
         
         //Estte es el correcto pero no funciona por le momento 
-        //panelEjercicio = new PanelDetalleEjercicio(sistema); //Crea el panel y lo asigna al atriuyo
-        //contenedor.add(panelEjercicio, "detalleEjercicio");
+        panelEjercicio = new PanelDetalleEjercicio(sistema); //Crea el panel y lo asigna al atriuyo
+        contenedor.add(panelEjercicio, "detalleEjercicio");
 
         panelConcepto = new PanelDetalleConcepto(sistema); //Crea el panel y lo asigna al atributo
         contenedor.add(panelConcepto, "detalleConcepto"); //Añade el atributo con el panel al contenedor.
@@ -65,5 +63,8 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
     public void mostrarTablita(ArrayList<Concepto> datos) {
         tablita.cargarFiltros(datos);  //Refiere datos con los que se trabajara
         mostrarPanel("tablita"); //Muestra el panel
+    }
+    public void mostrarEjercicios(Concepto conceptoActual){
+        //panelEjercicio.mostrarEjercicio();
     }
 }
