@@ -352,4 +352,9 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
         }
 
     }
+
+    public void mostrarEjercicio(Concepto concepto) {
+    this.conceptoActual = concepto;
+    repaint();
+    }
 }

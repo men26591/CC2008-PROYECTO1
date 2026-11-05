@@ -65,6 +65,7 @@ public class VentanaPrincipal extends JFrame {  // Función:. administrar la ven
         mostrarPanel("tablita"); //Muestra el panel
     }
     public void mostrarEjercicios(Concepto conceptoActual){
-        //panelEjercicio.mostrarEjercicio();
+        panelEjercicio.mostrarEjercicio(conceptoActual);
+        mostrarPanel("detalleEjercicio");
     }
 }

@@ -169,8 +169,8 @@ public class Sistema {
         ventana.mostrarPanel("agregarEjercicio");
     }
 
-    public void mostrarEjercicios(ArrayList<String> ejercicios){
-        
+    public void mostrarEjercicios(Concepto actual){
+        ventana.mostrarEjercicios(actual);
     }
 
     public void mostrarAgregarKit(){

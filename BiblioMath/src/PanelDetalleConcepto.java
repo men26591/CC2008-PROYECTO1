@@ -123,7 +123,7 @@ public class PanelDetalleConcepto extends JPanel {
     panelInferior.add(botonRegresar,   BorderLayout.EAST);
 
     botonEjercicios.addActionListener(e -> {
-        //sistema.mostrarEjercicios(conceptoActual);
+        sistema.mostrarEjercicios(conceptoActual);
     });
 
     botonKit.addActionListener(e -> {
@@ -169,11 +169,6 @@ private JButton crearBotonAzul(String texto) {
     boton.setPreferredSize(new Dimension(180, 40));
     return boton;
 }
-
-public void mostrarEjercicios(Concepto concepto) {
-    // cambia al panel de ejercicios (CardLayout o como lo manejes)
-}
-
 
 public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuidad al escribir. Graphics -> g (el nombre de la cariables o algo así)
     
