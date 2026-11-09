@@ -25,7 +25,7 @@ import javax.swing.JTextArea; //Permite agregar fuentes
 
 public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para conceptos
 
-    private JButton botonLogoBiblio, botonHerramientas, botonlogoMate,botonBiblioConcepto,botonEjercicios,botonKits, botonMasEjercicios, botonVerRespuesta, botonRegresar;
+    private JButton botonLogoBiblio, botonHerramientas, botonlogoMate,botonBiblioConcepto,botonEjercicios,botonKits, botonMasEjercicios, botonVerRespuesta, botonRegresar, botonAnterior;
     private JLabel  textoTituloEjercicio;
     private Sistema sistema;
     private JTextArea textoEjercicio; 
@@ -34,6 +34,7 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
 
     private Concepto conceptoActual;
     private String[] ejercicioActual;
+    public int eor;
     public int numeroEjercicio;
 
     public PanelDetalleEjercicio(Sistema sistema) {
@@ -42,13 +43,22 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
 
         this.sistema = sistema; // Guarda la referncia global 
         if(conceptoActual != null){
-            ejercicioActual = conceptoActual.getEjercicios().get(0);
+            if(conceptoActual.getEjercicios().get(0) != null){
+                ejercicioActual = conceptoActual.getEjercicios().get(0);
+            }
+            else{
+            ejercicioActual = new String[2];
+            ejercicioActual[0] = "No hay ningún ejercicio registrado";
+            ejercicioActual[1] = "No hay ninguna respuesta registrada";
+        }
         }
         else{
             ejercicioActual = new String[2];
             ejercicioActual[0] = "No hay ningún ejercicio registrado";
             ejercicioActual[1] = "No hay ninguna respuesta registrada";
         }
+        eor = 0;
+        numeroEjercicio = 0;
         
         Chismoso shute = new Chismoso();
 
@@ -215,7 +225,7 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
         textoTituloEjercicio.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
         if(ejercicioActual != null){
-            textoEjercicio = new JTextArea(ejercicioActual[0]);//Cualidades
+            textoEjercicio = new JTextArea(ejercicioActual[eor]);//Cualidades
         }
         else{
              textoEjercicio = new JTextArea("No hay ningún ejercicio guardado");//Cualidades
@@ -252,25 +262,25 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
         pie.setBorder(BorderFactory.createEmptyBorder(15, 50, 25, 50));
         pie.setOpaque(false); 
 
+        JPanel centro = new JPanel(new FlowLayout(FlowLayout.CENTER,10,0)); //Colcar una a la part de otra del lado recheo 
+        centro.setOpaque(false); 
+
         // Boton para ver más ejercicios
-        botonMasEjercicios = new JButton("Ver Respuesta");
+        botonMasEjercicios = new JButton("Siguiente");
         botonMasEjercicios.setOpaque(true); // Fuerza a que respete el nuevo color
         botonMasEjercicios.setContentAreaFilled(true); //Permite rellenar, pues dice que si está lleno
-        botonMasEjercicios.setPreferredSize(new Dimension(200,40)); //Limitamos tamaño
+        botonMasEjercicios.setPreferredSize(new Dimension(170,40)); //Limitamos tamaño
         botonMasEjercicios.setBackground(new Color(63, 123, 242)); // Cambiar el color del botón
         botonMasEjercicios.setForeground(Color.WHITE); // Cambiar el color de la letra
         botonMasEjercicios.setBorderPainted(false); // Quitar el borde del botón
         botonMasEjercicios.setAlignmentX(CENTER_ALIGNMENT);
         botonMasEjercicios.addActionListener(shute);
 
-        JPanel centro = new JPanel(new FlowLayout(FlowLayout.CENTER,10,0)); //Colcar una a la part de otra del lado recheo 
-        centro.setOpaque(false); 
-
         //Boton para ver respuesta
-        botonVerRespuesta = new JButton("Ver Respuesta");
+        botonVerRespuesta = new JButton("Respuesta");
         botonVerRespuesta.setOpaque(true); // Fuerza a que respete el nuevo color
         botonVerRespuesta.setContentAreaFilled(true); //Permite rellenar, pues dice que si está lleno
-        botonVerRespuesta.setPreferredSize(new Dimension(470,40)); //Limitamos tamaño
+        botonVerRespuesta.setPreferredSize(new Dimension(170,40)); //Limitamos tamaño
         botonVerRespuesta.setBackground(new Color(63, 123, 242)); // Cambiar el color del botón
         botonVerRespuesta.setForeground(Color.WHITE); // Cambiar el color de la letra
         botonVerRespuesta.setBorderPainted(false); // Quitar el borde del botón
@@ -278,19 +288,31 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
         botonVerRespuesta.addActionListener(shute);
 
         //Boton para regresar
-        botonRegresar = new JButton("Ver Respuesta");
+        botonRegresar = new JButton("Regresar");
         botonRegresar.setOpaque(true); // Fuerza a que respete el nuevo color
         botonRegresar.setContentAreaFilled(true); //Permite rellenar, pues dice que si está lleno
-        botonRegresar.setPreferredSize(new Dimension(200,40)); //Limitamos tamaño
+        botonRegresar.setPreferredSize(new Dimension(170,40)); //Limitamos tamaño
         botonRegresar.setBackground(new Color(63, 123, 242)); // Cambiar el color del botón
         botonRegresar.setForeground(Color.WHITE); // Cambiar el color de la letra
         botonRegresar.setBorderPainted(false); // Quitar el borde del botón
         botonRegresar.setAlignmentX(CENTER_ALIGNMENT);
         botonRegresar.addActionListener(shute);
 
-        centro.add(botonMasEjercicios);
-        centro.add(botonVerRespuesta);
+        //Botón ejercicio anterior
+        botonAnterior = new JButton("Anterior");
+        botonAnterior.setOpaque(true); // Fuerza a que respete el nuevo color
+        botonAnterior.setContentAreaFilled(true); //Permite rellenar, pues dice que si está lleno
+        botonAnterior.setPreferredSize(new Dimension(170,40)); //Limitamos tamaño
+        botonAnterior.setBackground(new Color(63, 123, 242)); // Cambiar el color del botón
+        botonAnterior.setForeground(Color.WHITE); // Cambiar el color de la letra
+        botonAnterior.setBorderPainted(false); // Quitar el borde del botón
+        botonAnterior.setAlignmentX(CENTER_ALIGNMENT);
+        botonAnterior.addActionListener(shute);
+
         centro.add(botonRegresar);
+        centro.add(botonVerRespuesta);
+        centro.add(botonAnterior);
+        centro.add(botonMasEjercicios);
 
         pie.add(centro, BorderLayout.CENTER);
 
@@ -361,8 +383,73 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
             if(e.getSource() == botonBiblioConcepto){
                 sistema.mostrarTablita();                 
             }
-
-
+            if(e.getSource() == botonVerRespuesta){
+                String titulo = null;
+                if(eor == 0){
+                    eor = 1;
+                    titulo = "Respuesta";
+                }
+                else{
+                    eor = 0;
+                    titulo = "Ejercicio";
+                }
+                
+                textoEjercicio.setText(ejercicioActual[eor]);
+                botonVerRespuesta.setText(titulo);
+            }
+            if(e.getSource() == botonMasEjercicios ){
+                numeroEjercicio++;
+                eor = 0;
+                 if(conceptoActual != null){
+                    if(conceptoActual.getEjercicios().get(0) != null){
+                        ejercicioActual = conceptoActual.getEjercicios().get(0);
+                    }
+                    else{
+                    ejercicioActual = new String[2];
+                    ejercicioActual[0] = "No hay ningún ejercicio registrado";
+                    ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                }
+                }
+                else{
+                    ejercicioActual = new String[2];
+                    ejercicioActual[0] = "No hay ningún ejercicio registrado";
+                    ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                }
+                textoEjercicio.setText(ejercicioActual[eor]);
+                botonVerRespuesta.setText("Respuesta");
+            }
+            if(e.getSource() == botonAnterior){
+                if((numeroEjercicio - 1) < 0){
+                    numeroEjercicio = numeroEjercicio - 1;
+                    eor = 0;
+                    if(conceptoActual != null){
+                        if(conceptoActual.getEjercicios().get(0) != null){
+                            ejercicioActual = conceptoActual.getEjercicios().get(0);
+                        }
+                        else{
+                        ejercicioActual = new String[2];
+                        ejercicioActual[0] = "No hay ningún ejercicio registrado";
+                        ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                    }
+                    }
+                    else{
+                        ejercicioActual = new String[2];
+                        ejercicioActual[0] = "No hay ningún ejercicio registrado";
+                        ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                    }
+                    textoEjercicio.setText(ejercicioActual[eor]);
+                    botonVerRespuesta.setText("Respuesta");
+                }
+            }
+            if(e.getSource() == botonRegresar){
+                if(conceptoActual != null){
+                    sistema.mostrarDetalleConcepto(conceptoActual);
+                }
+                else{
+                    sistema.mostrarInicio();
+                }
+                
+            }
         }
 
     }
