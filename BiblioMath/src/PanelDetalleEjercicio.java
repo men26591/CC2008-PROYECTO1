@@ -34,12 +34,22 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
 
     private Concepto conceptoActual;
     private String[] ejercicioActual;
+    public int numeroEjercicio;
 
     public PanelDetalleEjercicio(Sistema sistema) {
         
         add(new JLabel("DetalleConcepto"));
 
         this.sistema = sistema; // Guarda la referncia global 
+        if(conceptoActual != null){
+            ejercicioActual = conceptoActual.getEjercicios().get(0);
+        }
+        else{
+            ejercicioActual = new String[2];
+            ejercicioActual[0] = "No hay ningún ejercicio registrado";
+            ejercicioActual[1] = "No hay ninguna respuesta registrada";
+        }
+        
         Chismoso shute = new Chismoso();
 
         //this es
@@ -204,8 +214,12 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
         textoTituloEjercicio.setForeground(Color.BLACK); 
         textoTituloEjercicio.setAlignmentX(CENTER_ALIGNMENT); // Para que se posiciones a la derecha
 
-
-        textoEjercicio = new JTextArea(conceptoActual.getEjercicios().get(0)[0]);//Cualidades
+        if(ejercicioActual != null){
+            textoEjercicio = new JTextArea(ejercicioActual[0]);//Cualidades
+        }
+        else{
+             textoEjercicio = new JTextArea("No hay ningún ejercicio guardado");//Cualidades
+        }
         textoEjercicio.setEditable(false); //Bloquea edición
         textoEjercicio.setFocusable(false); //Quita el cursor
         textoEjercicio.setLineWrap(true); //El texto salta Automáticamente
@@ -354,7 +368,7 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
     }
 
     public void mostrarEjercicio(Concepto concepto) {
-    this.conceptoActual = concepto;
+    conceptoActual = concepto;
     repaint();
     }
 }
