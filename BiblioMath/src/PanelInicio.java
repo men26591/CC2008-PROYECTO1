@@ -218,6 +218,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonBuscar = new JButton("🔍");
         botonBuscar.setPreferredSize(new Dimension(100, 35)); 
         botonBuscar.addActionListener(shute);
+        botonBuscar.setToolTipText("Bu");//Texto al posicionarse sobre el botón.
 
 
 
@@ -245,6 +246,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonVer.setBorderPainted(false); // Quitar el borde del botón
         botonVer.setAlignmentX(CENTER_ALIGNMENT);
         botonVer.addActionListener(shute);
+        botonVer.setToolTipText("Ver último concepto");//Texto al posicionarse sobre el botón.
 
 
         //ABAJO 
@@ -284,7 +286,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonInformacion.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
         botonInformacion.setBorderPainted(false); //Quitar el borde del botó
         botonInformacion.setPreferredSize(new Dimension(100,100)); // Obligar a colocar el botón con estas medidas
-        botonInformacion.setToolTipText("Cerrar Sesión");//Texto al posicionarse sobre el botón.
+        botonInformacion.setToolTipText("Más información");//Texto al posicionarse sobre el botón.
         botonInformacion.addActionListener(shute);
 
         pie.add(botonCerrarSesion, BorderLayout.EAST);
@@ -348,7 +350,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
 
             if(e.getSource()== botonlogoMate){ // Valida si viene de este botón
 
-                    try{
+                    try{ // es obligatorio agregar try, catch porque el método lo solicita 
                         //Verifica si el sistema operativo puedo abrir el navegador 
                                                                                             //Es una constante de tiempo enumerada que representa una acción específica del sistema operativo, la capacidad de abrir una direccion web 
                         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)){
