@@ -27,11 +27,13 @@ import java.util.ArrayList;
 
 public class PanelInicio extends JPanel { // Función: Interfaz de inicio
 
-    private JButton botonLogoBiblio, botonHerramientas, botonBiblioConcepto, botonKits, botonlogoMate, botonBuscar, botonCerrarSesion, botonVer, botonEjercicios;
-    private JLabel textoBienvenidaInicio, textoBusquedasPopulares;
+    private JButton botonLogoBiblio, botonHerramientas, botonBiblioConcepto, botonKits, botonlogoMate, botonBuscar, botonCerrarSesion, botonVer, botonEjercicios, botonInformacion;
+    private JLabel textoBienvenidaInicio, textoBusquedasPopulares, informacionContenedor;
     private JTextField campoBuscar;
     private Sistema sistema; //Para que todos los que esten aquí adentro tengan acceso a sistema
     private String mensajeCampoBuscar;
+    private ImageIcon informacion, informacionMostrar;
+    private Image informacionEscalonada;
 
     public PanelInicio(Sistema sistema) {
 
@@ -267,7 +269,36 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
         botonCerrarSesion.setToolTipText("Cerrar Sesión");//Texto al posicionarse sobre el botón.
         botonCerrarSesion.addActionListener(shute);
 
+          //Cargar imagen LOGO BIBLIO CONCEPTOS
+        ImageIcon logoInfo = new ImageIcon("BiblioMath/recursos/logoInfo.png");
+        //Modifcar tamaño
+        Image logoInfoEscalonar = logoInfo.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        //Convetir nuevamente a ImageIcon
+        ImageIcon logoInfomarcionEscalonado = new ImageIcon(logoInfoEscalonar);
+        //Agregar a Jlabel para mostrar
+
+
+        botonInformacion = new JButton(logoInfomarcionEscalonado); // Agregamos la imagen que queremos que muestre
+        //Preferencias para el diseño del botón
+        botonInformacion.setContentAreaFilled(false); //Quitar el color del botón
+        botonInformacion.setFocusPainted(false); //Quitar la linea que aparece cuando le das click
+        botonInformacion.setBorderPainted(false); //Quitar el borde del botó
+        botonInformacion.setPreferredSize(new Dimension(100,100)); // Obligar a colocar el botón con estas medidas
+        botonInformacion.setToolTipText("Cerrar Sesión");//Texto al posicionarse sobre el botón.
+        botonInformacion.addActionListener(shute);
+
         pie.add(botonCerrarSesion, BorderLayout.EAST);
+        pie.add(botonInformacion, BorderLayout.WEST);
+
+        //Para agregar la imagen de la ventana de información 
+
+        informacion = new ImageIcon("BiblioMath/recursos/informacion.png");
+
+        informacionEscalonada = informacion.getImage().getScaledInstance(360,640,Image.SCALE_SMOOTH);
+        informacionMostrar = new ImageIcon (informacionEscalonada);
+
+        informacionContenedor = new JLabel(informacionMostrar);
+        
         
 
         
@@ -397,6 +428,12 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
                 else{
                     JOptionPane.showMessageDialog(PanelInicio.this, m); //Se muestra notificacion con mensaje retornado.
                 }
+            }
+
+            if(e.getSource() == botonInformacion){
+                
+                JOptionPane.showMessageDialog(null, informacionContenedor, "Ayuda", JOptionPane.PLAIN_MESSAGE); //Se muestra notificacion con mensaje retornado.
+
             }
 
 
