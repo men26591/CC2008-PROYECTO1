@@ -1,7 +1,7 @@
-id,nombre,explicacion,categoria,curso,kitEstudio
-0,a,a,a,a,[p]
-1,123,123,123,123,[]
-2,1,1,1,1,[]
-3,P,P,P,P,[]
-4,3,3,3,3,[]
-5,Pitagoras,A + B = C. El teorema de pitagoras es la cosa esa que pasa,Trigonometria,Calculo,[]
+id,nombre,explicacion,categoria,curso,kitEstudio,ejercicios
+0,a,a,a,a,[kit1],ejercicios:NSs1:MTA=;ODA=:b2NoZW50YQ==;bnVtZXJv:Njc=
+1,123,123,123,123,[p],ejercicios:
+2,1,1,1,1,[],ejercicios:
+3,P,P,P,P,[],ejercicios:
+4,3,3,3,3,[],ejercicios:
+5,Pitagoras,A + B = C. El teorema de pitagoras es la cosa esa que pasa,Trigonometria,Calculo,[],ejercicios:

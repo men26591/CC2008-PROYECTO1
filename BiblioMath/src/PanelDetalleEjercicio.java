@@ -384,47 +384,46 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
                 sistema.mostrarTablita();                 
             }
             if(e.getSource() == botonVerRespuesta){
-                String titulo = null;
-                if(eor == 0){
+                if (eor == 0) {
                     eor = 1;
-                    titulo = "Respuesta";
-                }
-                else{
+                    textoEjercicio.setText(ejercicioActual[0] + "\n\nRespuesta:\n" + ejercicioActual[1]); //Muestra respuesta abajo de ejercicio
+                    botonVerRespuesta.setText("Ejercicio");
+                } else {
                     eor = 0;
-                    titulo = "Ejercicio";
+                    textoEjercicio.setText(ejercicioActual[0]);//Muestra solo ejercicio
+                    botonVerRespuesta.setText("Respuesta");
                 }
-                
-                textoEjercicio.setText(ejercicioActual[eor]);
-                botonVerRespuesta.setText(titulo);
             }
             if(e.getSource() == botonMasEjercicios ){
-                numeroEjercicio++;
-                eor = 0;
-                 if(conceptoActual != null){
-                    if(conceptoActual.getEjercicios().get(0) != null){
-                        ejercicioActual = conceptoActual.getEjercicios().get(0);
+                if (conceptoActual != null && numeroEjercicio + 1 < conceptoActual.getEjercicios().size()) {
+                    numeroEjercicio++;
+                    eor = 0;
+                    if(conceptoActual != null){
+                        if (numeroEjercicio < conceptoActual.getEjercicios().size()) {
+                            ejercicioActual = conceptoActual.getEjercicios().get(numeroEjercicio);
+                        }
+                        else{
+                            ejercicioActual = new String[2];
+                            ejercicioActual[0] = "No hay ningún ejercicio registrado";
+                            ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                        }
                     }
                     else{
-                    ejercicioActual = new String[2];
-                    ejercicioActual[0] = "No hay ningún ejercicio registrado";
-                    ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                        ejercicioActual = new String[2];
+                        ejercicioActual[0] = "No hay ningún ejercicio registrado";
+                        ejercicioActual[1] = "No hay ninguna respuesta registrada";
+                    }
+                    textoEjercicio.setText(ejercicioActual[eor]);
+                    botonVerRespuesta.setText("Respuesta");
                 }
-                }
-                else{
-                    ejercicioActual = new String[2];
-                    ejercicioActual[0] = "No hay ningún ejercicio registrado";
-                    ejercicioActual[1] = "No hay ninguna respuesta registrada";
-                }
-                textoEjercicio.setText(ejercicioActual[eor]);
-                botonVerRespuesta.setText("Respuesta");
             }
             if(e.getSource() == botonAnterior){
-                if((numeroEjercicio - 1) < 0){
+                if (numeroEjercicio > 0) {
                     numeroEjercicio = numeroEjercicio - 1;
                     eor = 0;
                     if(conceptoActual != null){
-                        if(conceptoActual.getEjercicios().get(0) != null){
-                            ejercicioActual = conceptoActual.getEjercicios().get(0);
+                        if (numeroEjercicio < conceptoActual.getEjercicios().size()) {
+                            ejercicioActual = conceptoActual.getEjercicios().get(numeroEjercicio);
                         }
                         else{
                         ejercicioActual = new String[2];
@@ -455,7 +454,18 @@ public class PanelDetalleEjercicio extends JPanel { // Función: Formulario para
     }
 
     public void mostrarEjercicio(Concepto concepto) {
-    conceptoActual = concepto;
-    repaint();
+        conceptoActual = concepto;
+        numeroEjercicio = 0; // Empezar en el primer ejercicio
+        eor = 0; // Contralador de ejercicio o respuesta
+
+        if (conceptoActual != null && !conceptoActual.getEjercicios().isEmpty()) { //Si hay ejercicios
+            ejercicioActual = conceptoActual.getEjercicios().get(numeroEjercicio); //Guarda el ejercicio correspondiente
+        } else {
+            ejercicioActual = new String[] {"No hay ningún ejercicio registrado","No hay ninguna respuesta registrada"}; //Almacena una Array con String que indican que no hay ejercicios
+        }
+
+        textoEjercicio.setText(ejercicioActual[0]);
+        botonVerRespuesta.setText("Respuesta");
+        textoEjercicio.setCaretPosition(0);//Desde incio de texto
     }
 }

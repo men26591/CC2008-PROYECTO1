@@ -23,38 +23,100 @@ public class Usuario {
     public void BajarBaseDatos(String direccion, ArrayList<?> local)throws Exception {
         //Relacion con archivo .csv
         try(BufferedReader br = new BufferedReader(new FileReader(direccion))){ //Abre el archivo a manera de lector
-        br.readLine(); // Saltar el encabezado
+            br.readLine(); // Saltar el encabezado
 
-        String linea; //Para ir almacenando datos
-        local.clear(); // Evitar duplicados al volver a cargar
+            String linea; //Para ir almacenando datos
+            local.clear(); // Evitar duplicados al volver a cargar
 
-        while ((linea = br.readLine()) != null) {
-            if (linea.trim().isEmpty()) {
-                continue; // Saltar filas vacías
-            }
+            while ((linea = br.readLine()) != null) {
+                if (linea.trim().isEmpty()) {
+                    continue; // Saltar filas vacías
+                }
 
-            String[] atributos = linea.split(",");
-            
-            //Creacion de objetos
-            if (direccion.equals(aConceptos)){
-                Concepto c = new Concepto();
-                c.setId(Integer.parseInt(atributos[0]));
-                c.setNombre(atributos[1]);
-                c.setExplicacion(atributos[2]);
-                c.setCategoria(atributos[3]);
-                c.setCurso(atributos[4]);
-                //c.setKitEstudio(atributos[5]);
-
-                baseConceptos.add(c);//Agregar objeto a local
-            }
-            if (direccion.equals(aKits)) {
-                Kit k = new Kit();
-                k.setNombre(atributos[0]);
-                //k.setConceptos(atributos[1]);
-                baseKits.add(k); //Agregar objeto a local
+                String[] atributos = linea.split(",");
                 
+                //Creacion de objetos
+                if (direccion.equals(aConceptos)){
+                    Concepto c = new Concepto();
+                    c.setId(Integer.parseInt(atributos[0]));
+                    c.setNombre(atributos[1]);
+                    c.setExplicacion(atributos[2]);
+                    c.setCategoria(atributos[3]);
+                    c.setCurso(atributos[4]);
+
+                    //Para cargar Kits
+                    ArrayList<String> kits = new ArrayList<>();//ArrayList que almacena Kits
+                    for (int i = 5; i < atributos.length - 1; i++) { //Comenzando desde la posicion 5, menos el ultimo elemento (ejercicios)
+
+                        String nombreKit = atributos[i];//String del elemento
+                        nombreKit = nombreKit.replace("[", "");//Elimina corchetes
+                        nombreKit = nombreKit.replace("]", ""); 
+                        nombreKit = nombreKit.trim();//Elimina espacios inecesarios
+
+                        if (!nombreKit.isEmpty()) {//Si no esta vacio
+                            kits.add(nombreKit); //Lo agrega al ArrayList
+                        }
+                    }
+
+                    c.setKitEstudio(kits); //Se asigna el ArrayList como atributo kits
+                    
+
+                    String datos = atributos[atributos.length - 1];
+
+                    if (datos.startsWith("ejercicios:")) {
+                        datos = datos.substring(11); // Quita "ejercicios:"
+
+                        if (!datos.isEmpty()) {//Si hay ejercicios
+                            String[] lista = datos.split(";");
+
+                            //Toma pregunta y respuesta, los convierte en formato [String,String]
+                            for (int i = 0; i < lista.length; i++) {
+                                String[] partes = lista[i].split(":", -1);
+
+                                byte[] preguntaBytes = Base64.getDecoder().decode(partes[0]);
+                                byte[] respuestaBytes = Base64.getDecoder().decode(partes[1]);
+
+                                String pregunta = new String(preguntaBytes, "UTF-8");
+                                String respuesta = new String(respuestaBytes, "UTF-8");
+
+                                c.agregarEjercicio(pregunta, respuesta);
+                            }
+                        }
+                    }
+
+                    baseConceptos.add(c);//Agregar objeto a local
+                }
+                if (direccion.equals(aKits)) {
+                    Kit k = new Kit();
+
+                    // La primera posición contiene el nombre del kit
+                    k.setNombre(atributos[0]);
+
+                    // Lista para guardar los IDs de sus conceptos
+                    ArrayList<Integer> ids = new ArrayList<>();
+
+                    // Las posiciones restantes contienen los IDs
+                    for (int i = 1; i < atributos.length; i++) {
+                        String dato = atributos[i];
+
+                        // Quita los corchetes y espacios
+                        dato = dato.replace("[", "");
+                        dato = dato.replace("]", "");
+                        dato = dato.trim();
+
+                        // Si hay un número, lo convierte a entero
+                        if (!dato.isEmpty()) {
+                            ids.add(Integer.parseInt(dato));
+                        }
+                    }
+
+                    // Coloca los IDs recuperados dentro del kit
+                    k.setConceptos(ids);
+
+                    // Agrega el kit completo a la lista del usuario
+                    baseKits.add(k);                    
+                }
             }
-        }
         }
 
     }
@@ -79,7 +141,7 @@ public class Usuario {
 
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(direccion))){
                 if(local.get(0) instanceof Concepto){ //Si se trata de la base de Conceptos
-                    bw.write("id,nombre,explicacion,categoria,curso,kitEstudio");// encabezado
+                    bw.write("id,nombre,explicacion,categoria,curso,kitEstudio,ejercicios");// encabezado
                 }
                 if(local.get(0) instanceof Kit){ //Si se trata de la base de Kits
                     bw.write("nombre,conceptos");// encabezado
@@ -275,7 +337,7 @@ public class Usuario {
             baseKits.add(k);
             try {
                 GuardarBaseDatos(aKits, baseKits);
-                setUltimaVisita(k.getNombre());
+                setUltimaVisita(k);
             } catch (Exception e) {
                 baseKits.remove(k);
                 throw new RuntimeException("No se pudo guardar el Kit" + e);
@@ -297,7 +359,7 @@ public class Usuario {
     public Kit buscarKits(String nombre) {
         for (Kit k:baseKits){
             if(k.getNombre().toLowerCase().equals(nombre.toLowerCase())){
-                setUltimaVisita(nombre);
+                setUltimaVisita(k);
                 return k;
             }
         }
@@ -346,7 +408,6 @@ public class Usuario {
             }
         }
 
-        kit.agregarConcepto(concepto);
         concepto.agregarKit(kit);
         try{
             GuardarBaseDatos(aKits, baseKits);

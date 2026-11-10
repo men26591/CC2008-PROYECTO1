@@ -113,16 +113,12 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         filtros.setBorder(BorderFactory.createEmptyBorder(10, 40, 15, 40));
         filtros.setOpaque(false);
 
-        campoBuscar = new JTextField();
-        campoBuscar.setPreferredSize(new Dimension(280, 35));
-
         comboCurso = new JComboBox<>();
         comboCurso.setPreferredSize(new Dimension(220, 35));
 
         comboKit = new JComboBox<>();
         comboKit.setPreferredSize(new Dimension(220, 35));
 
-        filtros.add(conTitulo("Teorema/definición/fórmula", campoBuscar)); // si se pueden buscar pero no se filtran 
         filtros.add(conTitulo("Curso", comboCurso));
         filtros.add(conTitulo("Kit de estudio", comboKit));
         

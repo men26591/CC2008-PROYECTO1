@@ -110,6 +110,7 @@ public class Sistema {
 
         try {
             c.agregarEjercicio(ejercicio, respuesta);
+            u.GuardarBaseDatos(u.getAConceptos(), u.getBaseConceptos());
             return "Ejercicio agregado";
         } catch (Exception e) {
             return "Ha ocurrido un error.";
@@ -162,6 +163,7 @@ public class Sistema {
     }
 
     public void mostrarDetalleConcepto(Concepto concepto) {
+        getUsuarioActual().setUltimaVisita(concepto);
         ventana.mostrarDetalleConcepto(concepto);
     }
 

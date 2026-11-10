@@ -1,6 +1,8 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Base64;
+import java.nio.charset.StandardCharsets;
 
 public class Concepto {
 
@@ -124,8 +126,25 @@ public class Concepto {
     }
 
     public String toDatos(){ //Para el almacenamiento en csv
-        String cadena="";
-        cadena = id+","+nombre+","+explicacion+","+categoria+","+curso+","+kitEstudio; //Datos separados por comas
+        //Manejo de ejercicios
+        String datosEjercicios = "";
+
+        for (String[] ejercicio : ejercicios) { //Permite almacenear preguntas y respuestas sin saltos de lineas
+            String pregunta = Base64.getEncoder().encodeToString(ejercicio[0].getBytes(StandardCharsets.UTF_8));
+            String respuesta = Base64.getEncoder().encodeToString(ejercicio[1].getBytes(StandardCharsets.UTF_8));
+
+            if (!datosEjercicios.isEmpty()) {
+                datosEjercicios += ";";
+            }
+
+            datosEjercicios += pregunta + ":" + respuesta;
+        }
+
+        //Cadena para archivo csv
+        String cadena = "";
+        cadena = id + "," + nombre + "," + explicacion + ","+ categoria + "," + curso + "," + kitEstudio+ ",ejercicios:" + datosEjercicios;
+
         return cadena;
+
     }
 }
