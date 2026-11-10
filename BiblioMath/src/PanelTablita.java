@@ -235,7 +235,7 @@ public class PanelTablita extends JPanel { // Función: Interfaz de la tabla de 
         fila.setMaximumSize(new Dimension(Integer.MAX_VALUE, 70));
 
         botonAgregar = crearBotonRedondo("Agregar ✎");
-        botonAgregar.addActionListener(e -> sistema.mostrarAgregarConcepto());
+        botonAgregar.addActionListener(e -> sistema.mostrarAgregarConcepto()); //manda a mostrar el agregar concepto
 
         fila.add(crearCelda(botonAgregar));
         fila.add(crearCelda(new JLabel("")));
