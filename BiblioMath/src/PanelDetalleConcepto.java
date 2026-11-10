@@ -12,6 +12,7 @@ import javax.swing.JOptionPane; //Recibe el texto normal
 import javax.swing.JPanel; //Recibe contraseña y agrega los puntitos 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import javax.swing.JComboBox; //Para Combobox de Agregar a Kit
 
 
 public class PanelDetalleConcepto extends JPanel {
@@ -127,10 +128,24 @@ public class PanelDetalleConcepto extends JPanel {
     });
 
     botonKit.addActionListener(e -> {
-        if (conceptoActual != null) {
-            String kit = JOptionPane.showInputDialog(this, "Escribe el nombre del kit:"); //Recibe el nombre del kit
-            String m = sistema.agregarAKit(conceptoActual,kit); //Se llama el metodo en sistema
-            JOptionPane.showMessageDialog(this,m); //Se muestra el mensaje recibido.
+        JComboBox<String> comboKit = new JComboBox<>();//Crea combobox
+
+        for (Kit k : sistema.getUsuarioActual().getBaseKits()) {
+            comboKit.addItem(k.getNombre());//Agrega el nombre de cada kit registrado como opcion
+        }
+
+        if (comboKit.getItemCount() == 0) { //Si no hay kits
+            JOptionPane.showMessageDialog(this,"No has creado ningún Kit. Primero debes registrar un kit.");//Se muestra notificacion
+        }
+
+        //Notificación con Combobox
+        int opcion = JOptionPane.showConfirmDialog(this,comboKit,"Selecciona el kit",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE);
+
+        // Solo agrega el concepto si presiona Aceptar
+        if (opcion == JOptionPane.OK_OPTION) { //Si se selecciona uno
+            String nombreKit = (String) comboKit.getSelectedItem(); //Se obtiene el nombre seleccionado
+            String mensaje = sistema.agregarAKit(conceptoActual, nombreKit); //Se agrega el kit
+            JOptionPane.showMessageDialog(this, mensaje); //Se muestra mensaje de exito o error
         }
     });
 
