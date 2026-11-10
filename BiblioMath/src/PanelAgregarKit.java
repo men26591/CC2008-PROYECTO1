@@ -308,22 +308,27 @@ public class PanelAgregarKit extends JPanel { // Función: Formulario para conce
             }
 
             if(e.getSource() == botonLogoBiblio){
+                campoNombreKit.setText("");
                 sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
             }
 
             if(e.getSource() == botonHerramientas){
+                campoNombreKit.setText("");
                 sistema.mostrarAgregarConcepto();
             }
             
             if(e.getSource() == botonKits){
+                campoNombreKit.setText("");
                 sistema.mostrarAgregarKit(); 
             }
 
             if(e.getSource() == botonEjercicios){
+                campoNombreKit.setText("");
                 sistema.mostrarAgregarEjercicio();
             }
 
             if(e.getSource() == botonBiblioConcepto){
+                campoNombreKit.setText("");
                 sistema.mostrarTablita();                               
             }
 

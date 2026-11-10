@@ -345,22 +345,37 @@ public class PanelAgregarEjercicio extends JPanel { // Función: Formulario para
             }
 
             if(e.getSource() == botonLogoBiblio){
+                campoNombreConcepto.setText("");
+                informacionEjercicio.setText("");
+                informacionRespuesta.setText("");
                 sistema.mostrarInicio(); // Llama el métod que se encuentra en la clase Sistema el cual abre el panel de Inicio, esto se puede porque al inicio esta clase es una parámetro
             }
 
             if(e.getSource() == botonHerramientas){
+                campoNombreConcepto.setText("");
+                informacionEjercicio.setText("");
+                informacionRespuesta.setText("");
                 sistema.mostrarAgregarConcepto();
             }
             
             if(e.getSource() == botonKits){
+                 campoNombreConcepto.setText("");
+                informacionEjercicio.setText("");
+                informacionRespuesta.setText("");
                 sistema.mostrarAgregarKit(); 
             }
 
             if(e.getSource() == botonEjercicios){
+                campoNombreConcepto.setText("");
+                informacionEjercicio.setText("");
+                informacionRespuesta.setText(""); 
                 sistema.mostrarAgregarEjercicio();
             }
 
             if(e.getSource() == botonBiblioConcepto){
+                campoNombreConcepto.setText("");
+                informacionEjercicio.setText("");
+                informacionRespuesta.setText("");
                 sistema.mostrarTablita();                               
             }
 

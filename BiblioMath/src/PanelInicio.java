@@ -363,6 +363,7 @@ public class PanelInicio extends JPanel { // Función: Interfaz de inicio
             }
 
             if(e.getSource() == botonCerrarSesion){
+                campoBuscar.setText(mensajeCampoBuscar);
                 sistema.mostrarLogin();
             }
 
