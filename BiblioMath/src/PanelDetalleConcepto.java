@@ -13,11 +13,15 @@ import javax.swing.JPanel; //Recibe contraseña y agrega los puntitos
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JComboBox; //Para Combobox de Agregar a Kit
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 
 public class PanelDetalleConcepto extends JPanel {
     
     private Concepto conceptoActual;
+    private JTextArea areaExplicacion;
+
     public PanelDetalleConcepto(Sistema sistema) {
 
 
@@ -160,6 +164,34 @@ public class PanelDetalleConcepto extends JPanel {
 
     this.add(panelInferior, BorderLayout.SOUTH);
 
+    // Área para mostrar únicamente la explicación
+    areaExplicacion = new JTextArea();
+    areaExplicacion.setEditable(false);
+    areaExplicacion.setLineWrap(true);       // Ajusta al ancho disponible
+    areaExplicacion.setWrapStyleWord(true);  // Evita partir palabras
+    areaExplicacion.setFont(new Font("Arial", Font.PLAIN, 16));
+    areaExplicacion.setForeground(new Color(55, 65, 80));
+    areaExplicacion.setOpaque(false);
+    areaExplicacion.setBorder(BorderFactory.createEmptyBorder());
+
+    // Permite desplazarse si la explicación es muy larga
+    JScrollPane scrollExplicacion = new JScrollPane(areaExplicacion);
+    scrollExplicacion.setBorder(BorderFactory.createEmptyBorder());
+    scrollExplicacion.setOpaque(false);
+    scrollExplicacion.getViewport().setOpaque(false);
+    scrollExplicacion.setHorizontalScrollBarPolicy(
+    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+);
+
+// Coloca el área debajo del encabezado "Explicación"
+JPanel panelExplicacion = new JPanel(new BorderLayout());
+panelExplicacion.setOpaque(false);
+panelExplicacion.setBorder(
+    BorderFactory.createEmptyBorder(225, 100, 50, 100)
+);
+panelExplicacion.add(scrollExplicacion, BorderLayout.CENTER);
+
+this.add(panelExplicacion, BorderLayout.CENTER);
 
     }
 
@@ -213,6 +245,19 @@ public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuid
     if (conceptoActual != null) {
        int textoX = margen + 50;
 
+        if (areaExplicacion != null) {
+            String explicacion = conceptoActual.getExplicacion();
+            if (explicacion == null) {
+                explicacion = "";
+            }
+
+            // Actualiza únicamente cuando cambia el texto
+            if (!areaExplicacion.getText().equals(explicacion)) {
+                areaExplicacion.setText(explicacion);
+                areaExplicacion.setCaretPosition(0);
+            }
+        }
+
         // Nombre destacado
         g.setColor(new Color(25, 25, 25));
         g.setFont(new Font("Arial", Font.BOLD, 28));
@@ -240,7 +285,6 @@ public void paintComponent(Graphics g) { // paint -> pintura y Component -> cuid
 
         g.setColor(new Color(55, 65, 80));
         g.setFont(new Font("Arial", Font.PLAIN, 16));
-        g.drawString(conceptoActual.getExplicacion(),textoX, posicionY + 240);
 
     } else {
         g.drawString("Nombre Concepto",anchoCuadro / 2 - margen, posicionY + 30);
